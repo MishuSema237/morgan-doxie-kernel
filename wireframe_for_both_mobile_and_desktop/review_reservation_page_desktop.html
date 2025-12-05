@@ -1,0 +1,1055 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review &amp; Confirm Reservation - Dog Breeding Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.2s ease-in-out;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F5F5F5;
+            color: #333333;
+            line-height: 1.5;
+        }
+
+        .wireframe-container {
+            max-width: 1728px;
+            margin: 0 auto;
+            background: #F5F5F5;
+        }
+
+        .annotation {
+            font-size: 12px;
+            color: #999999;
+            font-style: italic;
+            margin-top: 4px;
+        }
+
+        /* Simplified Header */
+        .header {
+            height: 80px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 80px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-box {
+            width: 200px;
+            height: 60px;
+            border: 2px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            position: absolute;
+            left: 80px;
+        }
+
+        /* Progress Indicator */
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-circle {
+            width: 32px;
+            height: 32px;
+            border: 2px solid #E0E0E0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            background: #FFFFFF;
+            color: #999999;
+        }
+
+        .step-circle.completed {
+            background: #333333;
+            border-color: #333333;
+            color: #FFFFFF;
+        }
+
+        .step-circle.current {
+            background: #FFFFFF;
+            border-color: #333333;
+            color: #333333;
+            border-width: 3px;
+        }
+
+        .step-label {
+            font-size: 14px;
+            color: #999999;
+        }
+
+        .step-label.completed {
+            color: #333333;
+        }
+
+        .step-label.current {
+            color: #333333;
+            font-weight: 600;
+        }
+
+        .progress-line {
+            width: 60px;
+            height: 2px;
+            background: #E0E0E0;
+        }
+
+        .progress-line.completed {
+            background: #333333;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        .page-heading {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            color: #666666;
+        }
+
+        /* Two Column Layout */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 32px;
+            align-items: start;
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .right-column {
+            position: sticky;
+            top: 120px;
+        }
+
+        /* Review Cards */
+        .review-card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 32px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .edit-link {
+            font-size: 14px;
+            color: #333333;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .edit-link:hover {
+            color: #666666;
+        }
+
+        /* Puppy Details Section */
+        .puppy-details-layout {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 24px;
+        }
+
+        .puppy-photo {
+            width: 200px;
+            height: 180px;
+            border: 2px solid #E0E0E0;
+            background: #FAFAFA;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #999999;
+            position: relative;
+        }
+
+        .diagonal-line {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: #E0E0E0;
+            transform: rotate(45deg);
+        }
+
+        .puppy-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .info-row {
+            display: flex;
+            gap: 24px;
+        }
+
+        .info-label {
+            font-size: 14px;
+            color: #666666;
+            min-width: 100px;
+        }
+
+        .info-value {
+            font-size: 14px;
+            color: #333333;
+            font-weight: 500;
+        }
+
+        .price-highlight {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333333;
+            margin-top: 8px;
+        }
+
+        /* Contact Information Section */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .info-field {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .info-field.full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Payment Summary Section */
+        .payment-line-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .line-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .line-item-label {
+            color: #666666;
+        }
+
+        .line-item-value {
+            color: #333333;
+            font-weight: 500;
+        }
+
+        .divider {
+            height: 1px;
+            background: #E0E0E0;
+            margin: 16px 0;
+        }
+
+        .total-row {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .deposit-row {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        .payment-note {
+            font-size: 12px;
+            color: #666666;
+            margin-top: 16px;
+            padding: 12px;
+            background: #F5F5F5;
+            border-left: 3px solid #333333;
+        }
+
+        .selected-method {
+            margin-top: 16px;
+            padding: 12px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            font-size: 14px;
+        }
+
+        /* Right Sidebar - Summary Card */
+        .summary-card {
+            background: #FFFFFF;
+            border: 2px solid #333333;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .summary-header {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .summary-puppy {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .summary-photo {
+            width: 80px;
+            height: 80px;
+            border: 2px solid #E0E0E0;
+            background: #FAFAFA;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #999999;
+        }
+
+        .summary-breed {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .summary-id {
+            font-size: 12px;
+            color: #666666;
+        }
+
+        .summary-items {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .summary-total {
+            padding: 16px 0;
+            border-top: 2px solid #333333;
+            border-bottom: 2px solid #333333;
+            margin-bottom: 16px;
+        }
+
+        .summary-due-today {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            margin-bottom: 16px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .trust-indicators {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #666666;
+        }
+
+        .trust-icon {
+            width: 16px;
+            height: 16px;
+            border: 1px solid #E0E0E0;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .info-box-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .info-box ol {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .info-box li {
+            font-size: 12px;
+            color: #666666;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .info-box p {
+            font-size: 11px;
+            color: #999999;
+            line-height: 1.6;
+            margin-bottom: 4px;
+        }
+
+        /* Terms Confirmation */
+        .terms-section {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 32px;
+            margin-top: 32px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #333333;
+            flex-shrink: 0;
+            cursor: pointer;
+            margin-top: 2px;
+        }
+
+        .checkbox:hover {
+            background: #F5F5F5;
+        }
+
+        .checkbox.checked {
+            background: #333333;
+            position: relative;
+        }
+
+        .checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            color: #FFFFFF;
+            font-size: 14px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .checkbox-label {
+            font-size: 14px;
+            color: #333333;
+            line-height: 1.6;
+            cursor: pointer;
+        }
+
+        .terms-link {
+            color: #333333;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 2px solid #E0E0E0;
+        }
+
+        .back-button {
+            padding: 16px 32px;
+            background: #FFFFFF;
+            color: #333333;
+            border: 2px solid #333333;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background: #F5F5F5;
+        }
+
+        .confirm-button {
+            padding: 16px 48px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 2px solid #333333;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .confirm-button:hover {
+            background: #555555;
+        }
+
+        .confirm-button:disabled {
+            background: #E0E0E0;
+            border-color: #E0E0E0;
+            color: #999999;
+            cursor: not-allowed;
+        }
+
+        .cancel-link {
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .cancel-link a {
+            font-size: 12px;
+            color: #999999;
+            text-decoration: underline;
+        }
+
+        /* Security Note */
+        .security-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 24px;
+            font-size: 12px;
+            color: #666666;
+        }
+
+        .lock-icon {
+            width: 16px;
+            height: 16px;
+            border: 1px solid #666666;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        /* Simplified Footer */
+        .footer {
+            background: #FFFFFF;
+            border-top: 1px solid #E0E0E0;
+            padding: 40px 80px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-link {
+            font-size: 12px;
+            color: #666666;
+            text-decoration: none;
+        }
+
+        .footer-copyright {
+            font-size: 12px;
+            color: #999999;
+        }
+
+        /* Annotations */
+        .side-annotation {
+            position: fixed;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 220px;
+            padding: 16px;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            font-size: 12px;
+            color: #999999;
+            line-height: 1.8;
+            z-index: 50;
+        }
+
+        .side-annotation h4 {
+            font-size: 14px;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .side-annotation ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .side-annotation li {
+            margin-bottom: 4px;
+        }
+
+        .side-annotation li:before {
+            content: "• ";
+            color: #999999;
+        }
+    </style>
+</head>
+<body>
+    <div class="wireframe-container">
+        <!-- Simplified Header -->
+        <header class="header">
+            <div class="logo-box">BUSINESS NAME + LOGO</div>
+            
+            <!-- Progress Indicator -->
+            <div class="progress-container">
+                <div class="progress-step">
+                    <div class="step-circle completed">✓</div>
+                    <span class="step-label completed">Select Puppy</span>
+                </div>
+                <div class="progress-line completed"></div>
+                
+                <div class="progress-step">
+                    <div class="step-circle completed">✓</div>
+                    <span class="step-label completed">Your Information</span>
+                </div>
+                <div class="progress-line completed"></div>
+                
+                <div class="progress-step">
+                    <div class="step-circle current">3</div>
+                    <span class="step-label current">Review &amp; Payment</span>
+                </div>
+                <div class="progress-line"></div>
+                
+                <div class="progress-step">
+                    <div class="step-circle">4</div>
+                    <span class="step-label">Confirmation</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Page Heading -->
+            <div class="page-heading">
+                <h1 class="page-title">Review Your Reservation</h1>
+                <p class="page-subtitle">Please review all details before confirming</p>
+            </div>
+
+            <!-- Two Column Layout -->
+            <div class="content-grid">
+                <!-- Left Column - Review Sections -->
+                <div class="left-column">
+                    <!-- Puppy Details Section -->
+                    <div class="review-card">
+                        <div class="card-header">
+                            <h2 class="card-title">Selected Puppy</h2>
+                            <a href="#" class="edit-link">Change Selection</a>
+                        </div>
+                        
+                        <div class="puppy-details-layout">
+                            <div class="puppy-photo">
+                                <div class="diagonal-line"></div>
+                                PUPPY PHOTO
+                            </div>
+                            
+                            <div class="puppy-info">
+                                <div class="info-row">
+                                    <span class="info-label">Breed:</span>
+                                    <span class="info-value">Golden Retriever</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Puppy ID:</span>
+                                    <span class="info-value">GR-2024-001</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Age:</span>
+                                    <span class="info-value">8 weeks old</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Gender:</span>
+                                    <span class="info-value">Male</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Color:</span>
+                                    <span class="info-value">Golden</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Current Weight:</span>
+                                    <span class="info-value">3.2 kg</span>
+                                </div>
+                                <div class="price-highlight">Price: ₦180,000</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information Section -->
+                    <div class="review-card">
+                        <div class="card-header">
+                            <h2 class="card-title">Contact Information</h2>
+                            <a href="#" class="edit-link">Edit Information</a>
+                        </div>
+                        
+                        <div class="info-grid">
+                            <div class="info-field full-width">
+                                <span class="info-label">Name:</span>
+                                <span class="info-value">Chidi Okonkwo</span>
+                            </div>
+                            <div class="info-field">
+                                <span class="info-label">Email:</span>
+                                <span class="info-value">chidi.okonkwo@email.com</span>
+                            </div>
+                            <div class="info-field">
+                                <span class="info-label">Phone:</span>
+                                <span class="info-value">+234 803 123 4567</span>
+                            </div>
+                            <div class="info-field full-width">
+                                <span class="info-label">Address:</span>
+                                <span class="info-value">15 Admiralty Way, Lekki Phase 1, Lagos, Nigeria</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pickup/Delivery Section -->
+                    <div class="review-card">
+                        <div class="card-header">
+                            <h2 class="card-title">Pickup/Delivery Details</h2>
+                            <a href="#" class="edit-link">Edit Details</a>
+                        </div>
+                        
+                        <div class="info-grid">
+                            <div class="info-field full-width">
+                                <span class="info-label">Method:</span>
+                                <span class="info-value">Pickup at our location</span>
+                            </div>
+                            <div class="info-field">
+                                <span class="info-label">Date:</span>
+                                <span class="info-value">December 28, 2024</span>
+                            </div>
+                            <div class="info-field">
+                                <span class="info-label">Time:</span>
+                                <span class="info-value">2:00 PM - 4:00 PM</span>
+                            </div>
+                        </div>
+                        <div class="annotation">Alternative display for delivery: "Delivery to [Address] | Estimated delivery: [Date] | Delivery fee: ₦[Amount]"</div>
+                    </div>
+
+                    <!-- Payment Summary Section -->
+                    <div class="review-card">
+                        <div class="card-header">
+                            <h2 class="card-title">Payment Breakdown</h2>
+                        </div>
+                        
+                        <div class="payment-line-items">
+                            <div class="line-item">
+                                <span class="line-item-label">Puppy price:</span>
+                                <span class="line-item-value">₦180,000</span>
+                            </div>
+                            <div class="line-item">
+                                <span class="line-item-label">Delivery fee:</span>
+                                <span class="line-item-value">₦0</span>
+                            </div>
+                            
+                            <div class="divider"></div>
+                            
+                            <div class="line-item total-row">
+                                <span class="line-item-label">Subtotal:</span>
+                                <span class="line-item-value">₦180,000</span>
+                            </div>
+                            
+                            <div class="divider"></div>
+                            
+                            <div class="line-item deposit-row">
+                                <span class="line-item-label">Reservation deposit (30%):</span>
+                                <span class="line-item-value">₦54,000</span>
+                            </div>
+                            <div class="line-item">
+                                <span class="line-item-label">Remaining balance (due at pickup):</span>
+                                <span class="line-item-value">₦126,000</span>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-note">
+                            <strong>Note:</strong> Deposit is non-refundable but transferable to another puppy within 30 days
+                        </div>
+                        
+                        <div class="selected-method">
+                            <div class="info-row">
+                                <span class="info-label">Payment Method:</span>
+                                <span class="info-value">Bank Transfer</span>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 16px;">
+                            <a href="#" class="edit-link">Change Payment Method</a>
+                        </div>
+                    </div>
+
+                    <!-- Terms Confirmation -->
+                    <div class="terms-section">
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <div class="checkbox" id="checkbox1"></div>
+                                <label class="checkbox-label" for="checkbox1">
+                                    I have reviewed all details and confirm they are correct
+                                </label>
+                            </div>
+                            
+                            <div class="checkbox-item">
+                                <div class="checkbox" id="checkbox2"></div>
+                                <label class="checkbox-label" for="checkbox2">
+                                    I agree to the <a href="#" class="terms-link">reservation terms</a> and <a href="#" class="terms-link">cancellation policy</a>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button class="back-button">Back to Edit</button>
+                        <button class="confirm-button" id="confirmButton" disabled="">Confirm Reservation</button>
+                    </div>
+                    
+                    <div class="cancel-link">
+                        <a href="#">Cancel Reservation</a>
+                    </div>
+
+                    <!-- Security Note -->
+                    <div class="security-note">
+                        <div class="lock-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <span>Your information is secure and encrypted</span>
+                    </div>
+                </div>
+
+                <!-- Right Column - Summary & Info -->
+                <div class="right-column">
+                    <!-- Summary Card -->
+                    <div class="summary-card">
+                        <h3 class="summary-header">Reservation Summary</h3>
+                        
+                        <div class="summary-puppy">
+                            <div class="summary-photo">
+                                <div class="diagonal-line"></div>
+                                PHOTO
+                            </div>
+                            <div>
+                                <div class="summary-breed">Golden Retriever</div>
+                                <div class="summary-id">Puppy ID: GR-2024-001</div>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-items">
+                            <div class="summary-item">
+                                <span class="info-label">Puppy Price:</span>
+                                <span class="info-value">₦180,000</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="info-label">Delivery:</span>
+                                <span class="info-value">₦0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-total">
+                            <div class="summary-item" style="font-weight: 700;">
+                                <span>Total:</span>
+                                <span>₦180,000</span>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-items">
+                            <div class="summary-item summary-due-today">
+                                <span>Due Today (Deposit):</span>
+                                <span>₦54,000</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="info-label">Due at Pickup:</span>
+                                <span class="info-value">₦126,000</span>
+                            </div>
+                        </div>
+                        
+                        <div class="security-badge">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Secure Payment</span>
+                        </div>
+                        
+                        <div class="trust-indicators">
+                            <div class="trust-item">
+                                <div class="trust-icon"></div>
+                                <span>30-day health guarantee</span>
+                            </div>
+                            <div class="trust-item">
+                                <div class="trust-icon"></div>
+                                <span>Lifetime support</span>
+                            </div>
+                            <div class="trust-item">
+                                <div class="trust-icon"></div>
+                                <span>Licensed breeder</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- What Happens Next -->
+                    <div class="info-box">
+                        <h4 class="info-box-title">After You Confirm</h4>
+                        <ol>
+                            <li>You'll receive confirmation via email and WhatsApp</li>
+                            <li>Payment instructions will be sent immediately</li>
+                            <li>Once payment is confirmed, puppy is officially reserved</li>
+                            <li>We'll send regular updates and photos</li>
+                            <li>Final details confirmed 2 days before pickup</li>
+                        </ol>
+                    </div>
+
+                    <!-- Important Notes -->
+                    <div class="info-box">
+                        <h4 class="info-box-title">Important Notes</h4>
+                        <p>• Deposit must be paid within 24 hours to hold reservation</p>
+                        <p>• Full payment required before pickup</p>
+                        <p>• Please bring valid ID for pickup</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Simplified Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-copyright">© 2024 Business Name. All rights reserved.</div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Contact Support</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Side Annotations -->
+        <div class="side-annotation">
+            <h4>Page Notes</h4>
+            <ul>
+                <li>All edit links return to appropriate section with data preserved</li>
+                <li>Confirm button only enabled when both checkboxes checked</li>
+                <li>Loading state shown after confirm clicked</li>
+                <li>Page length: ~1800px</li>
+                <li>Summary card sticky on scroll</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Checkbox functionality
+        const checkbox1 = document.getElementById('checkbox1');
+        const checkbox2 = document.getElementById('checkbox2');
+        const confirmButton = document.getElementById('confirmButton');
+
+        function updateConfirmButton() {
+            if (checkbox1.classList.contains('checked') && checkbox2.classList.contains('checked')) {
+                confirmButton.disabled = false;
+            } else {
+                confirmButton.disabled = true;
+            }
+        }
+
+        checkbox1.addEventListener('click', function() {
+            this.classList.toggle('checked');
+            updateConfirmButton();
+        });
+
+        checkbox2.addEventListener('click', function() {
+            this.classList.toggle('checked');
+            updateConfirmButton();
+        });
+
+        // Confirm button click handler
+        confirmButton.addEventListener('click', function() {
+            if (!this.disabled) {
+                this.textContent = 'Processing...';
+                this.style.background = '#666666';
+                // In real implementation, would proceed to payment/confirmation
+            }
+        });
+    </script>
+
+</body></html>

@@ -1,0 +1,914 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Confirmed - Dog Breeding Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F5F5F5;
+            color: #333333;
+            line-height: 1.5;
+        }
+
+        .wireframe-container {
+            max-width: 1728px;
+            margin: 0 auto;
+            background: #F5F5F5;
+        }
+
+        .annotation {
+            font-size: 12px;
+            color: #999999;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        /* Simplified Header */
+        .header {
+            height: 80px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 80px;
+        }
+
+        .logo-box {
+            width: 200px;
+            height: 60px;
+            border: 2px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Success Animation Section */
+        .success-section {
+            height: 400px;
+            background: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .success-icon {
+            width: 120px;
+            height: 120px;
+            border: 4px solid #333333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            margin-bottom: 32px;
+        }
+
+        .checkmark {
+            font-size: 60px;
+            color: #333333;
+        }
+
+        /* Confirmation Message */
+        .confirmation-message {
+            height: 300px;
+            background: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 80px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .confirmation-heading {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .confirmation-subheading {
+            font-size: 20px;
+            color: #666666;
+            margin-bottom: 32px;
+        }
+
+        .confirmation-number {
+            padding: 16px 32px;
+            border: 2px solid #333333;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .confirmation-email {
+            font-size: 16px;
+            color: #666666;
+        }
+
+        /* Main Content Layout */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 80px;
+            display: grid;
+            grid-template-columns: 60% 40%;
+            gap: 40px;
+        }
+
+        /* Left Column */
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* Section Headers */
+        .section-header {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #E0E0E0;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 24px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 24px;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #333333;
+            border-radius: 50%;
+            background: #FFFFFF;
+        }
+
+        .timeline-step {
+            font-size: 12px;
+            font-weight: 700;
+            color: #999999;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .timeline-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .timeline-description {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .timeline-details {
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .account-detail {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .account-label {
+            color: #666666;
+        }
+
+        .account-value {
+            font-weight: 600;
+        }
+
+        .timeline-button {
+            padding: 12px 24px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 2px solid #333333;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 16px;
+            margin-right: 8px;
+        }
+
+        .timeline-button.secondary {
+            background: #FFFFFF;
+            color: #333333;
+        }
+
+        .deadline-box {
+            padding: 16px;
+            border: 2px solid #DC2626;
+            background: #FEF2F2;
+            margin-top: 16px;
+        }
+
+        .deadline-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #DC2626;
+            margin-bottom: 4px;
+        }
+
+        .deadline-warning {
+            font-size: 12px;
+            color: #DC2626;
+        }
+
+        /* Important Information Box */
+        .important-box {
+            background: #FFFFFF;
+            border: 2px solid #DC2626;
+            padding: 24px;
+        }
+
+        .important-heading {
+            font-size: 18px;
+            font-weight: 700;
+            color: #DC2626;
+            margin-bottom: 16px;
+        }
+
+        .important-item {
+            font-size: 14px;
+            color: #333333;
+            margin-bottom: 8px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .important-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            color: #DC2626;
+        }
+
+        /* Checklist */
+        .checklist {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 24px;
+        }
+
+        .checklist-item {
+            font-size: 14px;
+            padding: 12px;
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #E0E0E0;
+        }
+
+        .download-button {
+            padding: 12px 24px;
+            background: #FFFFFF;
+            color: #333333;
+            border: 2px solid #333333;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 16px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        /* Right Column */
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Cards */
+        .card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 24px;
+        }
+
+        .card-heading {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .puppy-image {
+            width: 100%;
+            height: 240px;
+            border: 2px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #999999;
+            margin-bottom: 16px;
+            background: #FAFAFA;
+        }
+
+        .puppy-info {
+            margin-bottom: 16px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            padding: 8px 0;
+            border-bottom: 1px solid #F5F5F5;
+        }
+
+        .info-label {
+            color: #666666;
+        }
+
+        .info-value {
+            font-weight: 600;
+        }
+
+        .divider {
+            height: 1px;
+            background: #E0E0E0;
+            margin: 16px 0;
+        }
+
+        .payment-summary {
+            margin-top: 16px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 12px 0;
+        }
+
+        .card-button {
+            width: 100%;
+            padding: 12px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 2px solid #333333;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .card-button.secondary {
+            background: #FFFFFF;
+            color: #333333;
+        }
+
+        .card-button.primary-green {
+            background: #25D366;
+            border-color: #25D366;
+            color: #FFFFFF;
+        }
+
+        .card-link {
+            font-size: 14px;
+            color: #333333;
+            text-decoration: underline;
+            text-align: center;
+            display: block;
+            margin-top: 8px;
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .account-info {
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            padding: 12px;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .contact-item {
+            font-size: 14px;
+            color: #333333;
+            text-decoration: underline;
+        }
+
+        .availability-text {
+            font-size: 12px;
+            color: #999999;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        /* Social Sharing Section */
+        .social-section {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 40px 80px;
+            text-align: center;
+        }
+
+        .social-heading {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .social-button {
+            padding: 12px 24px;
+            background: #FFFFFF;
+            border: 2px solid #E0E0E0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .social-message {
+            font-size: 14px;
+            color: #666666;
+            margin-top: 16px;
+        }
+
+        /* Related Content Section */
+        .related-section {
+            background: #F5F5F5;
+            padding: 40px 80px;
+        }
+
+        .related-heading {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .related-card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .related-icon {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #E0E0E0;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+        }
+
+        .related-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        /* Footer */
+        .footer {
+            background: #FFFFFF;
+            border-top: 1px solid #E0E0E0;
+            padding: 40px 80px;
+            text-align: center;
+        }
+
+        .footer-contact {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 24px;
+        }
+
+        .footer-item {
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .footer-item strong {
+            color: #333333;
+        }
+
+        .footer-copyright {
+            font-size: 12px;
+            color: #999999;
+        }
+
+        /* Side Annotations */
+        .side-annotation {
+            position: fixed;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            padding: 16px;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            font-size: 12px;
+            color: #999999;
+            line-height: 1.8;
+        }
+
+        .side-annotation h4 {
+            font-size: 14px;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .side-annotation ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .side-annotation li {
+            margin-bottom: 4px;
+        }
+
+        .side-annotation li:before {
+            content: "• ";
+            color: #999999;
+        }
+    </style>
+</head>
+<body>
+    <div class="wireframe-container">
+        <!-- Simplified Header -->
+        <header class="header">
+            <div class="logo-box">BUSINESS NAME + LOGO</div>
+        </header>
+
+        <!-- Success Animation Section -->
+        <section class="success-section">
+            <div class="success-icon">
+                <span class="checkmark">✓</span>
+            </div>
+            <div class="annotation">Large success checkmark animation plays once on page load with confetti (2 seconds)</div>
+        </section>
+
+        <!-- Confirmation Message -->
+        <section class="confirmation-message">
+            <h1 class="confirmation-heading">Reservation Confirmed! 🎉</h1>
+            <p class="confirmation-subheading">Your puppy is officially reserved</p>
+            <div class="confirmation-number">Reservation #REF-12345</div>
+            <p class="confirmation-email">Confirmation sent to customer@email.com</p>
+        </section>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Column -->
+            <div class="left-column">
+                <!-- What's Next Section -->
+                <div>
+                    <h2 class="section-header">Your Next Steps</h2>
+                    <div class="timeline">
+                        <!-- Step 1 -->
+                        <div class="timeline-item">
+                            <div class="timeline-step">STEP 1 - NOW</div>
+                            <h3 class="timeline-title">Complete Your Payment</h3>
+                            <p class="timeline-description">Please transfer the deposit amount to the account below</p>
+                            <div class="timeline-details">
+                                <div class="account-detail">
+                                    <span class="account-label">Account Name:</span>
+                                    <span class="account-value">Business Name Kennel</span>
+                                </div>
+                                <div class="account-detail">
+                                    <span class="account-label">Bank:</span>
+                                    <span class="account-value">GTBank Nigeria</span>
+                                </div>
+                                <div class="account-detail">
+                                    <span class="account-label">Account Number:</span>
+                                    <span class="account-value">0123456789</span>
+                                </div>
+                                <div class="account-detail">
+                                    <span class="account-label">Reference:</span>
+                                    <span class="account-value">REF-12345</span>
+                                </div>
+                            </div>
+                            <button class="timeline-button">Copy Account Details</button>
+                            <button class="timeline-button secondary">Upload Payment Proof</button>
+                            <div class="deadline-box">
+                                <div class="deadline-text">Payment Deadline: January 15, 2024 at 3:00 PM WAT</div>
+                                <div class="deadline-warning">Please pay within 24 hours to secure your reservation</div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="timeline-item">
+                            <div class="timeline-step">STEP 2 - WITHIN 24 HOURS</div>
+                            <h3 class="timeline-title">Payment Confirmation</h3>
+                            <p class="timeline-description">We'll confirm your payment via WhatsApp and email</p>
+                            <p class="timeline-description">Your puppy will be officially reserved and removed from availability</p>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="timeline-item">
+                            <div class="timeline-step">STEP 3 - REGULAR UPDATES</div>
+                            <h3 class="timeline-title">Stay Connected</h3>
+                            <p class="timeline-description">We'll send you photos and videos of your puppy weekly</p>
+                            <p class="timeline-description">WhatsApp updates every few days</p>
+                            <p class="timeline-description">Feel free to request photos anytime</p>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="timeline-item">
+                            <div class="timeline-step">STEP 4 - 7 DAYS BEFORE PICKUP</div>
+                            <h3 class="timeline-title">Final Preparations</h3>
+                            <p class="timeline-description">We'll confirm pickup date and time</p>
+                            <p class="timeline-description">Send puppy care guide and checklist</p>
+                            <p class="timeline-description">Final balance payment reminder</p>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="timeline-item">
+                            <div class="timeline-step">STEP 5 - PICKUP DAY</div>
+                            <h3 class="timeline-title">Welcome Your Puppy Home!</h3>
+                            <p class="timeline-description">Bring valid ID and remaining payment</p>
+                            <p class="timeline-description">We'll provide all documents and starter kit</p>
+                            <p class="timeline-description">Lifetime support begins</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Important Information Box -->
+                <div class="important-box">
+                    <h3 class="important-heading">⚠ Important Information</h3>
+                    <div class="important-item">Payment Deadline: January 15, 2024 at 3:00 PM WAT</div>
+                    <div class="important-item">If payment not received within 24 hours, reservation will be released</div>
+                    <div class="important-item">Having trouble? Contact us immediately via WhatsApp or phone</div>
+                </div>
+
+                <!-- Preparation Checklist -->
+                <div class="checklist">
+                    <h3 class="section-header">Get Ready for Your Puppy</h3>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Purchase food and water bowls</span>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Get puppy food (we'll recommend brand)</span>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Prepare sleeping area</span>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Buy toys and chews</span>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Puppy-proof your home</span>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Find a local vet</span>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Get collar and leash</span>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>Set up ID tag</span>
+                    </div>
+                    <button class="download-button">Download Full Checklist</button>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-column">
+                <!-- Reservation Summary Card -->
+                <div class="card">
+                    <h3 class="card-heading">Reservation Details</h3>
+                    <div class="puppy-image">
+                        LARGE PUPPY PHOTO<br>
+                        <span style="font-size: 12px;">(diagonal line placeholder)</span>
+                    </div>
+                    <div class="puppy-info">
+                        <div class="info-row">
+                            <span class="info-label">Breed:</span>
+                            <span class="info-value">Golden Retriever</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Puppy ID:</span>
+                            <span class="info-value">#GR-2024-001</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Age:</span>
+                            <span class="info-value">8 weeks</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Gender:</span>
+                            <span class="info-value">Male</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Ready for pickup:</span>
+                            <span class="info-value">February 1, 2024</span>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="payment-summary">
+                        <div class="info-row">
+                            <span class="info-label">Total Price:</span>
+                            <span class="info-value">₦180,000</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Deposit Due:</span>
+                            <span class="info-value">₦54,000</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Balance Due at Pickup:</span>
+                            <span>₦126,000</span>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="info-row">
+                        <span class="info-label">Pickup Method:</span>
+                        <span class="info-value">In-Person Pickup</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Pickup Date:</span>
+                        <span class="info-value">February 1, 2024</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Location:</span>
+                        <span class="info-value">Lekki, Lagos</span>
+                    </div>
+                    <button class="card-button">View/Print Receipt</button>
+                    <a href="#" class="card-link">Download as PDF</a>
+                </div>
+
+                <!-- Quick Actions Card -->
+                <div class="card">
+                    <h3 class="card-heading">Quick Actions</h3>
+                    <button class="card-button primary-green">Upload Payment Proof</button>
+                    <button class="card-button primary-green">Contact Us on WhatsApp</button>
+                    <button class="card-button secondary">Call Us</button>
+                    <button class="card-button secondary">Email Us</button>
+                    <a href="#" class="card-link">Add to Calendar</a>
+                    <div class="annotation">Creates calendar event for pickup date</div>
+                </div>
+
+                <!-- Your Account Card -->
+                <div class="card">
+                    <h3 class="card-heading">Your Account</h3>
+                    <p class="card-text">We've created an account for you to track your reservation, view photos, and get updates</p>
+                    <div class="account-info">
+                        <div style="margin-bottom: 4px;"><strong>Email:</strong> customer@email.com</div>
+                    </div>
+                    <button class="card-button">Set Your Password</button>
+                </div>
+
+                <!-- Support Card -->
+                <div class="card">
+                    <h3 class="card-heading">Need Help?</h3>
+                    <div class="contact-info">
+                        <a href="#" class="contact-item">WhatsApp: +234 XXX XXX XXXX</a>
+                        <a href="#" class="contact-item">Phone: +234 XXX XXX XXXX</a>
+                        <a href="#" class="contact-item">Email: info@businessname.com</a>
+                    </div>
+                    <div class="availability-text">Usually respond within 2 hours</div>
+                    <div class="availability-text">Available Monday-Saturday, 9 AM - 6 PM WAT</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Sharing Section -->
+        <section class="social-section">
+            <h2 class="social-heading">Share Your Excitement!</h2>
+            <div class="social-buttons">
+                <button class="social-button">Facebook</button>
+                <button class="social-button">Instagram</button>
+                <button class="social-button">Twitter</button>
+                <button class="social-button">WhatsApp</button>
+            </div>
+            <p class="social-message">Pre-populated message: "I just reserved my Golden Retriever puppy from Business Name! 🐶"</p>
+        </section>
+
+        <!-- Related Content Section -->
+        <section class="related-section">
+            <h2 class="related-heading">While You Wait...</h2>
+            <div class="related-grid">
+                <div class="related-card">
+                    <div class="related-icon"></div>
+                    <div class="related-title">Read Puppy Care Guide</div>
+                </div>
+                <div class="related-card">
+                    <div class="related-icon"></div>
+                    <div class="related-title">Join Our Community<br>(Facebook Group)</div>
+                </div>
+                <div class="related-card">
+                    <div class="related-icon"></div>
+                    <div class="related-title">Browse Instagram for<br>Puppy Updates</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-contact">
+                <div class="footer-item">
+                    <strong>Phone:</strong> +234 XXX XXX XXXX
+                </div>
+                <div class="footer-item">
+                    <strong>WhatsApp:</strong> +234 XXX XXX XXXX
+                </div>
+                <div class="footer-item">
+                    <strong>Email:</strong> info@businessname.com
+                </div>
+                <div class="footer-item">
+                    <strong>Location:</strong> Lagos, Nigeria
+                </div>
+            </div>
+            <div class="footer-copyright">© 2024 Business Name. All rights reserved.</div>
+        </footer>
+
+        <!-- Side Annotations -->
+        <div class="side-annotation">
+            <h4>Page Notes</h4>
+            <ul>
+                <li>Confirmation email sent automatically</li>
+                <li>WhatsApp message with payment instructions</li>
+                <li>Page prints nicely as receipt</li>
+                <li>Calendar file downloads for pickup</li>
+                <li>Page length: ~2600px</li>
+            </ul>
+        </div>
+    </div>
+
+</body></html>

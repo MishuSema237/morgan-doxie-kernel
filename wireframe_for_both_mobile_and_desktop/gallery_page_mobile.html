@@ -1,0 +1,891 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Mobile Wireframe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.2s ease-in-out;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFFFFF;
+            color: #333333;
+            line-height: 1.5;
+        }
+
+        .wireframe-container {
+            max-width: 430px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            box-shadow: 0 0 40px rgba(0,0,0,0.1);
+        }
+
+        .page {
+            background: #F5F5F5;
+            min-height: 932px;
+            position: relative;
+            padding-bottom: 80px;
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            border-bottom: 1px solid #E0E0E0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .hamburger, .header-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #E0E0E0;
+            background: #F5F5F5;
+            cursor: pointer;
+        }
+
+        .hamburger:hover, .header-icon:hover {
+            background: #E0E0E0;
+        }
+
+        .logo {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 16px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            font-size: 14px;
+            color: #666666;
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            padding: 12px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .filter-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-tabs-inner {
+            display: inline-flex;
+            gap: 8px;
+            padding: 0 16px;
+        }
+
+        .filter-tab {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #666666;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .filter-tab:hover {
+            background: #E0E0E0;
+        }
+
+        .filter-tab.active {
+            background: #333333;
+            color: #FFFFFF;
+            border-color: #333333;
+        }
+
+        /* Gallery Grid */
+        .gallery-section {
+            padding: 16px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .gallery-item {
+            background: #E0E0E0;
+            border: 1px solid #CCCCCC;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item.tall {
+            aspect-ratio: 197/350;
+        }
+
+        .gallery-item.medium {
+            aspect-ratio: 197/300;
+        }
+
+        .gallery-item.short {
+            aspect-ratio: 197/250;
+        }
+
+        .gallery-item::before,
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            background: #999999;
+        }
+
+        .gallery-item::before {
+            width: 100%;
+            height: 1px;
+            top: 50%;
+            left: 0;
+            transform: rotate(45deg);
+        }
+
+        .gallery-item::after {
+            width: 100%;
+            height: 1px;
+            top: 50%;
+            left: 0;
+            transform: rotate(-45deg);
+        }
+
+        .gallery-item-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+            color: #666666;
+            text-align: center;
+            z-index: 1;
+            padding: 4px 8px;
+            background: rgba(255,255,255,0.8);
+        }
+
+        .gallery-item:hover {
+            opacity: 0.8;
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: #FFFFFF;
+            padding: 8px;
+            font-size: 10px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:active .gallery-item-overlay {
+            transform: translateY(0);
+        }
+
+        /* Load More */
+        .load-more {
+            text-align: center;
+            padding: 24px 16px;
+        }
+
+        .loading-indicator {
+            font-size: 14px;
+            color: #666666;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .photo-count {
+            font-size: 12px;
+            color: #999999;
+            margin-top: 8px;
+        }
+
+        /* Instagram Section */
+        .instagram-section {
+            background: #FFFFFF;
+            padding: 24px 16px;
+            margin-top: 24px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .instagram-handle {
+            font-size: 16px;
+            color: #666666;
+            margin-bottom: 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .instagram-handle:hover {
+            color: #333333;
+        }
+
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .instagram-item {
+            aspect-ratio: 1;
+            background: #E0E0E0;
+            border: 1px solid #CCCCCC;
+            position: relative;
+        }
+
+        .instagram-item::before,
+        .instagram-item::after {
+            content: '';
+            position: absolute;
+            background: #999999;
+        }
+
+        .instagram-item::before {
+            width: 100%;
+            height: 1px;
+            top: 50%;
+            left: 0;
+            transform: rotate(45deg);
+        }
+
+        .instagram-item::after {
+            width: 100%;
+            height: 1px;
+            top: 50%;
+            left: 0;
+            transform: rotate(-45deg);
+        }
+
+        .instagram-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10px;
+            color: #666666;
+            z-index: 1;
+        }
+
+        /* Photo Upload CTA */
+        .upload-cta {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 24px 16px;
+            margin: 16px;
+            text-align: center;
+        }
+
+        .upload-cta h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .upload-cta p {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 16px;
+        }
+
+        .upload-cta-note {
+            font-size: 12px;
+            color: #999999;
+            margin-top: 8px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px 24px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid #333333;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            background: #FFFFFF;
+        }
+
+        .btn-primary {
+            background: #333333;
+            color: #FFFFFF;
+        }
+
+        .btn-primary:hover {
+            background: #555555;
+        }
+
+        .btn-secondary {
+            background: #FFFFFF;
+            color: #333333;
+        }
+
+        .btn-secondary:hover {
+            background: #F5F5F5;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333333;
+            color: #FFFFFF;
+            padding: 32px 16px;
+        }
+
+        .footer-logo {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .footer-copyright {
+            font-size: 12px;
+            color: #999999;
+            text-align: center;
+            padding-top: 16px;
+            border-top: 1px solid #555555;
+        }
+
+        /* Floating WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            border: 2px solid #20BA5A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            background: #20BA5A;
+        }
+
+        .whatsapp-float i {
+            font-size: 28px;
+            color: #FFFFFF;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Annotation */
+        .annotation {
+            font-size: 12px;
+            color: #999999;
+            font-style: italic;
+            padding: 8px;
+            background: #F9F9F9;
+            border-left: 2px solid #999999;
+            margin: 8px 16px;
+        }
+
+        /* Lightbox Modal */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            color: #FFFFFF;
+        }
+
+        .lightbox-close, .lightbox-share {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+        }
+
+        .lightbox-close:hover, .lightbox-share:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lightbox-counter {
+            font-size: 14px;
+            color: #FFFFFF;
+        }
+
+        .lightbox-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 100%;
+            background: #E0E0E0;
+            border: 2px dashed #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 3/4;
+            width: 100%;
+        }
+
+        .lightbox-caption {
+            background: rgba(0,0,0,0.8);
+            color: #FFFFFF;
+            padding: 16px;
+            font-size: 14px;
+        }
+
+        .lightbox-caption-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .lightbox-caption-details {
+            font-size: 12px;
+            color: #CCCCCC;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wireframe-container">
+    <div class="page">
+        <!-- Header -->
+        <div class="header">
+            <div class="hamburger">
+                <i class="fas fa-arrow-left"></i>
+            </div>
+            <div class="logo">Gallery</div>
+            <div class="header-icon">
+                <i class="fas fa-filter"></i>
+            </div>
+        </div>
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            Home &gt; Gallery
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+            <div class="filter-tabs-inner">
+                <div class="filter-tab active">All Photos (156)</div>
+                <div class="filter-tab">Available (12)</div>
+                <div class="filter-tab">Past Puppies (68)</div>
+                <div class="filter-tab">Happy Families (45)</div>
+                <div class="filter-tab">Parent Dogs (18)</div>
+                <div class="filter-tab">Our Facility (13)</div>
+            </div>
+        </div>
+
+        <div class="annotation">
+            Horizontal scroll tabs - swipe left/right. Active tab highlighted in black.
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="gallery-section">
+            <div class="gallery-grid">
+                <!-- Row 1 -->
+                <div class="gallery-item tall">
+                    <span class="gallery-item-label">Golden Retriever<br>Puppy Portrait</span>
+                    <div class="gallery-item-overlay">
+                        <div>Golden Retriever • Available</div>
+                        <div>Nov 15, 2024</div>
+                    </div>
+                </div>
+                <div class="gallery-item medium">
+                    <span class="gallery-item-label">German Shepherd<br>Playing</span>
+                    <div class="gallery-item-overlay">
+                        <div>Action Shot • Available</div>
+                        <div>Nov 14, 2024</div>
+                    </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="gallery-item short">
+                    <span class="gallery-item-label">French Bulldog<br>on Gradient BG</span>
+                    <div class="gallery-item-overlay">
+                        <div>Studio Photo • Available</div>
+                        <div>Nov 13, 2024</div>
+                    </div>
+                </div>
+                <div class="gallery-item tall">
+                    <span class="gallery-item-label">Happy Family<br>with Puppy</span>
+                    <div class="gallery-item-overlay">
+                        <div>Customer Photo • Lekki</div>
+                        <div>Nov 10, 2024</div>
+                    </div>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="gallery-item medium">
+                    <span class="gallery-item-label">Labrador<br>Transparent PNG</span>
+                    <div class="gallery-item-overlay">
+                        <div>Studio Photo • Reserved</div>
+                        <div>Nov 9, 2024</div>
+                    </div>
+                </div>
+                <div class="gallery-item short">
+                    <span class="gallery-item-label">Rottweiler<br>Parent Dog</span>
+                    <div class="gallery-item-overlay">
+                        <div>Parent Dog • Mother</div>
+                        <div>Nov 8, 2024</div>
+                    </div>
+                </div>
+
+                <!-- Row 4 -->
+                <div class="gallery-item tall">
+                    <span class="gallery-item-label">Puppies<br>Playing Together</span>
+                    <div class="gallery-item-overlay">
+                        <div>Action Shot • Facility</div>
+                        <div>Nov 7, 2024</div>
+                    </div>
+                </div>
+                <div class="gallery-item medium">
+                    <span class="gallery-item-label">Indoor Play<br>Area</span>
+                    <div class="gallery-item-overlay">
+                        <div>Facility Photo</div>
+                        <div>Nov 6, 2024</div>
+                    </div>
+                </div>
+
+                <!-- Row 5 -->
+                <div class="gallery-item short">
+                    <span class="gallery-item-label">Golden Retriever<br>Close-up</span>
+                    <div class="gallery-item-overlay">
+                        <div>Portrait • Past Puppy</div>
+                        <div>Oct 30, 2024</div>
+                    </div>
+                </div>
+                <div class="gallery-item tall">
+                    <span class="gallery-item-label">Family<br>Adoption Day</span>
+                    <div class="gallery-item-overlay">
+                        <div>Happy Family • VI</div>
+                        <div>Oct 28, 2024</div>
+                    </div>
+                </div>
+
+                <!-- Row 6 -->
+                <div class="gallery-item medium">
+                    <span class="gallery-item-label">Husky<br>Blue Gradient BG</span>
+                    <div class="gallery-item-overlay">
+                        <div>Studio Photo • Available</div>
+                        <div>Oct 25, 2024</div>
+                    </div>
+                </div>
+                <div class="gallery-item short">
+                    <span class="gallery-item-label">German Shepherd<br>Parent Dog</span>
+                    <div class="gallery-item-overlay">
+                        <div>Parent Dog • Father</div>
+                        <div>Oct 20, 2024</div>
+                    </div>
+                </div>
+
+                <!-- Row 7 -->
+                <div class="gallery-item tall">
+                    <span class="gallery-item-label">Puppy<br>First Bath</span>
+                    <div class="gallery-item-overlay">
+                        <div>Care Photo • Facility</div>
+                        <div>Oct 15, 2024</div>
+                    </div>
+                </div>
+                <div class="gallery-item medium">
+                    <span class="gallery-item-label">French Bulldog<br>Sleeping</span>
+                    <div class="gallery-item-overlay">
+                        <div>Past Puppy • Cute</div>
+                        <div>Oct 12, 2024</div>
+                    </div>
+                </div>
+
+                <!-- Row 8 -->
+                <div class="gallery-item short">
+                    <span class="gallery-item-label">Outdoor<br>Exercise Area</span>
+                    <div class="gallery-item-overlay">
+                        <div>Facility Photo</div>
+                        <div>Oct 10, 2024</div>
+                    </div>
+                </div>
+                <div class="gallery-item tall">
+                    <span class="gallery-item-label">Golden Retriever<br>Litter</span>
+                    <div class="gallery-item-overlay">
+                        <div>Multiple Puppies</div>
+                        <div>Oct 8, 2024</div>
+                    </div>
+                </div>
+
+                <!-- Row 9 -->
+                <div class="gallery-item medium">
+                    <span class="gallery-item-label">Customer<br>Family Photo</span>
+                    <div class="gallery-item-overlay">
+                        <div>Happy Family • Ikeja</div>
+                        <div>Oct 5, 2024</div>
+                    </div>
+                </div>
+                <div class="gallery-item short">
+                    <span class="gallery-item-label">Labrador<br>Yellow Gradient</span>
+                    <div class="gallery-item-overlay">
+                        <div>Studio Photo • Available</div>
+                        <div>Oct 3, 2024</div>
+                    </div>
+                </div>
+
+                <!-- Row 10 -->
+                <div class="gallery-item tall">
+                    <span class="gallery-item-label">Rottweiler<br>Puppy Portrait</span>
+                    <div class="gallery-item-overlay">
+                        <div>Portrait • Available</div>
+                        <div>Oct 1, 2024</div>
+                    </div>
+                </div>
+                <div class="gallery-item medium">
+                    <span class="gallery-item-label">Sleeping<br>Quarters</span>
+                    <div class="gallery-item-overlay">
+                        <div>Facility Photo</div>
+                        <div>Sep 28, 2024</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="annotation">
+                Masonry grid - 2 columns with varying heights (tall 350px, medium 300px, short 250px). Tap photo to view in lightbox. Overlay shows on tap with caption, category, date.
+            </div>
+
+            <!-- Loading Indicator -->
+            <div class="loading-indicator">
+                Loading more photos...
+            </div>
+            <div class="photo-count">
+                Showing 20 of 156 photos
+            </div>
+        </div>
+
+        <div class="annotation">
+            Infinite scroll - auto-loads 20 more photos when user scrolls near bottom. Skeleton screens appear while loading.
+        </div>
+
+        <!-- Instagram Section -->
+        <div class="instagram-section">
+            <h2 class="section-title">Follow Our Journey</h2>
+            <a href="#" class="instagram-handle">@businessname</a>
+            
+            <div class="instagram-grid">
+                <div class="instagram-item">
+                    <span class="instagram-label">Recent<br>Post 1</span>
+                </div>
+                <div class="instagram-item">
+                    <span class="instagram-label">Recent<br>Post 2</span>
+                </div>
+                <div class="instagram-item">
+                    <span class="instagram-label">Recent<br>Post 3</span>
+                </div>
+                <div class="instagram-item">
+                    <span class="instagram-label">Recent<br>Post 4</span>
+                </div>
+                <div class="instagram-item">
+                    <span class="instagram-label">Recent<br>Post 5</span>
+                </div>
+                <div class="instagram-item">
+                    <span class="instagram-label">Recent<br>Post 6</span>
+                </div>
+            </div>
+
+            <button class="btn btn-secondary">
+                <i class="fab fa-instagram"></i> Follow on Instagram
+            </button>
+
+            <div class="annotation" style="margin-top: 16px; margin-left: 0; margin-right: 0;">
+                Instagram feed updates automatically. Shows 6 most recent posts. Tapping opens Instagram app/web.
+            </div>
+        </div>
+
+        <!-- Photo Upload CTA -->
+        <div class="upload-cta">
+            <h3>Share Your Puppy's Story</h3>
+            <p>Did you adopt from us? We'd love to see how your puppy is doing!</p>
+            <button class="btn btn-primary">
+                <i class="fas fa-camera"></i> Submit Your Photos
+            </button>
+            <p class="upload-cta-note">Photos may be featured on our website and social media</p>
+        </div>
+
+        <div class="annotation">
+            Photo upload opens form where customers can submit photos with captions. Great for social proof and engagement.
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-logo">Business Name</div>
+            <div class="footer-copyright">© 2024 Business Name. All rights reserved.</div>
+        </div>
+
+        <!-- Floating WhatsApp -->
+        <div class="whatsapp-float">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+
+        <!-- Lightbox Modal -->
+        <div class="lightbox-overlay" id="lightbox">
+            <div class="lightbox-header">
+                <div class="lightbox-close" onclick="closeLightbox()">
+                    <i class="fas fa-times"></i>
+                </div>
+                <div class="lightbox-counter">5 of 156</div>
+                <div class="lightbox-share">
+                    <i class="fas fa-share-alt"></i>
+                </div>
+            </div>
+            <div class="lightbox-content">
+                <div class="lightbox-image">
+                    <span style="color: #666; font-size: 14px;">Full-size Photo<br>Swipe left/right</span>
+                </div>
+            </div>
+            <div class="lightbox-caption">
+                <div class="lightbox-caption-title">Golden Retriever Puppy Portrait</div>
+                <div class="lightbox-caption-details">Available • Nov 15, 2024 • Tap for full details</div>
+            </div>
+        </div>
+
+        <div class="annotation">
+            Lightbox: Full-screen overlay. Swipe left/right for prev/next photo. Pinch to zoom. Caption swipes up for full details. X closes, share button top-right.
+        </div>
+
+        <div class="annotation" style="background: #333; color: #fff; margin-top: 24px;">
+            Page Summary: 2-column masonry gallery with varying heights creates visual interest. Tap photos for lightbox with swipe navigation. Photos lazy-load optimized for Nigerian mobile networks. Instagram feed auto-updates. Photo upload CTA encourages customer engagement. Total page length: ~2000px for 20 initial photos, grows with infinite scroll.
+        </div>
+    </div>
+</div>
+
+<script>
+// Lightbox functionality (demo)
+const galleryItems = document.querySelectorAll('.gallery-item');
+const lightbox = document.getElementById('lightbox');
+
+galleryItems.forEach(item => {
+    item.addEventListener('click', function() {
+        lightbox.classList.add('active');
+    });
+});
+
+function closeLightbox() {
+    lightbox.classList.remove('active');
+}
+
+// Filter tab functionality
+const filterTabs = document.querySelectorAll('.filter-tab');
+filterTabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+        filterTabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+    });
+});
+
+// Simulate infinite scroll
+let isLoading = false;
+window.addEventListener('scroll', function() {
+    if (isLoading) return;
+    
+    const scrollPosition = window.innerHeight + window.scrollY;
+    const threshold = document.body.offsetHeight - 500;
+    
+    if (scrollPosition >= threshold) {
+        isLoading = true;
+        // Simulate loading more photos
+        setTimeout(() => {
+            isLoading = false;
+        }, 1000);
+    }
+});
+
+// Swipe gestures for lightbox (basic demo)
+let touchStartX = 0;
+let touchEndX = 0;
+
+lightbox.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+});
+
+lightbox.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+});
+
+function handleSwipe() {
+    if (touchEndX < touchStartX - 50) {
+        // Swiped left - next photo
+        console.log('Next photo');
+    }
+    if (touchEndX > touchStartX + 50) {
+        // Swiped right - previous photo
+        console.log('Previous photo');
+    }
+}
+</script>
+
+
+</body></html>

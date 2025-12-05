@@ -1,0 +1,1138 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Dog Breeding Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.2s ease-in-out;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F5F5F5;
+            color: #333333;
+            line-height: 1.5;
+        }
+
+        .wireframe-container {
+            max-width: 430px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            box-shadow: 0 0 40px rgba(0,0,0,0.1);
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            border-bottom: 1px solid #E0E0E0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-button, .header-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #E0E0E0;
+            background: #F5F5F5;
+            cursor: pointer;
+        }
+
+        .back-button:hover, .header-icon:hover {
+            background: #E0E0E0;
+        }
+
+        .header-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        /* Hero */
+        .hero {
+            height: 300px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), #CCCCCC;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 24px;
+        }
+
+        .hero::before {
+            content: 'Photo of breeder with dogs';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+            color: #666666;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #FFFFFF;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 8px;
+        }
+
+        .hero-tagline {
+            font-size: 16px;
+            color: #FFFFFF;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Section */
+        .section {
+            padding: 24px 16px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 16px;
+        }
+
+        .section-text {
+            font-size: 16px;
+            color: #666666;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        /* Breeder Photo */
+        .breeder-photo {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 24px;
+            background: #E0E0E0;
+            border: 2px solid #CCCCCC;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666666;
+            font-size: 14px;
+        }
+
+        /* Story Content */
+        .story-content {
+            max-height: 300px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .story-content.expanded {
+            max-height: none;
+        }
+
+        .read-more-btn {
+            background: none;
+            border: none;
+            color: #333333;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+            padding: 12px 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .read-more-btn:hover {
+            color: #000000;
+        }
+
+        /* Pull Quote */
+        .pull-quote {
+            background: #F5F5F5;
+            border-left: 4px solid #333333;
+            padding: 16px;
+            margin: 24px 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333333;
+            font-style: italic;
+        }
+
+        /* Feature Card */
+        .feature-card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: #E0E0E0;
+            border: 1px solid #CCCCCC;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-content {
+            flex: 1;
+        }
+
+        .feature-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .feature-description {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        /* Checklist */
+        .checklist-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            margin-bottom: 8px;
+        }
+
+        .checklist-icon {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #333333;
+            flex-shrink: 0;
+            margin-top: 2px;
+            position: relative;
+        }
+
+        .checklist-icon.checked {
+            background: #25D366;
+            border-color: #25D366;
+        }
+
+        .checklist-icon.checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FFFFFF;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .checklist-text {
+            font-size: 14px;
+            color: #333333;
+        }
+
+        /* Accordion */
+        .accordion-item {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            margin-bottom: 8px;
+        }
+
+        .accordion-header {
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            color: #333333;
+            min-height: 56px;
+        }
+
+        .accordion-header:hover {
+            background: #F5F5F5;
+        }
+
+        .accordion-icon {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #333333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 18px;
+        }
+
+        .accordion-content {
+            padding: 0 16px 16px;
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .accordion-item.active .accordion-content {
+            display: block;
+        }
+
+        .accordion-item.active .accordion-icon::before {
+            content: '−';
+        }
+
+        .accordion-icon::before {
+            content: '+';
+        }
+
+        /* Parent Dog Card */
+        .parent-card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            margin-bottom: 16px;
+        }
+
+        .parent-image {
+            width: 100%;
+            height: 300px;
+            background: #E0E0E0;
+            border-bottom: 1px solid #CCCCCC;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666666;
+            font-size: 14px;
+        }
+
+        .parent-info {
+            padding: 16px;
+        }
+
+        .parent-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .parent-breed {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 12px;
+        }
+
+        .parent-details {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .parent-link {
+            font-size: 14px;
+            color: #333333;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        /* Photo Grid */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .photo-grid-item {
+            aspect-ratio: 1;
+            background: #E0E0E0;
+            border: 1px solid #CCCCCC;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666666;
+            font-size: 12px;
+            text-align: center;
+            padding: 8px;
+        }
+
+        /* Testimonial Card */
+        .testimonial-card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-header {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            background: #E0E0E0;
+            border: 1px solid #CCCCCC;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .testimonial-info {
+            flex: 1;
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333333;
+            margin-bottom: 2px;
+        }
+
+        .testimonial-location {
+            font-size: 12px;
+            color: #666666;
+            margin-bottom: 6px;
+        }
+
+        .rating {
+            display: flex;
+            gap: 4px;
+        }
+
+        .rating-star {
+            width: 16px;
+            height: 16px;
+            background: #E0E0E0;
+            border: 1px solid #CCCCCC;
+            position: relative;
+        }
+
+        .rating-star.filled {
+            background: #333333;
+            border-color: #333333;
+        }
+
+        .rating-star.filled::after {
+            content: '★';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FFFFFF;
+            font-size: 12px;
+        }
+
+        .testimonial-text {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .testimonial-puppy-photo {
+            width: 100%;
+            height: 150px;
+            background: #E0E0E0;
+            border: 1px solid #CCCCCC;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666666;
+            font-size: 14px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px 24px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid #333333;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            min-height: 56px;
+        }
+
+        .btn-primary {
+            background: #333333;
+            color: #FFFFFF;
+            margin-bottom: 8px;
+        }
+
+        .btn-primary:hover {
+            background: #555555;
+        }
+
+        .btn-secondary {
+            background: #FFFFFF;
+            color: #333333;
+        }
+
+        .btn-secondary:hover {
+            background: #F5F5F5;
+        }
+
+        /* CTA Card */
+        .cta-card {
+            background: #F5F5F5;
+            border: 2px solid #333333;
+            padding: 24px 16px;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 16px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333333;
+            color: #FFFFFF;
+            padding: 32px 16px;
+        }
+
+        .footer-logo {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .footer-contact {
+            margin-bottom: 24px;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #444444;
+            margin-bottom: 8px;
+            text-decoration: none;
+            color: #FFFFFF;
+            border: 1px solid #555555;
+            min-height: 48px;
+        }
+
+        .footer-contact-item:hover {
+            background: #555555;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .social-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #444444;
+            border: 1px solid #555555;
+        }
+
+        .social-icon:hover {
+            background: #555555;
+        }
+
+        .footer-hours {
+            font-size: 14px;
+            color: #CCCCCC;
+            margin-bottom: 16px;
+        }
+
+        .footer-copyright {
+            font-size: 12px;
+            color: #999999;
+            text-align: center;
+            padding-top: 16px;
+            border-top: 1px solid #555555;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            border: 2px solid #20BA5A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            background: #20BA5A;
+        }
+
+        .whatsapp-float i {
+            font-size: 28px;
+            color: #FFFFFF;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Annotations */
+        .annotation {
+            font-size: 12px;
+            color: #999999;
+            font-style: italic;
+            padding: 8px;
+            background: #F9F9F9;
+            border-left: 2px solid #999999;
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wireframe-container">
+    
+    <!-- Header -->
+    <div class="header">
+        <div class="back-button">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+        <div class="header-title">About Us</div>
+        <div class="header-icon">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Business Name</h1>
+            <p class="hero-tagline">Breeding healthy puppies since 2018</p>
+        </div>
+    </div>
+
+    <!-- Our Story Section -->
+    <div class="section">
+        <h2 class="section-title">Our Breeding Philosophy</h2>
+        
+        <div class="breeder-photo">
+            Breeder with Puppies
+        </div>
+
+        <div class="story-content" id="storyContent">
+            <p class="section-text">
+                I started breeding dogs over 5 years ago out of my deep love for these amazing animals. What began as a passion project has grown into a trusted breeding business serving families across Lagos and beyond.
+            </p>
+            <p class="section-text">
+                My approach to breeding is simple but unwavering: every puppy deserves the best possible start in life. I raise all puppies in my home environment, ensuring they receive constant love, attention, and proper socialization from the moment they're born.
+            </p>
+            <p class="section-text">
+                Each puppy is thoroughly vet-checked, vaccinated, and comes with complete health records. I take immense pride in matching the right puppy with the right family, and I'm committed to providing lifetime support to ensure every dog thrives.
+            </p>
+            <p class="section-text">
+                Over the years, I've had the incredible joy of placing 50+ puppies with loving families throughout Nigeria. Seeing these dogs grow up healthy, happy, and deeply bonded with their families is what makes this work so profoundly rewarding.
+            </p>
+            <p class="section-text">
+                I believe in transparency and building trust. That's why I welcome visits to see where the puppies are raised, meet the parent dogs, and ask any questions. When you adopt from me, you're not just getting a puppy - you're joining our extended family.
+            </p>
+            <p class="section-text">
+                My commitment goes beyond the sale. I'm here for advice, support, and guidance throughout your dog's entire life. Whether you need training tips, health advice, or just want to share a photo, I'm always just a message away.
+            </p>
+        </div>
+
+        <button class="read-more-btn" onclick="toggleStory()">
+            <span id="readMoreText">Read More</span>
+        </button>
+
+        <div class="pull-quote">
+            "Every puppy deserves the best start in life"
+        </div>
+    </div>
+
+    <!-- What Sets Us Apart -->
+    <div class="section" style="background: #FFFFFF;">
+        <h2 class="section-title">What Sets Us Apart</h2>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-heart-pulse" style="color: #666;"></i>
+            </div>
+            <div class="feature-content">
+                <h3 class="feature-title">Health-First Approach</h3>
+                <p class="feature-description">All breeding dogs are health tested. Puppies receive early vet care, vaccinations, and complete health certificates. We prioritize genetic health above all else.</p>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-users" style="color: #666;"></i>
+            </div>
+            <div class="feature-content">
+                <h3 class="feature-title">Socialized Puppies</h3>
+                <p class="feature-description">Raised in a loving home environment with constant human interaction. Our puppies are well-adjusted, confident, and ready for family life from day one.</p>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-infinity" style="color: #666;"></i>
+            </div>
+            <div class="feature-content">
+                <h3 class="feature-title">Lifetime Support</h3>
+                <p class="feature-description">I'm here for advice and help throughout your dog's entire life. Training questions, health concerns, behavior guidance - you're never alone on this journey.</p>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-eye" style="color: #666;"></i>
+            </div>
+            <div class="feature-content">
+                <h3 class="feature-title">Transparent Process</h3>
+                <p class="feature-description">Visit anytime by appointment. See where puppies are raised. Meet the parent dogs. Review complete health records. We believe in full transparency.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Our Standards -->
+    <div class="section">
+        <h2 class="section-title">Our Commitment to Quality</h2>
+
+        <div class="checklist-item">
+            <div class="checklist-icon checked"></div>
+            <div class="checklist-text">All breeding dogs health tested</div>
+        </div>
+        <div class="checklist-item">
+            <div class="checklist-icon checked"></div>
+            <div class="checklist-text">Puppies raised in home environment</div>
+        </div>
+        <div class="checklist-item">
+            <div class="checklist-icon checked"></div>
+            <div class="checklist-text">Early socialization and training</div>
+        </div>
+        <div class="checklist-item">
+            <div class="checklist-icon checked"></div>
+            <div class="checklist-text">Regular veterinary care</div>
+        </div>
+        <div class="checklist-item">
+            <div class="checklist-icon checked"></div>
+            <div class="checklist-text">Proper nutrition and exercise</div>
+        </div>
+        <div class="checklist-item">
+            <div class="checklist-icon checked"></div>
+            <div class="checklist-text">Genetic health screening</div>
+        </div>
+        <div class="checklist-item">
+            <div class="checklist-icon checked"></div>
+            <div class="checklist-text">Responsible breeding practices</div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>Learn more about our breeding standards</span>
+                <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+                We follow internationally recognized breeding standards and best practices. Our breeding program focuses on health, temperament, and breed characteristics. We carefully select breeding pairs to minimize genetic health issues and maximize positive traits. All parent dogs undergo comprehensive health screenings before breeding. We limit the number of litters each female has to ensure her health and wellbeing. Every decision we make prioritizes the welfare of our dogs and puppies.
+            </div>
+        </div>
+    </div>
+
+    <!-- Parent Dogs -->
+    <div class="section" style="background: #FFFFFF;">
+        <h2 class="section-title">Meet Our Breeding Dogs</h2>
+
+        <div class="parent-card">
+            <div class="parent-image">
+                Golden Retriever Parent
+            </div>
+            <div class="parent-info">
+                <h3 class="parent-name">Bella</h3>
+                <p class="parent-breed">Golden Retriever • Female • 3 years old</p>
+                <p class="parent-details">
+                    <strong>Temperament:</strong> Gentle, loving, excellent with children<br>
+                    <strong>Health Status:</strong> All health tests passed, excellent genetics<br>
+                    <strong>Achievements:</strong> Champion bloodline, therapy dog certified
+                </p>
+                <a href="#" class="parent-link">View puppies from Bella →</a>
+            </div>
+        </div>
+
+        <div class="parent-card">
+            <div class="parent-image">
+                German Shepherd Parent
+            </div>
+            <div class="parent-info">
+                <h3 class="parent-name">Zeus</h3>
+                <p class="parent-breed">German Shepherd • Male • 4 years old</p>
+                <p class="parent-details">
+                    <strong>Temperament:</strong> Intelligent, loyal, protective yet gentle<br>
+                    <strong>Health Status:</strong> Hip/elbow tested, excellent health<br>
+                    <strong>Achievements:</strong> Working line bloodline, obedience trained
+                </p>
+                <a href="#" class="parent-link">View puppies from Zeus →</a>
+            </div>
+        </div>
+
+        <div class="parent-card">
+            <div class="parent-image">
+                Labrador Retriever Parent
+            </div>
+            <div class="parent-info">
+                <h3 class="parent-name">Luna</h3>
+                <p class="parent-breed">Labrador Retriever • Female • 2 years old</p>
+                <p class="parent-details">
+                    <strong>Temperament:</strong> Playful, friendly, highly trainable<br>
+                    <strong>Health Status:</strong> Clear health tests, excellent structure<br>
+                    <strong>Achievements:</strong> Show quality, family favorite
+                </p>
+                <a href="#" class="parent-link">View puppies from Luna →</a>
+            </div>
+        </div>
+
+        <div class="annotation">
+            Only shows active breeding dogs with current or upcoming litters
+        </div>
+    </div>
+
+    <!-- Facility Photos -->
+    <div class="section">
+        <h2 class="section-title">Where Puppies Grow Up</h2>
+
+        <div class="photo-grid">
+            <div class="photo-grid-item">Indoor Play Area</div>
+            <div class="photo-grid-item">Outdoor Exercise Space</div>
+            <div class="photo-grid-item">Sleeping Quarters</div>
+            <div class="photo-grid-item">Socialization Area</div>
+            <div class="photo-grid-item">Vet Care Facility</div>
+            <div class="photo-grid-item">Training Space</div>
+        </div>
+
+        <button class="btn btn-primary">Schedule a Visit to See Our Facility</button>
+
+        <div class="annotation">
+            Photos show clean, professional breeding environment. Builds trust with potential buyers.
+        </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="section" style="background: #FFFFFF;">
+        <h2 class="section-title">What Families Say About Us</h2>
+
+        <div class="testimonial-card">
+            <div class="testimonial-header">
+                <div class="testimonial-avatar"></div>
+                <div class="testimonial-info">
+                    <div class="testimonial-name">Chidi Okonkwo</div>
+                    <div class="testimonial-location">Lekki, Lagos</div>
+                    <div class="rating">
+                        <div class="rating-star filled"></div>
+                        <div class="rating-star filled"></div>
+                        <div class="rating-star filled"></div>
+                        <div class="rating-star filled"></div>
+                        <div class="rating-star filled"></div>
+                    </div>
+                </div>
+            </div>
+            <p class="testimonial-text">"Best breeder in Lagos! Our Golden Retriever is healthy, well-socialized, and has the sweetest temperament. The support we received throughout the process was exceptional. She answered every question and is still available for advice months later. Highly recommend to anyone looking for a quality puppy."</p>
+            <div class="testimonial-puppy-photo">
+                Customer's Golden Retriever
+            </div>
+        </div>
+
+        <div class="testimonial-card">
+            <div class="testimonial-header">
+                <div class="testimonial-avatar"></div>
+                <div class="testimonial-info">
+                    <div class="testimonial-name">Amara Nwosu</div>
+                    <div class="testimonial-location">Victoria Island, Lagos</div>
+                    <div class="rating">
+                        <div class="rating-star filled"></div>
+                        <div class="rating-star filled"></div>
+                        <div class="rating-star filled"></div>
+                        <div class="rating-star filled"></div>
+                        <div class="rating-star filled"></div>
+                    </div>
+                </div>
+            </div>
+            <p class="testimonial-text">"Very professional and caring breeder. Our German Shepherd puppy came with all health records, vaccinations, and even a starter kit. The puppy was so well-adjusted from day one - clearly raised with love. She always responds quickly to our questions. We couldn't be happier!"</p>
+            <div class="testimonial-puppy-photo">
+                Customer's German Shepherd
+            </div>
+        </div>
+
+        <div class="testimonial-card">
+            <div class="testimonial-header">
+                <div class="testimonial-avatar"></div>
+                <div class="testimonial-info">
+                    <div class="testimonial-name">Ibrahim Sule</div>
+                    <div class="testimonial-location">Ikeja, Lagos</div>
+                    <div class="rating">
+                        <div class="rating-star filled"></div>
+                        <div class="rating-star filled"></div>
+                        <div class="rating-star filled"></div>
+                        <div class="rating-star filled"></div>
+                        <div class="rating-star filled"></div>
+                    </div>
+                </div>
+            </div>
+            <p class="testimonial-text">"We got our Rottweiler from her 2 years ago and he's been the perfect family dog. She really knows her breeds and helped us choose the right puppy for our home with young children. The ongoing support has been invaluable. She genuinely cares about the dogs even after they leave."</p>
+            <div class="testimonial-puppy-photo">
+                Customer's Rottweiler
+            </div>
+        </div>
+
+        <button class="btn btn-secondary">Read More Testimonials</button>
+
+        <div class="annotation">
+            Social proof is crucial in Nigerian market. Real testimonials with photos build trust.
+        </div>
+    </div>
+
+    <!-- FAQs -->
+    <div class="section">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>What health guarantees do you provide?</span>
+                <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+                All puppies come with a comprehensive 30-day health guarantee, complete vet health certificate, full vaccination records, and deworming history. We stand behind the health of every puppy we place. If any genetic health issues arise within the first year, we work with you to resolve them.
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>Can I visit the puppies before purchasing?</span>
+                <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+                Yes! We welcome and strongly encourage visits by appointment. You can meet the puppy, see where they're raised, meet the parent dogs, and ask any questions. We believe transparency builds trust. Please call or WhatsApp ahead to schedule your visit.
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>What's included in the purchase price?</span>
+                <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+                Purchase includes: official vet health certificate, age-appropriate vaccinations, deworming treatment, starter food supply, favorite toy, blanket with mother's scent, care guide, and lifetime support from us. Microchipping is available for an additional fee.
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>Do you offer payment plans?</span>
+                <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+                Yes, we offer flexible installment plans. A 50% deposit is required to reserve your chosen puppy, with the remaining balance due before pickup. We want to make it easier for families to bring home their perfect companion. Contact us to discuss terms.
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>What if I need to return the puppy?</span>
+                <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+                We have a return policy if circumstances change. The deposit is non-refundable but can be transferred to another puppy within 6 months. We always prioritize the welfare of our dogs and will work with you to find the best solution if issues arise.
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>Do you ship puppies outside Lagos?</span>
+                <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+                We prefer local pickup for the puppy's comfort and your peace of mind, but we can arrange safe delivery within Nigeria for an additional fee. We ensure proper transport with climate control, frequent breaks, and all necessary documentation. International shipping is not available.
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>What ongoing support do you provide?</span>
+                <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+                Lifetime support! I'm always available via WhatsApp, phone, or email for questions about training, health, nutrition, behavior, or anything else. You're part of our extended family. Many of my clients stay in touch for years, sending updates and photos. I love seeing how the puppies grow!
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>How do you socialize the puppies?</span>
+                <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+                Puppies are raised in my home with daily human interaction from birth. They're exposed to household sounds, different people, gentle handling, and positive experiences. Early socialization continues with introductions to various stimuli, sounds, and situations to ensure confident, well-adjusted puppies.
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>What breeds do you specialize in?</span>
+                <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+                We specialize in Golden Retrievers, German Shepherds, Labrador Retrievers, Rottweilers, French Bulldogs, and American Bullies. Each breed is carefully selected for temperament, health, and family compatibility. Visit our Breeds page to learn more about each one.
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>At what age can puppies go to new homes?</span>
+                <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+                Puppies go to their new homes at a minimum of 8 weeks old, ensuring they've had crucial time with their mother and littermates for proper social development. Some breeds may stay slightly longer depending on individual development and breed-specific needs.
+            </div>
+        </div>
+
+        <div class="annotation">
+            Accordions conserve space on mobile while providing comprehensive information. Reduces need for separate FAQ page.
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="section" style="background: #FFFFFF;">
+        <div class="cta-card">
+            <h2 class="cta-title">Ready to Welcome a Puppy Home?</h2>
+            <button class="btn btn-primary">View Available Puppies</button>
+            <button class="btn btn-secondary">Contact Us</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-logo">Business Name</div>
+        
+        <div class="footer-contact">
+            <a href="#" class="footer-contact-item">
+                <i class="fas fa-phone"></i>
+                <span>+234 XXX XXX XXXX</span>
+            </a>
+            <a href="#" class="footer-contact-item">
+                <i class="fab fa-whatsapp"></i>
+                <span>Chat on WhatsApp</span>
+            </a>
+            <a href="#" class="footer-contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>info@businessname.com</span>
+            </a>
+        </div>
+
+        <div class="footer-social">
+            <div class="social-icon"><i class="fab fa-instagram"></i></div>
+            <div class="social-icon"><i class="fab fa-facebook"></i></div>
+            <div class="social-icon"><i class="fab fa-tiktok"></i></div>
+            <div class="social-icon"><i class="fab fa-youtube"></i></div>
+        </div>
+
+        <div class="footer-hours">
+            <strong>Business Hours</strong><br>
+            Mon-Fri: 9:00 AM - 6:00 PM<br>
+            Saturday: 10:00 AM - 4:00 PM<br>
+            Sunday: By appointment only<br>
+            <em style="font-size: 12px;">All times West Africa Time (WAT)</em>
+        </div>
+
+        <div class="footer-copyright">© 2024 Business Name. All rights reserved.<br>Breeding quality puppies with love in Lagos, Nigeria</div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
+</div>
+
+<script>
+// Toggle story read more/less
+function toggleStory() {
+    const content = document.getElementById('storyContent');
+    const button = document.getElementById('readMoreText');
+    
+    if (content.classList.contains('expanded')) {
+        content.classList.remove('expanded');
+        button.textContent = 'Read More';
+        content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+        content.classList.add('expanded');
+        button.textContent = 'Read Less';
+    }
+}
+
+// Accordion functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const item = this.parentElement;
+            const wasActive = item.classList.contains('active');
+            
+            // Close all accordions
+            document.querySelectorAll('.accordion-item').forEach(accordion => {
+                accordion.classList.remove('active');
+            });
+            
+            // Open clicked accordion if it wasn't active
+            if (!wasActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+});
+</script>
+
+
+</body></html>

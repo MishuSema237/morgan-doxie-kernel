@@ -1,0 +1,1030 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserve Puppy - Step 2: Your Information</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.2s ease-in-out;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F5F5F5;
+            color: #333333;
+            line-height: 1.5;
+            padding-bottom: 100px;
+        }
+
+        .wireframe-container {
+            max-width: 430px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            box-shadow: 0 0 40px rgba(0,0,0,0.1);
+            min-height: 932px;
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            border-bottom: 1px solid #E0E0E0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            gap: 16px;
+        }
+
+        .back-button {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #E0E0E0;
+            background: #F5F5F5;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .back-button:hover {
+            background: #E0E0E0;
+        }
+
+        .header-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+            flex: 1;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            padding: 20px 16px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            max-width: 360px;
+            margin: 0 auto;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .progress-circle {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #E0E0E0;
+            background: #F5F5F5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #666666;
+            margin-bottom: 8px;
+        }
+
+        .progress-step.completed .progress-circle {
+            background: #333333;
+            border-color: #333333;
+            color: #FFFFFF;
+        }
+
+        .progress-step.active .progress-circle {
+            background: #FFFFFF;
+            border-color: #333333;
+            border-width: 3px;
+            color: #333333;
+        }
+
+        .progress-label {
+            font-size: 11px;
+            color: #666666;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .progress-step.active .progress-label {
+            font-weight: 600;
+            color: #333333;
+        }
+
+        .progress-line {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            right: -50%;
+            height: 2px;
+            background: #E0E0E0;
+            z-index: 1;
+        }
+
+        .progress-step.completed .progress-line {
+            background: #333333;
+        }
+
+        .progress-step:last-child .progress-line {
+            display: none;
+        }
+
+        /* Puppy Summary Card */
+        .puppy-summary {
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            cursor: pointer;
+        }
+
+        .puppy-summary-collapsed {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .puppy-summary-photo-small {
+            width: 60px;
+            height: 60px;
+            background: #E0E0E0;
+            border: 1px solid #CCCCCC;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #666666;
+        }
+
+        .puppy-summary-info {
+            flex: 1;
+        }
+
+        .puppy-breed-small {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 2px;
+        }
+
+        .puppy-id-small {
+            font-size: 12px;
+            color: #666666;
+            margin-bottom: 4px;
+        }
+
+        .puppy-price-small {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        .expand-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666666;
+        }
+
+        .puppy-summary-expanded {
+            display: none;
+            padding: 16px;
+            border-top: 1px solid #E0E0E0;
+        }
+
+        .puppy-summary.expanded .puppy-summary-expanded {
+            display: block;
+        }
+
+        .puppy-summary.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .puppy-photo-large {
+            width: 100%;
+            height: 200px;
+            background: #E0E0E0;
+            border: 2px dashed #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666666;
+            font-size: 14px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .puppy-photo-large::before,
+        .puppy-photo-large::after {
+            content: '';
+            position: absolute;
+            background: #999999;
+        }
+
+        .puppy-photo-large::before {
+            width: 100%;
+            height: 1px;
+            transform: rotate(45deg);
+        }
+
+        .puppy-photo-large::after {
+            width: 100%;
+            height: 1px;
+            transform: rotate(-45deg);
+        }
+
+        .puppy-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            font-size: 12px;
+            color: #666666;
+        }
+
+        .price-breakdown {
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            padding: 12px;
+            margin: 12px 0;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .price-label {
+            color: #666666;
+        }
+
+        .price-value {
+            font-weight: 600;
+            color: #333333;
+        }
+
+        .change-link {
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            color: #666666;
+            text-decoration: underline;
+            margin-top: 12px;
+        }
+
+        /* Section */
+        .section {
+            padding: 24px 16px;
+            background: #FFFFFF;
+            border-bottom: 8px solid #F5F5F5;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 16px;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #DC2626;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            min-height: 48px;
+            padding: 12px 16px;
+            border: 1px solid #E0E0E0;
+            background: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: #333333;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: 2px solid #333333;
+            outline-offset: 2px;
+            border-color: #333333;
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-hint {
+            font-size: 12px;
+            color: #999999;
+            margin-top: 4px;
+        }
+
+        /* Checkbox & Radio */
+        .checkbox-group,
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .checkbox-item,
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-height: 44px;
+            padding: 12px;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            cursor: pointer;
+        }
+
+        .checkbox-item:hover,
+        .radio-item:hover {
+            background: #F5F5F5;
+        }
+
+        .checkbox-item.checked,
+        .radio-item.checked {
+            border-color: #333333;
+            background: #F5F5F5;
+        }
+
+        .checkbox-box,
+        .radio-box {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #333333;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .radio-box {
+            border-radius: 50%;
+        }
+
+        .checkbox-item.checked .checkbox-box::after {
+            content: '✓';
+            font-size: 16px;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        .radio-item.checked .radio-box::after {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: #333333;
+            border-radius: 50%;
+        }
+
+        .checkbox-label,
+        .radio-label {
+            font-size: 14px;
+            color: #333333;
+            flex: 1;
+        }
+
+        .price-badge {
+            font-size: 12px;
+            color: #666666;
+            background: #F5F5F5;
+            padding: 2px 8px;
+            border: 1px solid #E0E0E0;
+        }
+
+        /* Info Box */
+        .info-box {
+            padding: 16px;
+            background: #FFF9E6;
+            border: 2px solid #FFD700;
+            margin: 16px 0;
+        }
+
+        .info-box-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .info-box-text {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        /* Expandable Details */
+        .expandable {
+            margin-top: 8px;
+            padding: 12px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            display: none;
+        }
+
+        .radio-item.checked .expandable {
+            display: block;
+        }
+
+        /* Sticky Bottom Actions */
+        .sticky-actions {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #FFFFFF;
+            border-top: 2px solid #333333;
+            padding: 16px;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+            z-index: 90;
+        }
+
+        .sticky-actions-inner {
+            max-width: 430px;
+            margin: 0 auto;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid #333333;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            min-height: 48px;
+            padding: 12px 24px;
+        }
+
+        .btn-primary {
+            background: #333333;
+            color: #FFFFFF;
+            flex: 1.5;
+        }
+
+        .btn-primary:hover {
+            background: #555555;
+        }
+
+        .btn-primary:active {
+            background: #222222;
+        }
+
+        .btn-secondary {
+            background: #FFFFFF;
+            color: #333333;
+            flex: 1;
+        }
+
+        .btn-secondary:hover {
+            background: #F5F5F5;
+        }
+
+        .btn-secondary:active {
+            background: #E0E0E0;
+        }
+
+        .save-link {
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            color: #666666;
+            text-decoration: underline;
+        }
+
+        /* Floating Help Button */
+        .help-float {
+            position: fixed;
+            bottom: 100px;
+            left: 16px;
+            width: 56px;
+            height: 56px;
+            background: #666666;
+            border: 2px solid #555555;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 80;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+
+        .help-float:hover {
+            background: #555555;
+        }
+
+        .help-float i {
+            font-size: 24px;
+            color: #FFFFFF;
+        }
+
+        /* Annotations */
+        .annotation {
+            font-size: 12px;
+            color: #999999;
+            font-style: italic;
+            padding: 8px;
+            background: #F9F9F9;
+            border-left: 2px solid #999999;
+            margin: 16px 0;
+        }
+
+        /* Date Picker Placeholder */
+        .date-picker {
+            width: 100%;
+            min-height: 48px;
+            padding: 12px 16px;
+            border: 1px solid #E0E0E0;
+            background: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: #333333;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .date-picker:hover {
+            background: #F5F5F5;
+        }
+
+        .date-picker i {
+            color: #666666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wireframe-container">
+    
+    <!-- Header -->
+    <div class="header">
+        <div class="back-button">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+        <div class="header-title">Reserve Puppy</div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-steps">
+            <div class="progress-step completed">
+                <div class="progress-circle">✓</div>
+                <div class="progress-label">Select<br>Puppy</div>
+                <div class="progress-line"></div>
+            </div>
+            <div class="progress-step active">
+                <div class="progress-circle">2</div>
+                <div class="progress-label">Your<br>Info</div>
+                <div class="progress-line"></div>
+            </div>
+            <div class="progress-step">
+                <div class="progress-circle">3</div>
+                <div class="progress-label">Review</div>
+                <div class="progress-line"></div>
+            </div>
+            <div class="progress-step">
+                <div class="progress-circle">4</div>
+                <div class="progress-label">Confirm</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Puppy Summary (Collapsible) -->
+    <div class="puppy-summary" id="puppySummary">
+        <div class="puppy-summary-collapsed">
+            <div class="puppy-summary-photo-small">
+                <span>PHOTO</span>
+            </div>
+            <div class="puppy-summary-info">
+                <div class="puppy-breed-small">Golden Retriever</div>
+                <div class="puppy-id-small">ID: #GR-001</div>
+                <div class="puppy-price-small">₦180,000</div>
+            </div>
+            <div class="expand-icon">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+        
+        <div class="puppy-summary-expanded">
+            <div class="puppy-photo-large">
+                <span>Golden Retriever Puppy Photo</span>
+            </div>
+            
+            <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 4px;">Golden Retriever</h3>
+            <div style="font-size: 14px; color: #666666; margin-bottom: 8px;">8 weeks old • Male • ID: #GR-001</div>
+            
+            <div class="puppy-tags">
+                <span class="tag">Family Friendly</span>
+                <span class="tag">Playful</span>
+                <span class="tag">Good with Kids</span>
+            </div>
+            
+            <div class="price-breakdown">
+                <div class="price-row">
+                    <span class="price-label">Puppy Price</span>
+                    <span class="price-value">₦180,000</span>
+                </div>
+                <div class="price-row">
+                    <span class="price-label">Delivery Fee</span>
+                    <span class="price-value">₦0</span>
+                </div>
+                <div class="price-row" style="padding-top: 8px; border-top: 1px solid #E0E0E0; margin-top: 8px; font-weight: 700;">
+                    <span>Total</span>
+                    <span>₦180,000</span>
+                </div>
+            </div>
+            
+            <div style="font-size: 13px; color: #666666; margin-top: 12px;">
+                <strong>Includes:</strong> Health certificate, first vaccinations, deworming, starter kit
+            </div>
+            
+            <a href="#" class="change-link">Change Selection</a>
+        </div>
+    </div>
+
+    <div class="annotation" style="margin: 16px;">
+        Tap card to expand/collapse puppy details. Summary stays visible for context.
+    </div>
+
+    <!-- Personal Information Section -->
+    <div class="section">
+        <h2 class="section-title">Your Information</h2>
+        
+        <div class="form-group">
+            <label class="form-label">Full Name <span class="required">*</span></label>
+            <input type="text" class="form-input" placeholder="Enter your full name">
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Email Address <span class="required">*</span></label>
+            <input type="email" class="form-input" placeholder="your.email@example.com">
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Phone Number <span class="required">*</span></label>
+            <input type="tel" class="form-input" placeholder="+234 XXX XXX XXXX">
+            <div class="form-hint">Nigerian format auto-validated</div>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">WhatsApp Number</label>
+            <input type="tel" class="form-input" placeholder="If different from phone number">
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Address Line 1 <span class="required">*</span></label>
+            <input type="text" class="form-input" placeholder="Street address">
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Address Line 2</label>
+            <input type="text" class="form-input" placeholder="Apartment, suite, etc. (optional)">
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">City <span class="required">*</span></label>
+            <input type="text" class="form-input" placeholder="Enter city">
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">State <span class="required">*</span></label>
+            <select class="form-select">
+                <option>Select State</option>
+                <option>Lagos</option>
+                <option>Abuja FCT</option>
+                <option>Rivers</option>
+                <option>Oyo</option>
+                <option>Kano</option>
+                <option>Kaduna</option>
+                <option>Enugu</option>
+                <option>Delta</option>
+                <option>Ogun</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Postal Code</label>
+            <input type="text" class="form-input" placeholder="Optional">
+        </div>
+    </div>
+
+    <!-- About You Section -->
+    <div class="section">
+        <h2 class="section-title">Tell Us About Your Home</h2>
+        
+        <div class="form-group">
+            <label class="form-label">I am a (select all that apply)</label>
+            <div class="checkbox-group">
+                <div class="checkbox-item" onclick="this.classList.toggle('checked')">
+                    <div class="checkbox-box"></div>
+                    <div class="checkbox-label">First-time dog owner</div>
+                </div>
+                <div class="checkbox-item" onclick="this.classList.toggle('checked')">
+                    <div class="checkbox-box"></div>
+                    <div class="checkbox-label">Experienced owner</div>
+                </div>
+                <div class="checkbox-item" onclick="this.classList.toggle('checked')">
+                    <div class="checkbox-box"></div>
+                    <div class="checkbox-label">Have other pets</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Living Situation</label>
+            <div class="radio-group">
+                <div class="radio-item" onclick="selectRadio(this, 'living')">
+                    <div class="radio-box"></div>
+                    <div class="radio-label">House with yard</div>
+                </div>
+                <div class="radio-item" onclick="selectRadio(this, 'living')">
+                    <div class="radio-box"></div>
+                    <div class="radio-label">House without yard</div>
+                </div>
+                <div class="radio-item" onclick="selectRadio(this, 'living')">
+                    <div class="radio-box"></div>
+                    <div class="radio-label">Apartment</div>
+                </div>
+                <div class="radio-item" onclick="selectRadio(this, 'living')">
+                    <div class="radio-box"></div>
+                    <div class="radio-label">Other</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Who will primarily care for the puppy?</label>
+            <div class="radio-group">
+                <div class="radio-item" onclick="selectRadio(this, 'caregiver')">
+                    <div class="radio-box"></div>
+                    <div class="radio-label">Me</div>
+                </div>
+                <div class="radio-item" onclick="selectRadio(this, 'caregiver')">
+                    <div class="radio-box"></div>
+                    <div class="radio-label">Family member</div>
+                </div>
+                <div class="radio-item" onclick="selectRadio(this, 'caregiver')">
+                    <div class="radio-box"></div>
+                    <div class="radio-label">Shared responsibility</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Why did you choose this breed?</label>
+            <textarea class="form-textarea" placeholder="This helps us understand your expectations and ensure a good match (optional)"></textarea>
+        </div>
+    </div>
+
+    <!-- Pickup/Delivery Section -->
+    <div class="section">
+        <h2 class="section-title">Pickup or Delivery?</h2>
+        
+        <div class="radio-group">
+            <div class="radio-item checked" onclick="selectRadio(this, 'delivery')">
+                <div class="radio-box"></div>
+                <div class="radio-label">
+                    I will pick up in Lagos
+                    <span class="price-badge">₦0</span>
+                </div>
+            </div>
+            <div class="radio-item" onclick="selectRadio(this, 'delivery')">
+                <div class="radio-box"></div>
+                <div class="radio-label">
+                    Delivery within Lagos
+                    <span class="price-badge">₦15,000</span>
+                </div>
+            </div>
+            <div class="radio-item" onclick="selectRadio(this, 'delivery')">
+                <div class="radio-box"></div>
+                <div class="radio-label">
+                    Delivery outside Lagos
+                    <span class="price-badge">Price TBD</span>
+                </div>
+                <div class="expandable">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Delivery City</label>
+                        <input type="text" class="form-input" placeholder="Enter delivery city">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group" style="margin-top: 16px;">
+            <label class="form-label">Preferred Pickup/Delivery Date</label>
+            <div class="date-picker">
+                <span style="color: #999999;">Select date</span>
+                <i class="fas fa-calendar"></i>
+            </div>
+            <div class="form-hint">Calendar widget opens on tap</div>
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Preferred Time</label>
+            <select class="form-select">
+                <option>Select time slot</option>
+                <option>9:00 AM - 11:00 AM</option>
+                <option>11:00 AM - 1:00 PM</option>
+                <option>1:00 PM - 3:00 PM</option>
+                <option>3:00 PM - 5:00 PM</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Payment Method Section -->
+    <div class="section">
+        <h2 class="section-title">Payment Method</h2>
+        
+        <div class="radio-group">
+            <div class="radio-item checked" onclick="selectRadio(this, 'payment')">
+                <div class="radio-box"></div>
+                <div class="radio-label">Bank Transfer</div>
+            </div>
+            <div class="radio-item" onclick="selectRadio(this, 'payment')">
+                <div class="radio-box"></div>
+                <div class="radio-label">Cash on Pickup/Delivery</div>
+            </div>
+            <div class="radio-item" onclick="selectRadio(this, 'payment')">
+                <div class="radio-box"></div>
+                <div class="radio-label">Installment Plan</div>
+                <div class="expandable">
+                    <div style="font-size: 13px; color: #666666; line-height: 1.6;">
+                        <strong>Installment Terms:</strong><br>
+                        • 50% deposit required (₦90,000)<br>
+                        • Remaining 50% due before pickup (₦90,000)<br>
+                        • No interest or additional fees<br>
+                        • Puppy reserved upon deposit payment
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reservation Deposit Section -->
+    <div class="section">
+        <h2 class="section-title">Reservation Deposit</h2>
+        
+        <div class="info-box">
+            <div class="info-box-title">Deposit Required</div>
+            <div class="info-box-text">
+                A deposit of <strong>₦54,000 (30%)</strong> is required to reserve this puppy.<br><br>
+                Remaining balance of <strong>₦126,000</strong> is due at pickup.<br><br>
+                <strong>Note:</strong> Deposit is non-refundable but transferable to another puppy within 6 months if needed.
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="checkbox-item" onclick="this.classList.toggle('checked')">
+                <div class="checkbox-box"></div>
+                <div class="checkbox-label">I understand and agree to the reservation terms <span class="required">*</span></div>
+            </div>
+        </div>
+        
+        <a href="#" style="display: block; text-align: center; font-size: 14px; color: #666666; text-decoration: underline; margin-top: 8px;">View full reservation policy</a>
+    </div>
+
+    <!-- Terms & Conditions Section -->
+    <div class="section">
+        <h2 class="section-title">Terms &amp; Conditions</h2>
+        
+        <div class="checkbox-group">
+            <div class="checkbox-item" onclick="this.classList.toggle('checked')">
+                <div class="checkbox-box"></div>
+                <div class="checkbox-label">I agree to the terms and conditions <span class="required">*</span></div>
+            </div>
+            <div class="checkbox-item" onclick="this.classList.toggle('checked')">
+                <div class="checkbox-box"></div>
+                <div class="checkbox-label">I agree to receive updates about my puppy via WhatsApp and email</div>
+            </div>
+        </div>
+        
+        <a href="#" style="display: block; text-align: center; font-size: 14px; color: #666666; text-decoration: underline; margin-top: 12px;">Read full terms and conditions</a>
+    </div>
+
+    <div class="annotation" style="margin: 16px;">
+        Form auto-saves every 30 seconds. All required fields marked with red asterisk (*). Validation happens on blur and submit with helpful error messages.
+    </div>
+
+    <div class="annotation" style="margin: 16px; background: #333; color: #fff;">
+        Page length: ~2000px | Sticky bottom CTA ensures continue button always accessible | Nigerian phone format auto-validated
+    </div>
+
+    <!-- Spacer for sticky actions -->
+    <div style="height: 20px;"></div>
+
+</div>
+
+<!-- Sticky Bottom Actions -->
+<div class="sticky-actions">
+    <div class="sticky-actions-inner">
+        <div class="button-row">
+            <button class="btn btn-secondary">Back</button>
+            <button class="btn btn-primary">Continue to Review</button>
+        </div>
+        <a href="#" class="save-link">Save Progress</a>
+    </div>
+</div>
+
+<!-- Floating Help Button -->
+<div class="help-float">
+    <i class="fas fa-question"></i>
+</div>
+
+<script>
+// Puppy summary expand/collapse
+document.getElementById('puppySummary').addEventListener('click', function(e) {
+    // Don't toggle if clicking on change link
+    if (e.target.classList.contains('change-link')) {
+        return;
+    }
+    this.classList.toggle('expanded');
+});
+
+// Radio button selection
+function selectRadio(element, groupName) {
+    // Get all radio items in the same group
+    const group = element.closest('.radio-group');
+    const items = group.querySelectorAll('.radio-item');
+    
+    // Uncheck all items in group
+    items.forEach(item => {
+        item.classList.remove('checked');
+    });
+    
+    // Check clicked item
+    element.classList.add('checked');
+}
+
+// Simulate auto-save
+setInterval(() => {
+    console.log('Form auto-saved');
+}, 30000);
+
+// Date picker interaction
+document.querySelectorAll('.date-picker').forEach(picker => {
+    picker.addEventListener('click', function() {
+        console.log('Calendar widget would open here');
+        // In real implementation, this would open a date picker modal
+    });
+});
+</script>
+
+
+</body></html>

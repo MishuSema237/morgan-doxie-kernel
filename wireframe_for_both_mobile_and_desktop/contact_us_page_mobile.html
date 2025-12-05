@@ -1,0 +1,939 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Dog Breeding Mobile Wireframes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.2s ease-in-out;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFFFFF;
+            color: #333333;
+            line-height: 1.5;
+        }
+
+        .wireframe-container {
+            max-width: 430px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            box-shadow: 0 0 40px rgba(0,0,0,0.1);
+        }
+
+        .page {
+            background: #F5F5F5;
+            min-height: 932px;
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            border-bottom: 1px solid #E0E0E0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #E0E0E0;
+            background: #F5F5F5;
+            cursor: pointer;
+        }
+
+        .header-icon:hover {
+            background: #E0E0E0;
+        }
+
+        .logo {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        /* Page Intro */
+        .page-intro {
+            padding: 24px 16px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .page-intro h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #333333;
+        }
+
+        .page-intro p {
+            font-size: 16px;
+            color: #666666;
+        }
+
+        /* Section */
+        .section {
+            padding: 24px 16px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 16px;
+        }
+
+        /* Cards */
+        .card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px 24px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid #333333;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: #333333;
+            color: #FFFFFF;
+        }
+
+        .btn-primary:hover {
+            background: #555555;
+        }
+
+        .btn-secondary {
+            background: #FFFFFF;
+            color: #333333;
+        }
+
+        .btn-secondary:hover {
+            background: #F5F5F5;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: #FFFFFF;
+            border-color: #25D366;
+        }
+
+        .btn-whatsapp:hover {
+            background: #20BA5A;
+        }
+
+        .btn-phone {
+            background: #333333;
+            color: #FFFFFF;
+            border-color: #333333;
+        }
+
+        .btn-phone:hover {
+            background: #555555;
+        }
+
+        .btn-email {
+            background: #333333;
+            color: #FFFFFF;
+            border-color: #333333;
+        }
+
+        .btn-email:hover {
+            background: #555555;
+        }
+
+        .btn-instagram {
+            background: #E4405F;
+            color: #FFFFFF;
+            border-color: #E4405F;
+        }
+
+        .btn-instagram:hover {
+            background: #D32F4F;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #E0E0E0;
+            background: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: #333333;
+            min-height: 48px;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: 2px solid #333333;
+            outline-offset: 2px;
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-note {
+            font-size: 12px;
+            color: #666666;
+            margin-top: 8px;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .checkbox-box {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #333333;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .checkbox-label {
+            font-size: 14px;
+            color: #333333;
+        }
+
+        /* Contact Card */
+        .contact-card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .contact-card .btn {
+            margin-bottom: 12px;
+        }
+
+        .contact-card .btn:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-note {
+            font-size: 12px;
+            color: #666666;
+            text-align: center;
+            margin-top: 12px;
+            padding: 8px;
+            background: #F9F9F9;
+            border: 1px solid #E0E0E0;
+        }
+
+        /* Hours List */
+        .hours-list {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.8;
+        }
+
+        .hours-list div {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .hours-list div:last-child {
+            border-bottom: none;
+        }
+
+        .hours-note {
+            font-size: 12px;
+            color: #999999;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* Location Card */
+        .location-card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .address {
+            font-size: 14px;
+            color: #333333;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .address strong {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 250px;
+            background: #E0E0E0;
+            border: 2px dashed #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666666;
+            font-size: 14px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .map-placeholder::before,
+        .map-placeholder::after {
+            content: '';
+            position: absolute;
+            background: #999999;
+        }
+
+        .map-placeholder::before {
+            width: 100%;
+            height: 1px;
+            transform: rotate(45deg);
+        }
+
+        .map-placeholder::after {
+            width: 100%;
+            height: 1px;
+            transform: rotate(-45deg);
+        }
+
+        .location-note {
+            font-size: 12px;
+            color: #666666;
+            padding: 8px;
+            background: #F9F9F9;
+            border: 1px solid #E0E0E0;
+            margin-top: 12px;
+        }
+
+        /* Visit Card */
+        .visit-card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .visit-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333333;
+        }
+
+        .visit-card p {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .requirements-list {
+            font-size: 12px;
+            color: #666666;
+            margin-top: 12px;
+            padding: 12px;
+            background: #F9F9F9;
+            border: 1px solid #E0E0E0;
+        }
+
+        .requirements-list div {
+            margin-bottom: 4px;
+        }
+
+        .requirements-list div:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Emergency Card */
+        .emergency-card {
+            background: #FFF3CD;
+            border: 2px solid #FFC107;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .emergency-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #333333;
+        }
+
+        .emergency-card p {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 12px;
+        }
+
+        .emergency-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333333;
+            text-align: center;
+            padding: 12px;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            margin-bottom: 8px;
+        }
+
+        .emergency-note {
+            font-size: 12px;
+            color: #666666;
+            text-align: center;
+        }
+
+        /* Stay Connected Cards */
+        .connect-card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .connect-card h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333333;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 8px;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #E0E0E0;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+        }
+
+        .newsletter-btn {
+            padding: 12px 20px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 1px solid #333333;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .newsletter-btn:hover {
+            background: #555555;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            cursor: pointer;
+        }
+
+        .social-icon:hover {
+            background: #E0E0E0;
+        }
+
+        .qr-placeholder {
+            width: 150px;
+            height: 150px;
+            background: #E0E0E0;
+            border: 2px dashed #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 12px auto;
+            font-size: 12px;
+            color: #666666;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333333;
+            color: #FFFFFF;
+            padding: 32px 16px;
+        }
+
+        .footer-logo {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .footer-contact {
+            margin-bottom: 24px;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #444444;
+            margin-bottom: 8px;
+            text-decoration: none;
+            color: #FFFFFF;
+            border: 1px solid #555555;
+        }
+
+        .footer-contact-item:hover {
+            background: #555555;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .footer-social-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #444444;
+            border: 1px solid #555555;
+        }
+
+        .footer-social-icon:hover {
+            background: #555555;
+        }
+
+        .footer-hours {
+            font-size: 14px;
+            color: #CCCCCC;
+            margin-bottom: 16px;
+        }
+
+        .footer-copyright {
+            font-size: 12px;
+            color: #999999;
+            text-align: center;
+            padding-top: 16px;
+            border-top: 1px solid #555555;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            border: 2px solid #20BA5A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            background: #20BA5A;
+        }
+
+        .whatsapp-float i {
+            font-size: 28px;
+            color: #FFFFFF;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Annotations */
+        .annotation {
+            font-size: 12px;
+            color: #999999;
+            font-style: italic;
+            padding: 8px;
+            background: #F9F9F9;
+            border-left: 2px solid #999999;
+            margin: 8px 0;
+        }
+
+        /* Utility Classes */
+        .mb-8 { margin-bottom: 8px; }
+        .mb-12 { margin-bottom: 12px; }
+        .mb-16 { margin-bottom: 16px; }
+        .mt-12 { margin-top: 12px; }
+    </style>
+</head>
+<body>
+
+<div class="wireframe-container">
+    <div class="page">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-icon">
+                <i class="fas fa-arrow-left"></i>
+            </div>
+            <div class="logo">Contact Us</div>
+            <div class="header-icon">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+        </div>
+
+        <!-- Page Intro -->
+        <div class="page-intro">
+            <h1>Get in Touch</h1>
+            <p>We're here to help you find your perfect puppy</p>
+        </div>
+
+        <!-- Quick Contact Cards -->
+        <div class="section">
+            <h2 class="section-title">Contact Options</h2>
+            
+            <div class="contact-card">
+                <button class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Chat on WhatsApp: +234 XXX XXX XXXX
+                </button>
+                
+                <button class="btn btn-phone">
+                    <i class="fas fa-phone"></i> Call Us: +234 XXX XXX XXXX
+                </button>
+                
+                <button class="btn btn-email">
+                    <i class="fas fa-envelope"></i> info@businessname.com
+                </button>
+                
+                <button class="btn btn-instagram">
+                    <i class="fab fa-instagram"></i> Follow @businessname
+                </button>
+
+                <div class="contact-note">
+                    <i class="fas fa-info-circle"></i> WhatsApp is fastest for immediate response
+                </div>
+            </div>
+
+            <div class="annotation">
+                WhatsApp and Phone buttons open respective apps with pre-filled message/number
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="section" style="background: #FFFFFF; border-top: 1px solid #E0E0E0;">
+            <h2 class="section-title">Send Us a Message</h2>
+            
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Full Name *</label>
+                    <input type="text" class="form-input" placeholder="Enter your full name" required="">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email Address *</label>
+                    <input type="email" class="form-input" placeholder="your.email@example.com" required="">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Phone Number *</label>
+                    <input type="tel" class="form-input" placeholder="+234" required="">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Subject *</label>
+                    <select class="form-select" required="">
+                        <option value="">Select a subject</option>
+                        <option value="specific-puppy">Interested in a specific puppy</option>
+                        <option value="general">General inquiry</option>
+                        <option value="visit">Schedule a visit</option>
+                        <option value="breeding">Breeding information</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Puppy of Interest (Optional)</label>
+                    <select class="form-select">
+                        <option value="">Select a puppy</option>
+                        <option value="gr-001">Golden Retriever - #GR-001</option>
+                        <option value="gs-002">German Shepherd - #GS-002</option>
+                        <option value="fb-003">French Bulldog - #FB-003</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Message *</label>
+                    <textarea class="form-textarea" placeholder="Tell us how we can help..." required=""></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">How did you hear about us? (Optional)</label>
+                    <select class="form-select">
+                        <option value="">Select one</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="facebook">Facebook</option>
+                        <option value="referral">Friend referral</option>
+                        <option value="google">Google search</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-checkbox">
+                    <div class="checkbox-box"></div>
+                    <label class="checkbox-label">I'd like to join the waiting list for future puppies</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Send Message</button>
+
+                <p class="form-note">We typically respond within 2-4 hours during business hours</p>
+            </form>
+
+            <div class="annotation mt-12">
+                Form validates on submit with inline error messages. Success shows confirmation screen.
+            </div>
+        </div>
+
+        <!-- Office Hours -->
+        <div class="section">
+            <h2 class="section-title">When to Reach Us</h2>
+            
+            <div class="card">
+                <div class="hours-list">
+                    <div>
+                        <span>Monday - Friday</span>
+                        <span>9:00 AM - 6:00 PM</span>
+                    </div>
+                    <div>
+                        <span>Saturday</span>
+                        <span>10:00 AM - 4:00 PM</span>
+                    </div>
+                    <div>
+                        <span>Sunday</span>
+                        <span>By appointment only</span>
+                    </div>
+                </div>
+                <p class="hours-note">All times West Africa Time (WAT)</p>
+                <p class="hours-note">Closed on public holidays</p>
+            </div>
+        </div>
+
+        <!-- Location -->
+        <div class="section" style="background: #FFFFFF; border-top: 1px solid #E0E0E0;">
+            <h2 class="section-title">Our Location</h2>
+            
+            <div class="location-card">
+                <div class="address">
+                    <strong>[Business Name]</strong>
+                    [Area], Lagos<br>
+                    Nigeria
+                </div>
+
+                <div class="map-placeholder">
+                    <span>Google Maps Embed</span>
+                </div>
+
+                <button class="btn btn-secondary">
+                    <i class="fas fa-map-marker-alt"></i> Get Directions
+                </button>
+
+                <div class="location-note">
+                    <i class="fas fa-lock"></i> Exact address provided upon visit appointment for security
+                </div>
+            </div>
+
+            <div class="annotation">
+                Map placeholder opens native maps app. "Get Directions" uses device's default navigation app.
+            </div>
+        </div>
+
+        <!-- Visit Us -->
+        <div class="section">
+            <h2 class="section-title">Schedule a Visit</h2>
+            
+            <div class="visit-card">
+                <h3>Come Meet Our Puppies!</h3>
+                <p>We welcome visitors to meet our puppies and see where they're raised. All visits are by appointment only to ensure we can give you our full attention.</p>
+                
+                <button class="btn btn-primary mb-12">
+                    <i class="fas fa-calendar"></i> Book a Visit
+                </button>
+
+                <div class="requirements-list">
+                    <strong style="display: block; margin-bottom: 8px; color: #333;">Visit Requirements:</strong>
+                    <div>✓ Please call ahead to schedule</div>
+                    <div>✓ Valid ID required for security</div>
+                    <div>✓ Please don't visit other kennels same day (biosecurity)</div>
+                    <div>✓ Bring the whole family - we love meeting everyone!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Emergency Contact -->
+        <div class="section" style="background: #FFFFFF; border-top: 1px solid #E0E0E0;">
+            <h2 class="section-title">Emergency Contact</h2>
+            
+            <div class="emergency-card">
+                <h3>Already Own One of Our Puppies?</h3>
+                <p>If you're experiencing a pet emergency and need immediate help, please call our emergency line.</p>
+                
+                <div class="emergency-number">
+                    <i class="fas fa-phone-alt"></i> +234 XXX XXX XXXX
+                </div>
+                
+                <p class="emergency-note">24/7 emergency line for existing customers only</p>
+            </div>
+
+            <div class="annotation">
+                Emergency section specifically for post-purchase support. Shows commitment to lifetime care.
+            </div>
+        </div>
+
+        <!-- Stay Connected -->
+        <div class="section">
+            <h2 class="section-title">Stay Connected</h2>
+            
+            <div class="connect-card">
+                <h4>Newsletter</h4>
+                <p style="font-size: 14px; color: #666; margin-bottom: 12px;">Get updates on new puppies and dog care tips</p>
+                <div class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Your email">
+                    <button class="newsletter-btn">Subscribe</button>
+                </div>
+            </div>
+
+            <div class="connect-card">
+                <h4>Follow Us on Social Media</h4>
+                <p style="font-size: 14px; color: #666; margin-bottom: 12px;">See daily puppy photos and updates</p>
+                <div class="social-icons">
+                    <div class="social-icon">
+                        <i class="fab fa-instagram" style="font-size: 24px;"></i>
+                    </div>
+                    <div class="social-icon">
+                        <i class="fab fa-facebook" style="font-size: 24px;"></i>
+                    </div>
+                    <div class="social-icon">
+                        <i class="fab fa-tiktok" style="font-size: 24px;"></i>
+                    </div>
+                    <div class="social-icon">
+                        <i class="fab fa-youtube" style="font-size: 24px;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="connect-card">
+                <h4>WhatsApp Updates</h4>
+                <p style="font-size: 14px; color: #666; margin-bottom: 12px;">Join our WhatsApp group for instant puppy announcements</p>
+                <div class="qr-placeholder">
+                    QR Code<br>
+                    <small>Scan to join</small>
+                </div>
+                <button class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Join WhatsApp Group
+                </button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-logo">Business Name</div>
+            
+            <div class="footer-contact">
+                <a href="tel:+234" class="footer-contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+234 XXX XXX XXXX</span>
+                </a>
+                <a href="#" class="footer-contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Chat on WhatsApp</span>
+                </a>
+                <a href="mailto:info@businessname.com" class="footer-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@businessname.com</span>
+                </a>
+            </div>
+
+            <div class="footer-social">
+                <div class="footer-social-icon"><i class="fab fa-instagram"></i></div>
+                <div class="footer-social-icon"><i class="fab fa-facebook"></i></div>
+                <div class="footer-social-icon"><i class="fab fa-tiktok"></i></div>
+                <div class="footer-social-icon"><i class="fab fa-youtube"></i></div>
+            </div>
+
+            <div class="footer-hours">Mon-Sat 9AM-6PM WAT</div>
+
+            <div class="footer-copyright">© 2024 Business Name. All rights reserved.</div>
+        </div>
+
+        <!-- Floating WhatsApp Button -->
+        <div class="whatsapp-float">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+
+        <div class="annotation" style="margin: 16px; background: #333; color: #fff;">
+            Page length: ~2400px | All contact buttons open native apps | Form validates inline | Map integration with device location services
+        </div>
+    </div>
+</div>
+
+
+</body></html>

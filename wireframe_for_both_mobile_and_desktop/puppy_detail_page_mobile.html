@@ -1,0 +1,1105 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Retriever Puppy - Individual Detail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.2s ease-in-out;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F5F5F5;
+            color: #333333;
+            line-height: 1.5;
+            padding-bottom: 72px;
+        }
+
+        .wireframe-container {
+            max-width: 430px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            box-shadow: 0 0 40px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            border-bottom: 1px solid #E0E0E0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #E0E0E0;
+            background: #F5F5F5;
+            cursor: pointer;
+        }
+
+        .header-icon:hover {
+            background: #E0E0E0;
+        }
+
+        .logo {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        /* Photo Gallery */
+        .gallery-section {
+            position: relative;
+            background: #E0E0E0;
+        }
+
+        .main-photo {
+            width: 100%;
+            height: 500px;
+            background: #CCCCCC;
+            border: 2px solid #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-photo::before,
+        .main-photo::after {
+            content: '';
+            position: absolute;
+            background: #999999;
+        }
+
+        .main-photo::before {
+            width: 100%;
+            height: 1px;
+            transform: rotate(45deg);
+        }
+
+        .main-photo::after {
+            width: 100%;
+            height: 1px;
+            transform: rotate(-45deg);
+        }
+
+        .main-photo span {
+            position: relative;
+            z-index: 2;
+            color: #666666;
+            font-size: 14px;
+        }
+
+        .photo-counter {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(0,0,0,0.7);
+            color: #FFFFFF;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .zoom-icon {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            width: 44px;
+            height: 44px;
+            background: rgba(0,0,0,0.7);
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .zoom-icon:hover {
+            background: rgba(0,0,0,0.85);
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: #25D366;
+            color: #FFFFFF;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .status-badge.reserved {
+            background: #FF6B6B;
+        }
+
+        .thumbnail-strip {
+            display: flex;
+            gap: 8px;
+            padding: 8px;
+            background: #FFFFFF;
+            overflow-x: auto;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+            background: #E0E0E0;
+            border: 2px solid #CCCCCC;
+            cursor: pointer;
+        }
+
+        .thumbnail.active {
+            border-color: #333333;
+        }
+
+        .thumbnail:hover {
+            border-color: #666666;
+        }
+
+        /* Quick Info Bar */
+        .quick-info-bar {
+            background: #FFFFFF;
+            padding: 16px;
+            border-bottom: 2px solid #E0E0E0;
+            position: sticky;
+            top: 64px;
+            z-index: 90;
+        }
+
+        .puppy-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .price-large {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        /* Section */
+        .section {
+            background: #FFFFFF;
+            margin-bottom: 8px;
+            padding: 24px 16px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            cursor: pointer;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        .expand-icon {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #333333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .section-content {
+            font-size: 16px;
+            color: #666666;
+            line-height: 1.8;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .section-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .timestamp {
+            font-size: 12px;
+            color: #999999;
+            margin-top: 16px;
+        }
+
+        /* Card */
+        .detail-card {
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .detail-item {
+            font-size: 14px;
+        }
+
+        .detail-label {
+            color: #666666;
+            margin-bottom: 4px;
+        }
+
+        .detail-value {
+            color: #333333;
+            font-weight: 600;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            padding: 6px 12px;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            font-size: 12px;
+            color: #666666;
+        }
+
+        /* Price Card */
+        .price-card {
+            background: #F5F5F5;
+            border: 2px solid #333333;
+            padding: 20px 16px;
+            margin-bottom: 16px;
+        }
+
+        .price-display {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .price-label {
+            font-size: 12px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .price-amount {
+            font-size: 36px;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        .includes-list {
+            margin: 16px 0;
+        }
+
+        .includes-list h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .includes-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .includes-item i {
+            color: #25D366;
+            font-size: 12px;
+        }
+
+        .payment-options {
+            text-align: center;
+            font-size: 12px;
+            color: #999999;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #E0E0E0;
+        }
+
+        /* Parent Cards */
+        .parent-cards {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            margin-bottom: 16px;
+        }
+
+        .parent-card {
+            min-width: 280px;
+            flex-shrink: 0;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            padding: 16px;
+        }
+
+        .parent-photo {
+            width: 100%;
+            height: 180px;
+            background: #E0E0E0;
+            border: 1px solid #CCCCCC;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666666;
+            font-size: 14px;
+        }
+
+        .parent-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .parent-info {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 4px;
+        }
+
+        .health-badge {
+            display: inline-block;
+            background: #25D366;
+            color: #FFFFFF;
+            padding: 4px 8px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        /* Checklist */
+        .checklist-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            margin-bottom: 8px;
+        }
+
+        .checklist-icon {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #333333;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .checklist-icon.checked {
+            background: #25D366;
+            border-color: #25D366;
+            position: relative;
+        }
+
+        .checklist-icon.checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FFFFFF;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .checklist-text {
+            font-size: 14px;
+            color: #333333;
+        }
+
+        .health-note {
+            background: #F9F9F9;
+            border-left: 4px solid #333333;
+            padding: 12px;
+            font-size: 14px;
+            color: #666666;
+            margin-top: 16px;
+        }
+
+        /* Similar Puppies */
+        .similar-puppies {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+
+        .similar-card {
+            min-width: 280px;
+            flex-shrink: 0;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+        }
+
+        .similar-photo {
+            width: 280px;
+            height: 250px;
+            background: #E0E0E0;
+            border-bottom: 1px solid #CCCCCC;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666666;
+            font-size: 14px;
+        }
+
+        .similar-info {
+            padding: 12px;
+        }
+
+        .similar-breed {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .similar-meta {
+            font-size: 12px;
+            color: #666666;
+            margin-bottom: 8px;
+        }
+
+        .similar-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .similar-link {
+            font-size: 14px;
+            color: #666666;
+            text-decoration: underline;
+        }
+
+        /* Sticky Bottom Bar */
+        .sticky-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #FFFFFF;
+            border-top: 2px solid #333333;
+            padding: 12px 16px;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+            z-index: 200;
+            max-width: 430px;
+            margin: 0 auto;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 16px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid #333333;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: #25D366;
+            color: #FFFFFF;
+            border-color: #25D366;
+            flex: 1.5;
+        }
+
+        .btn-primary:hover {
+            background: #20BA5A;
+        }
+
+        .btn-secondary {
+            background: #FFFFFF;
+            color: #333333;
+            flex: 1;
+        }
+
+        .btn-secondary:hover {
+            background: #F5F5F5;
+        }
+
+        /* Floating Action Menu */
+        .floating-menu {
+            position: fixed;
+            bottom: 90px;
+            right: 24px;
+            z-index: 150;
+            max-width: 430px;
+        }
+
+        .fab-button {
+            width: 56px;
+            height: 56px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 2px solid #333333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .fab-button:hover {
+            background: #555555;
+        }
+
+        .fab-button i {
+            font-size: 24px;
+        }
+
+        .fab-menu {
+            position: absolute;
+            bottom: 64px;
+            right: 0;
+            background: #FFFFFF;
+            border: 2px solid #333333;
+            padding: 8px;
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 200px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .fab-menu.active {
+            display: flex;
+        }
+
+        .fab-menu-item {
+            padding: 12px 16px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: #333333;
+        }
+
+        .fab-menu-item:hover {
+            background: #E0E0E0;
+        }
+
+        .fab-menu-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Annotations */
+        .annotation {
+            font-size: 12px;
+            color: #999999;
+            font-style: italic;
+            padding: 8px;
+            background: #F9F9F9;
+            border-left: 2px solid #999999;
+            margin: 16px 0;
+        }
+
+        /* Collapsible Section */
+        .section.collapsed .section-content {
+            display: none;
+        }
+
+        .section.collapsed .expand-icon::before {
+            content: '+';
+        }
+
+        .section:not(.collapsed) .expand-icon::before {
+            content: '−';
+        }
+
+        /* Footer */
+        .footer {
+            background: #333333;
+            color: #FFFFFF;
+            padding: 24px 16px;
+            margin-top: 16px;
+        }
+
+        .footer-logo {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .footer-copyright {
+            font-size: 12px;
+            color: #CCCCCC;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wireframe-container">
+    
+    <!-- Header -->
+    <div class="header">
+        <div class="header-icon">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+        <div class="logo">Puppy Details</div>
+        <div class="header-icon">
+            <i class="fas fa-share-alt"></i>
+        </div>
+    </div>
+
+    <!-- Photo Gallery -->
+    <div class="gallery-section">
+        <div class="main-photo">
+            <span>Golden Retriever Main Photo</span>
+            <div class="photo-counter">1 of 8</div>
+            <div class="status-badge">AVAILABLE</div>
+            <div class="zoom-icon">
+                <i class="fas fa-search-plus"></i>
+            </div>
+        </div>
+        
+        <div class="thumbnail-strip">
+            <div class="thumbnail active"></div>
+            <div class="thumbnail"></div>
+            <div class="thumbnail"></div>
+            <div class="thumbnail"></div>
+            <div class="thumbnail"></div>
+            <div class="thumbnail"></div>
+            <div class="thumbnail"></div>
+            <div class="thumbnail"></div>
+        </div>
+
+        <div class="annotation" style="margin: 8px 16px;">
+            Swipe left/right on main photo to see more. Tap thumbnails to jump to specific photo. Tap zoom icon for full-screen gallery.
+        </div>
+    </div>
+
+    <!-- Quick Info Bar (Sticky) -->
+    <div class="quick-info-bar">
+        <div class="puppy-name">Max - Golden Retriever</div>
+        <div class="price-large">₦180,000</div>
+    </div>
+
+    <!-- About This Puppy (Default Expanded) -->
+    <div class="section">
+        <div class="section-header">
+            <h2 class="section-title">About This Puppy</h2>
+            <div class="expand-icon"></div>
+        </div>
+        <div class="section-content">
+            <p>
+                This beautiful Golden Retriever puppy has an exceptional temperament and is perfect for families. He's been raised in a loving home environment with lots of socialization from birth.
+            </p>
+            <p>
+                Max is very playful and energetic, loves to play fetch and enjoys being around people. He's already showing signs of being highly intelligent and trainable, which is typical of the Golden Retriever breed.
+            </p>
+            <p>
+                He's great with children and other pets. Has been well-socialized from birth and is comfortable with household noises and activities. He loves belly rubs and will follow you everywhere!
+            </p>
+            <p>
+                Max has a beautiful golden coat and classic Golden Retriever features. He comes from champion bloodlines with both parents health tested and temperament certified.
+            </p>
+            <p>
+                Ready to go to his forever home now. Will make an excellent family companion and is sure to bring lots of joy and love to your household.
+            </p>
+            <p>
+                We've been working on basic commands and crate training. He's doing very well and is eager to learn. Would thrive in an active household that can provide regular exercise and mental stimulation.
+            </p>
+            <div class="timestamp">Last Updated: January 15, 2025</div>
+        </div>
+    </div>
+
+    <!-- Key Details -->
+    <div class="section">
+        <div class="section-header">
+            <h2 class="section-title">Key Details</h2>
+            <div class="expand-icon"></div>
+        </div>
+        <div class="section-content">
+            <div class="detail-card">
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <div class="detail-label">Breed</div>
+                        <div class="detail-value">Golden Retriever</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Age</div>
+                        <div class="detail-value">8 weeks old</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Date of Birth</div>
+                        <div class="detail-value">Nov 20, 2024</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Gender</div>
+                        <div class="detail-value">Male</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Color</div>
+                        <div class="detail-value">Golden</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Size at Maturity</div>
+                        <div class="detail-value">Large</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Current Weight</div>
+                        <div class="detail-value">4.5 kg</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Adult Weight</div>
+                        <div class="detail-value">27-34 kg</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #E0E0E0;">
+                    <h4 style="font-size: 14px; font-weight: 600; color: #333; margin-bottom: 8px;">Temperament</h4>
+                    <div class="tags">
+                        <span class="tag">Family Friendly</span>
+                        <span class="tag">Playful</span>
+                        <span class="tag">Good with Kids</span>
+                        <span class="tag">Energetic</span>
+                        <span class="tag">Intelligent</span>
+                        <span class="tag">Affectionate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Price & What's Included -->
+    <div class="section">
+        <div class="section-header">
+            <h2 class="section-title">Price &amp; What's Included</h2>
+            <div class="expand-icon"></div>
+        </div>
+        <div class="section-content">
+            <div class="price-card">
+                <div class="price-display">
+                    <div class="price-label">Total Price</div>
+                    <div class="price-amount">₦180,000</div>
+                </div>
+
+                <div class="includes-list">
+                    <h4>Includes:</h4>
+                    <div class="includes-item">
+                        <i class="fas fa-check"></i>
+                        <span>Official health certificate from licensed vet</span>
+                    </div>
+                    <div class="includes-item">
+                        <i class="fas fa-check"></i>
+                        <span>First round of vaccinations completed</span>
+                    </div>
+                    <div class="includes-item">
+                        <i class="fas fa-check"></i>
+                        <span>Deworming treatments (completed)</span>
+                    </div>
+                    <div class="includes-item">
+                        <i class="fas fa-check"></i>
+                        <span>Starter kit (food sample, toy, blanket)</span>
+                    </div>
+                    <div class="includes-item">
+                        <i class="fas fa-check"></i>
+                        <span>30-day health guarantee</span>
+                    </div>
+                    <div class="includes-item">
+                        <i class="fas fa-check"></i>
+                        <span>Lifetime breeder support</span>
+                    </div>
+                </div>
+
+                <div class="payment-options">
+                    Payment Options: Cash | Bank Transfer | Installment Plans Available
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Meet the Parents -->
+    <div class="section">
+        <div class="section-header">
+            <h2 class="section-title">Meet the Parents</h2>
+            <div class="expand-icon"></div>
+        </div>
+        <div class="section-content">
+            <div class="parent-cards">
+                <div class="parent-card">
+                    <div class="parent-photo">Mother Photo</div>
+                    <div class="parent-name">Bella (Dam)</div>
+                    <div class="parent-info"><strong>Breed:</strong> Golden Retriever</div>
+                    <div class="parent-info"><strong>Age:</strong> 3 years</div>
+                    <div class="parent-info"><strong>Temperament:</strong> Gentle, loving, excellent with children</div>
+                    <div class="health-badge">HEALTH TESTED ✓</div>
+                </div>
+
+                <div class="parent-card">
+                    <div class="parent-photo">Father Photo</div>
+                    <div class="parent-name">Max Sr. (Sire)</div>
+                    <div class="parent-info"><strong>Breed:</strong> Golden Retriever</div>
+                    <div class="parent-info"><strong>Age:</strong> 4 years</div>
+                    <div class="parent-info"><strong>Temperament:</strong> Intelligent, athletic, champion bloodline</div>
+                    <div class="health-badge">HEALTH TESTED ✓</div>
+                </div>
+            </div>
+
+            <div class="annotation">
+                Swipe to see both parents. Both have been health tested and cleared for breeding.
+            </div>
+        </div>
+    </div>
+
+    <!-- Health Information -->
+    <div class="section">
+        <div class="section-header">
+            <h2 class="section-title">Health Information</h2>
+            <div class="expand-icon"></div>
+        </div>
+        <div class="section-content">
+            <div class="checklist-item">
+                <div class="checklist-icon checked"></div>
+                <div class="checklist-text">First vaccination completed (Dec 18, 2024)</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon checked"></div>
+                <div class="checklist-text">Dewormed (Dec 15, 2024)</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon checked"></div>
+                <div class="checklist-text">Vet health check passed (Dec 20, 2024)</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon checked"></div>
+                <div class="checklist-text">Health certificate available for pickup</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon"></div>
+                <div class="checklist-text">Microchipping available (optional add-on: ₦15,000)</div>
+            </div>
+
+            <div class="health-note">
+                <strong>30-Day Health Guarantee:</strong> All health records will be provided at pickup. We stand behind the health of all our puppies and offer lifetime support for any health questions or concerns.
+            </div>
+        </div>
+    </div>
+
+    <!-- Similar Puppies -->
+    <div class="section">
+        <div class="section-header">
+            <h2 class="section-title">You Might Also Like</h2>
+        </div>
+        <div class="section-content">
+            <div class="similar-puppies">
+                <div class="similar-card">
+                    <div class="similar-photo">Golden Retriever</div>
+                    <div class="similar-info">
+                        <div class="similar-breed">Golden Retriever</div>
+                        <div class="similar-meta">10 weeks old • Female</div>
+                        <div class="similar-price">₦180,000</div>
+                        <a href="#" class="similar-link">View Details →</a>
+                    </div>
+                </div>
+
+                <div class="similar-card">
+                    <div class="similar-photo">Labrador Retriever</div>
+                    <div class="similar-info">
+                        <div class="similar-breed">Labrador Retriever</div>
+                        <div class="similar-meta">9 weeks old • Male</div>
+                        <div class="similar-price">₦160,000</div>
+                        <a href="#" class="similar-link">View Details →</a>
+                    </div>
+                </div>
+
+                <div class="similar-card">
+                    <div class="similar-photo">Golden Retriever</div>
+                    <div class="similar-info">
+                        <div class="similar-breed">Golden Retriever</div>
+                        <div class="similar-meta">7 weeks old • Male</div>
+                        <div class="similar-price">₦180,000</div>
+                        <a href="#" class="similar-link">View Details →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="annotation">
+                Horizontal scroll to see other available puppies in similar breed and price range.
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-logo">Business Name</div>
+        <div class="footer-copyright">© 2025 Business Name. All rights reserved.</div>
+    </div>
+
+    <!-- Sticky Bottom Bar -->
+    <div class="sticky-bottom-bar">
+        <div class="button-group">
+            <button class="btn btn-primary">
+                <i class="fab fa-whatsapp"></i>
+                Reserve on WhatsApp
+            </button>
+            <button class="btn btn-secondary">
+                <i class="fas fa-phone"></i>
+                Call
+            </button>
+        </div>
+    </div>
+
+    <!-- Floating Action Menu -->
+    <div class="floating-menu">
+        <div class="fab-button" onclick="toggleFabMenu()">
+            <i class="fas fa-ellipsis-v"></i>
+        </div>
+        <div class="fab-menu" id="fabMenu">
+            <div class="fab-menu-item">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </div>
+            <div class="fab-menu-item">
+                <i class="fas fa-phone"></i>
+                <span>Call</span>
+            </div>
+            <div class="fab-menu-item">
+                <i class="fas fa-calendar"></i>
+                <span>Schedule Visit</span>
+            </div>
+            <div class="fab-menu-item">
+                <i class="fas fa-share-alt"></i>
+                <span>Share</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// Section collapse/expand functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('.section');
+    
+    sections.forEach(section => {
+        const header = section.querySelector('.section-header');
+        if (header) {
+            header.addEventListener('click', function() {
+                section.classList.toggle('collapsed');
+            });
+        }
+    });
+    
+    // Thumbnail click handlers
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    thumbnails.forEach((thumb, index) => {
+        thumb.addEventListener('click', function() {
+            thumbnails.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            // Update main photo and counter (in real implementation)
+            document.querySelector('.photo-counter').textContent = `${index + 1} of 8`;
+        });
+    });
+});
+
+// FAB menu toggle
+function toggleFabMenu() {
+    const menu = document.getElementById('fabMenu');
+    menu.classList.toggle('active');
+}
+
+// Close FAB menu when clicking outside
+document.addEventListener('click', function(event) {
+    const fabMenu = document.getElementById('fabMenu');
+    const fabButton = document.querySelector('.fab-button');
+    
+    if (!fabButton.contains(event.target) && !fabMenu.contains(event.target)) {
+        fabMenu.classList.remove('active');
+    }
+});
+
+// Main photo swipe simulation (touch events)
+let touchStartX = 0;
+let touchEndX = 0;
+
+const mainPhoto = document.querySelector('.main-photo');
+
+mainPhoto.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+});
+
+mainPhoto.addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+});
+
+function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+            // Swipe left - next photo
+            console.log('Next photo');
+        } else {
+            // Swipe right - previous photo
+            console.log('Previous photo');
+        }
+    }
+}
+</script>
+
+
+</body></html>

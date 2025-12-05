@@ -1,0 +1,1204 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Breeds - Mobile Wireframe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.2s ease-in-out;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F5F5F5;
+            color: #333333;
+            line-height: 1.5;
+        }
+
+        .wireframe-container {
+            max-width: 430px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            box-shadow: 0 0 40px rgba(0,0,0,0.1);
+            min-height: 932px;
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            border-bottom: 1px solid #E0E0E0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #E0E0E0;
+            background: #F5F5F5;
+            cursor: pointer;
+        }
+
+        .header-icon:hover {
+            background: #E0E0E0;
+        }
+
+        .logo {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        /* Page Intro */
+        .page-intro {
+            padding: 24px 16px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .page-intro h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .page-intro p {
+            font-size: 14px;
+            color: #666666;
+        }
+
+        /* Filter Bar */
+        .filter-bar {
+            background: #FFFFFF;
+            padding: 12px 16px;
+            border-bottom: 1px solid #E0E0E0;
+            position: sticky;
+            top: 64px;
+            z-index: 90;
+        }
+
+        .filter-button {
+            width: 100%;
+            padding: 12px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+
+        .filter-button:hover {
+            background: #E0E0E0;
+        }
+
+        .filter-chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .chip {
+            padding: 6px 12px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 1px solid #333333;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .results-count {
+            font-size: 14px;
+            color: #666666;
+        }
+
+        /* Breed Card */
+        .breed-card {
+            background: #FFFFFF;
+            margin-bottom: 16px;
+            border: 1px solid #E0E0E0;
+        }
+
+        .breed-image {
+            width: 100%;
+            height: 350px;
+            background: #E0E0E0;
+            border-bottom: 1px solid #CCCCCC;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666666;
+            font-size: 14px;
+        }
+
+        .breed-image::before,
+        .breed-image::after {
+            content: '';
+            position: absolute;
+            background: #999999;
+        }
+
+        .breed-image::before {
+            width: 100%;
+            height: 1px;
+            transform: rotate(45deg);
+        }
+
+        .breed-image::after {
+            width: 100%;
+            height: 1px;
+            transform: rotate(-45deg);
+        }
+
+        .availability-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #25D366;
+            color: #FFFFFF;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .coming-soon-badge {
+            background: #E0E0E0;
+            color: #666666;
+        }
+
+        .breed-content {
+            padding: 16px;
+        }
+
+        .breed-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 12px;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 12px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stat-icon {
+            width: 24px;
+            height: 24px;
+            background: #E0E0E0;
+            border: 1px solid #CCCCCC;
+            flex-shrink: 0;
+        }
+
+        .stat-content {
+            flex: 1;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        .breed-description {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .price-display {
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            padding: 12px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .price-label {
+            font-size: 11px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .price-amount {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        /* Buttons */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px 24px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid #333333;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            background: none;
+            min-height: 48px;
+        }
+
+        .btn-primary {
+            background: #333333;
+            color: #FFFFFF;
+        }
+
+        .btn-primary:hover {
+            background: #555555;
+        }
+
+        .btn-secondary {
+            background: #FFFFFF;
+            color: #333333;
+            border: none;
+            font-size: 14px;
+            padding: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: #F5F5F5;
+        }
+
+        /* Section */
+        .section {
+            padding: 24px 16px;
+            background: #FFFFFF;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 16px;
+        }
+
+        /* Comparison Tool */
+        .comparison-tool {
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            padding: 16px;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #E0E0E0;
+            background: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: #333333;
+            margin-bottom: 12px;
+            min-height: 48px;
+        }
+
+        .form-select:focus {
+            outline: 2px solid #333333;
+            outline-offset: 2px;
+        }
+
+        .comparison-results {
+            margin-top: 16px;
+        }
+
+        .comparison-card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .comparison-header {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .comparison-image {
+            width: 80px;
+            height: 80px;
+            background: #E0E0E0;
+            border: 1px solid #CCCCCC;
+            flex-shrink: 0;
+        }
+
+        .comparison-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        .comparison-attributes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .attribute-item {
+            font-size: 12px;
+        }
+
+        .attribute-label {
+            color: #666666;
+        }
+
+        .attribute-value {
+            color: #333333;
+            font-weight: 600;
+        }
+
+        /* Accordion */
+        .accordion-item {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            margin-bottom: 8px;
+        }
+
+        .accordion-header {
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            color: #333333;
+            min-height: 56px;
+        }
+
+        .accordion-header:hover {
+            background: #F5F5F5;
+        }
+
+        .accordion-icon {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #333333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .accordion-content {
+            padding: 0 16px 16px;
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .accordion-item.active .accordion-content {
+            display: block;
+        }
+
+        .accordion-item.active .accordion-icon::after {
+            content: '−';
+        }
+
+        .accordion-icon::after {
+            content: '+';
+            font-size: 18px;
+        }
+
+        /* Quiz CTA */
+        .quiz-cta {
+            background: #F5F5F5;
+            border: 2px solid #333333;
+            padding: 24px 16px;
+            text-align: center;
+        }
+
+        .quiz-cta h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .quiz-cta p {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 16px;
+        }
+
+        .quiz-illustration {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 16px;
+            background: #E0E0E0;
+            border: 2px dashed #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #666666;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333333;
+            color: #FFFFFF;
+            padding: 32px 16px;
+        }
+
+        .footer-logo {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #444444;
+            margin-bottom: 8px;
+            text-decoration: none;
+            color: #FFFFFF;
+            border: 1px solid #555555;
+            min-height: 48px;
+        }
+
+        .footer-contact-item:hover {
+            background: #555555;
+        }
+
+        .footer-copyright {
+            font-size: 12px;
+            color: #999999;
+            text-align: center;
+            padding-top: 16px;
+            border-top: 1px solid #555555;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            border: 2px solid #20BA5A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            background: #20BA5A;
+        }
+
+        .whatsapp-float i {
+            font-size: 28px;
+            color: #FFFFFF;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Annotation */
+        .annotation {
+            font-size: 12px;
+            color: #999999;
+            font-style: italic;
+            padding: 8px;
+            background: #F9F9F9;
+            border-left: 2px solid #999999;
+            margin: 8px 0;
+        }
+
+        /* Bottom Sheet Overlay */
+        .bottom-sheet-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 200;
+            display: none;
+        }
+
+        .bottom-sheet-overlay.active {
+            display: block;
+        }
+
+        .bottom-sheet {
+            position: fixed;
+            bottom: -70%;
+            left: 0;
+            right: 0;
+            height: 70%;
+            background: #FFFFFF;
+            z-index: 201;
+            transition: bottom 0.3s ease-in-out;
+            overflow-y: auto;
+            padding: 24px 16px;
+            max-width: 430px;
+            margin: 0 auto;
+        }
+
+        .bottom-sheet.active {
+            bottom: 0;
+        }
+
+        .sheet-handle {
+            width: 40px;
+            height: 4px;
+            background: #E0E0E0;
+            margin: 0 auto 24px;
+        }
+
+        .filter-section {
+            margin-bottom: 24px;
+        }
+
+        .filter-section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 12px;
+        }
+
+        .filter-chips-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .filter-chip {
+            padding: 12px;
+            background: #F5F5F5;
+            border: 2px solid #E0E0E0;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333333;
+            cursor: pointer;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .filter-chip:hover {
+            background: #E0E0E0;
+        }
+
+        .filter-chip.active {
+            background: #333333;
+            color: #FFFFFF;
+            border-color: #333333;
+        }
+
+        .sheet-actions {
+            position: sticky;
+            bottom: 0;
+            background: #FFFFFF;
+            padding: 16px 0 0;
+            border-top: 1px solid #E0E0E0;
+            margin-top: 24px;
+        }
+
+        .text-link {
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            color: #666666;
+            text-decoration: underline;
+            margin-top: 12px;
+            padding: 8px;
+        }
+
+        .mb-8 { margin-bottom: 8px; }
+        .mb-12 { margin-bottom: 12px; }
+        .mb-16 { margin-bottom: 16px; }
+        .mt-16 { margin-top: 16px; }
+    </style>
+</head>
+<body>
+
+<div class="wireframe-container">
+    <!-- Header -->
+    <div class="header">
+        <div class="header-icon">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+        <div class="logo">Dog Breeds</div>
+        <div class="header-icon">
+            <i class="fas fa-search"></i>
+        </div>
+    </div>
+
+    <!-- Page Intro -->
+    <div class="page-intro">
+        <h1>Breeds We Specialize In</h1>
+        <p>Learn about our carefully raised breeds</p>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <div class="filter-button" onclick="toggleBottomSheet()">
+            <span><i class="fas fa-filter"></i> Filter &amp; Sort</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="filter-chips">
+            <span class="chip">All Sizes</span>
+            <span class="chip">All Temperaments</span>
+        </div>
+        <div class="results-count">Showing 8 breeds</div>
+    </div>
+
+    <div class="annotation" style="margin: 0 16px 16px;">
+        Filter opens bottom sheet modal. Active filters shown as chips.
+    </div>
+
+    <!-- Breed Cards -->
+    <div style="padding: 0 16px;">
+        <!-- Breed Card 1: Golden Retriever -->
+        <div class="breed-card">
+            <div class="breed-image">
+                <span>Golden Retriever Photo</span>
+                <div class="availability-badge">3 Puppies Available</div>
+            </div>
+            <div class="breed-content">
+                <h2 class="breed-name">Golden Retriever</h2>
+                
+                <div class="quick-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon"></div>
+                        <div class="stat-content">
+                            <div class="stat-label">Size</div>
+                            <div class="stat-value">Large</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"></div>
+                        <div class="stat-content">
+                            <div class="stat-label">Energy</div>
+                            <div class="stat-value">High</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"></div>
+                        <div class="stat-content">
+                            <div class="stat-label">With Kids</div>
+                            <div class="stat-value">Excellent</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"></div>
+                        <div class="stat-content">
+                            <div class="stat-label">Grooming</div>
+                            <div class="stat-value">Medium</div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="breed-description">
+                    Friendly, intelligent, and devoted family companions. Perfect for active families with children. Highly trainable and eager to please.
+                </p>
+
+                <div class="price-display">
+                    <div class="price-label">Starting From</div>
+                    <div class="price-amount">₦180,000</div>
+                </div>
+
+                <button class="btn btn-primary mb-8">Learn More About This Breed</button>
+                <button class="btn btn-secondary">View Available Golden Retrievers</button>
+            </div>
+        </div>
+
+        <!-- Breed Card 2: German Shepherd -->
+        <div class="breed-card">
+            <div class="breed-image">
+                <span>German Shepherd Photo</span>
+                <div class="availability-badge">2 Puppies Available</div>
+            </div>
+            <div class="breed-content">
+                <h2 class="breed-name">German Shepherd</h2>
+                
+                <div class="quick-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon"></div>
+                        <div class="stat-content">
+                            <div class="stat-label">Size</div>
+                            <div class="stat-value">Large</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"></div>
+                        <div class="stat-content">
+                            <div class="stat-label">Energy</div>
+                            <div class="stat-value">High</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"></div>
+                        <div class="stat-content">
+                            <div class="stat-label">With Kids</div>
+                            <div class="stat-value">Very Good</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"></div>
+                        <div class="stat-content">
+                            <div class="stat-label">Grooming</div>
+                            <div class="stat-value">Medium</div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="breed-description">
+                    Intelligent, confident, and courageous. Excellent guard dogs and loyal companions. Highly versatile and trainable for various roles.
+                </p>
+
+                <div class="price-display">
+                    <div class="price-label">Starting From</div>
+                    <div class="price-amount">₦220,000</div>
+                </div>
+
+                <button class="btn btn-primary mb-8">Learn More About This Breed</button>
+                <button class="btn btn-secondary">View Available German Shepherds</button>
+            </div>
+        </div>
+
+        <!-- Breed Card 3: French Bulldog -->
+        <div class="breed-card">
+            <div class="breed-image">
+                <span>French Bulldog Photo</span>
+                <div class="availability-badge coming-soon-badge">Coming Soon</div>
+            </div>
+            <div class="breed-content">
+                <h2 class="breed-name">French Bulldog</h2>
+                
+                <div class="quick-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon"></div>
+                        <div class="stat-content">
+                            <div class="stat-label">Size</div>
+                            <div class="stat-value">Small</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"></div>
+                        <div class="stat-content">
+                            <div class="stat-label">Energy</div>
+                            <div class="stat-value">Medium</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"></div>
+                        <div class="stat-content">
+                            <div class="stat-label">With Kids</div>
+                            <div class="stat-value">Excellent</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"></div>
+                        <div class="stat-content">
+                            <div class="stat-label">Grooming</div>
+                            <div class="stat-value">Low</div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="breed-description">
+                    Playful, adaptable, and smart. Perfect for apartment living and urban families. Affectionate companions who love attention.
+                </p>
+
+                <div class="price-display">
+                    <div class="price-label">Starting From</div>
+                    <div class="price-amount">₦350,000</div>
+                </div>
+
+                <button class="btn btn-primary mb-8">Learn More About This Breed</button>
+                <button class="btn btn-secondary">Join Waiting List</button>
+            </div>
+        </div>
+
+        <!-- Breed Card 4: Labrador Retriever -->
+        <div class="breed-card">
+            <div class="breed-image">
+                <span>Labrador Retriever Photo</span>
+                <div class="availability-badge">1 Puppy Available</div>
+            </div>
+            <div class="breed-content">
+                <h2 class="breed-name">Labrador Retriever</h2>
+                
+                <div class="quick-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon"></div>
+                        <div class="stat-content">
+                            <div class="stat-label">Size</div>
+                            <div class="stat-value">Large</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"></div>
+                        <div class="stat-content">
+                            <div class="stat-label">Energy</div>
+                            <div class="stat-value">Very High</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"></div>
+                        <div class="stat-content">
+                            <div class="stat-label">With Kids</div>
+                            <div class="stat-value">Excellent</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"></div>
+                        <div class="stat-content">
+                            <div class="stat-label">Grooming</div>
+                            <div class="stat-value">Low</div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="breed-description">
+                    Outgoing, even-tempered, and gentle. America's most popular breed for good reason. Excellent family dogs and working companions.
+                </p>
+
+                <div class="price-display">
+                    <div class="price-label">Starting From</div>
+                    <div class="price-amount">₦160,000</div>
+                </div>
+
+                <button class="btn btn-primary mb-8">Learn More About This Breed</button>
+                <button class="btn btn-secondary">View Available Labrador Retrievers</button>
+            </div>
+        </div>
+
+        <div class="annotation mb-16">
+            More breed cards following same pattern. Each card ~600px height.
+        </div>
+    </div>
+
+    <!-- Comparison Tool -->
+    <div class="section">
+        <h2 class="section-title">Compare Breeds</h2>
+        <p style="font-size: 14px; color: #666; margin-bottom: 16px;">
+            Compare up to 3 breeds side-by-side to find your perfect match
+        </p>
+
+        <div class="comparison-tool">
+            <select class="form-select">
+                <option>Select Breed 1</option>
+                <option>Golden Retriever</option>
+                <option>German Shepherd</option>
+                <option>French Bulldog</option>
+                <option>Labrador Retriever</option>
+            </select>
+
+            <select class="form-select">
+                <option>Select Breed 2</option>
+                <option>Golden Retriever</option>
+                <option>German Shepherd</option>
+                <option>French Bulldog</option>
+                <option>Labrador Retriever</option>
+            </select>
+
+            <select class="form-select">
+                <option>Select Breed 3 (Optional)</option>
+                <option>Golden Retriever</option>
+                <option>German Shepherd</option>
+                <option>French Bulldog</option>
+                <option>Labrador Retriever</option>
+            </select>
+
+            <button class="btn btn-primary">Compare Breeds</button>
+        </div>
+
+        <div class="annotation mt-16">
+            Results appear below as vertical stack of comparison cards
+        </div>
+
+        <a href="#" class="text-link">Help Me Choose the Right Breed</a>
+    </div>
+
+    <!-- Choosing Guide (Accordion) -->
+    <div class="section" style="background: #F5F5F5; border-top: 1px solid #E0E0E0;">
+        <h2 class="section-title">How to Choose Your Perfect Breed</h2>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span><i class="fas fa-user-circle" style="margin-right: 8px;"></i> Consider Your Lifestyle</span>
+                <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+                Think about your daily routine, activity level, and how much time you can dedicate to a dog. Active breeds need regular exercise, while calmer breeds are better for less active households. Consider work schedules and family dynamics.
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span><i class="fas fa-home" style="margin-right: 8px;"></i> Space Requirements</span>
+                <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+                Large breeds generally need more space, but temperament matters more than size. Some large breeds are calm indoors, while small breeds may be very active. Consider yard access and living environment.
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span><i class="fas fa-running" style="margin-right: 8px;"></i> Activity Level Match</span>
+                <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+                Match the dog's energy to yours. High-energy breeds need daily vigorous exercise. Medium-energy breeds are happy with walks and play. Low-energy breeds are content with shorter activities.
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span><i class="fas fa-cut" style="margin-right: 8px;"></i> Grooming Commitment</span>
+                <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+                Some breeds require daily brushing, professional grooming, and regular maintenance. Others are low-maintenance with minimal grooming needs. Consider time and budget for grooming care.
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span><i class="fas fa-graduation-cap" style="margin-right: 8px;"></i> Training Needs</span>
+                <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+                First-time owners should consider easily trainable breeds. Some breeds are independent and challenging. Research breed-specific training requirements and typical temperament traits.
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span><i class="fas fa-money-bill-wave" style="margin-right: 8px;"></i> Cost of Ownership</span>
+                <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+                Beyond purchase price, consider food costs (larger breeds eat more), veterinary care, grooming, training, supplies, and potential health issues. Budget for unexpected expenses.
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span><i class="fas fa-heartbeat" style="margin-right: 8px;"></i> Health Considerations</span>
+                <div class="accordion-icon"></div>
+            </div>
+            <div class="accordion-content">
+                Research breed-specific health issues. Some breeds have genetic conditions requiring special care. Ask breeders about health testing and guarantees. Consider lifespan and long-term commitment.
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz CTA -->
+    <div class="section">
+        <div class="quiz-cta">
+            <div class="quiz-illustration">
+                Dog illustration
+            </div>
+            <h3>Not Sure Which Breed is Right for You?</h3>
+            <p>Take our 2-minute quiz to get personalized breed recommendations based on your lifestyle</p>
+            <button class="btn btn-primary">Take the Breed Quiz</button>
+        </div>
+    </div>
+
+    <div class="annotation" style="margin: 0 16px 24px;">
+        Total page length: ~3500px for 8 breeds. Breeds link to detailed individual breed pages.
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-logo">Business Name</div>
+        
+        <a href="#" class="footer-contact-item">
+            <i class="fas fa-phone"></i>
+            <span>+234 XXX XXX XXXX</span>
+        </a>
+        <a href="#" class="footer-contact-item">
+            <i class="fab fa-whatsapp"></i>
+            <span>Chat on WhatsApp</span>
+        </a>
+
+        <div class="footer-copyright">© 2024 Business Name. All rights reserved.</div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+</div>
+
+<!-- Bottom Sheet Overlay -->
+<div class="bottom-sheet-overlay" id="bottomSheetOverlay" onclick="toggleBottomSheet()"></div>
+
+<!-- Bottom Sheet -->
+<div class="bottom-sheet" id="bottomSheet">
+    <div class="sheet-handle"></div>
+    
+    <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 24px;">Filter Breeds</h2>
+
+    <div class="filter-section">
+        <div class="filter-section-title">Size</div>
+        <div class="filter-chips-grid">
+            <div class="filter-chip active">All Sizes</div>
+            <div class="filter-chip">Small</div>
+            <div class="filter-chip">Medium</div>
+            <div class="filter-chip">Large</div>
+        </div>
+    </div>
+
+    <div class="filter-section">
+        <div class="filter-section-title">Temperament</div>
+        <div class="filter-chips-grid">
+            <div class="filter-chip active">All</div>
+            <div class="filter-chip">Family Dogs</div>
+            <div class="filter-chip">Active</div>
+            <div class="filter-chip">Calm</div>
+            <div class="filter-chip">Guard Dogs</div>
+            <div class="filter-chip">Playful</div>
+        </div>
+    </div>
+
+    <div class="filter-section">
+        <div class="filter-section-title">Energy Level</div>
+        <div class="filter-chips-grid">
+            <div class="filter-chip active">All</div>
+            <div class="filter-chip">Low</div>
+            <div class="filter-chip">Medium</div>
+            <div class="filter-chip">High</div>
+        </div>
+    </div>
+
+    <div class="sheet-actions">
+        <button class="btn btn-primary mb-8">Apply Filters</button>
+        <a href="#" class="text-link" onclick="event.preventDefault()">Clear All Filters</a>
+    </div>
+
+    <div class="annotation" style="margin-top: 16px;">
+        Bottom sheet slides up from bottom. Drag handle or tap overlay to close. Selections saved on "Apply".
+    </div>
+</div>
+
+<script>
+function toggleBottomSheet() {
+    const overlay = document.getElementById('bottomSheetOverlay');
+    const sheet = document.getElementById('bottomSheet');
+    
+    overlay.classList.toggle('active');
+    sheet.classList.toggle('active');
+}
+
+// Accordion functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const item = this.parentElement;
+            const wasActive = item.classList.contains('active');
+            
+            // Close all accordions
+            document.querySelectorAll('.accordion-item').forEach(i => {
+                i.classList.remove('active');
+            });
+            
+            // Open clicked accordion if it wasn't active
+            if (!wasActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+
+    // Filter chip functionality
+    const filterChips = document.querySelectorAll('.filter-chip');
+    
+    filterChips.forEach(chip => {
+        chip.addEventListener('click', function() {
+            const section = this.parentElement;
+            const isActive = this.classList.contains('active');
+            
+            // If "All" chip is clicked
+            if (this.textContent.includes('All')) {
+                section.querySelectorAll('.filter-chip').forEach(c => {
+                    c.classList.remove('active');
+                });
+                this.classList.add('active');
+            } else {
+                // Remove "All" active state
+                section.querySelector('.filter-chip').classList.remove('active');
+                this.classList.toggle('active');
+                
+                // If no chips active, activate "All"
+                const anyActive = Array.from(section.querySelectorAll('.filter-chip')).some(c => 
+                    c.classList.contains('active') && !c.textContent.includes('All')
+                );
+                if (!anyActive) {
+                    section.querySelector('.filter-chip').classList.add('active');
+                }
+            }
+        });
+    });
+});
+</script>
+
+
+</body></html>

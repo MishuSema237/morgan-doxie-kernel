@@ -1,0 +1,1397 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Puppies - Mobile Wireframe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.2s ease-in-out;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F5F5F5;
+            color: #333333;
+            line-height: 1.5;
+        }
+
+        .wireframe-container {
+            max-width: 430px;
+            margin: 0 auto;
+            background: #F5F5F5;
+            box-shadow: 0 0 40px rgba(0,0,0,0.1);
+            min-height: 932px;
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            border-bottom: 1px solid #E0E0E0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #E0E0E0;
+            background: #F5F5F5;
+            cursor: pointer;
+        }
+
+        .header-icon:hover {
+            background: #E0E0E0;
+        }
+
+        .header-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        /* Filter Bar */
+        .filter-bar {
+            background: #FFFFFF;
+            padding: 12px 16px;
+            border-bottom: 1px solid #E0E0E0;
+            position: sticky;
+            top: 64px;
+            z-index: 99;
+        }
+
+        .filter-button {
+            width: 100%;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+
+        .filter-button:hover {
+            background: #E0E0E0;
+        }
+
+        .filter-chips {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            margin-bottom: 8px;
+        }
+
+        .filter-chip {
+            padding: 6px 12px;
+            background: #E0E0E0;
+            border: 1px solid #CCCCCC;
+            white-space: nowrap;
+            font-size: 12px;
+            color: #666666;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .filter-chip-close {
+            width: 14px;
+            height: 14px;
+            background: #999999;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            cursor: pointer;
+        }
+
+        .results-count {
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .clear-filters {
+            font-size: 12px;
+            color: #666666;
+            text-decoration: underline;
+            cursor: pointer;
+            float: right;
+        }
+
+        /* Puppy Cards */
+        .puppies-grid {
+            padding: 16px;
+        }
+
+        .puppy-card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .puppy-image-container {
+            position: relative;
+            height: 350px;
+            background: #E0E0E0;
+            overflow: hidden;
+        }
+
+        .puppy-image {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #CCCCCC;
+            border-bottom: 1px solid #999999;
+            position: relative;
+        }
+
+        .puppy-image::before,
+        .puppy-image::after {
+            content: '';
+            position: absolute;
+            background: #999999;
+        }
+
+        .puppy-image::before {
+            width: 100%;
+            height: 1px;
+            transform: rotate(45deg);
+        }
+
+        .puppy-image::after {
+            width: 100%;
+            height: 1px;
+            transform: rotate(-45deg);
+        }
+
+        .photo-counter {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #FFFFFF;
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 12px;
+        }
+
+        .badge-overlay {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .badge-new {
+            background: #25D366;
+        }
+
+        .badge-reserved {
+            background: #FF6B6B;
+        }
+
+        .swipe-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .dot.active {
+            background: #FFFFFF;
+        }
+
+        .puppy-info {
+            padding: 16px;
+        }
+
+        .puppy-breed {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #333333;
+        }
+
+        .puppy-meta {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #666666;
+            flex-wrap: wrap;
+        }
+
+        .meta-separator {
+            color: #CCCCCC;
+        }
+
+        .puppy-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .tag {
+            padding: 6px 12px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            font-size: 12px;
+            color: #666666;
+            border-radius: 16px;
+        }
+
+        .puppy-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 12px;
+        }
+
+        .puppy-description {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px 24px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid #333333;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: #333333;
+            color: #FFFFFF;
+            margin-bottom: 12px;
+        }
+
+        .btn-primary:hover {
+            background: #555555;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: #FFFFFF;
+            border-color: #25D366;
+            margin-bottom: 12px;
+        }
+
+        .btn-whatsapp:hover {
+            background: #20BA5A;
+        }
+
+        .btn-secondary {
+            background: #FFFFFF;
+            color: #333333;
+        }
+
+        .btn-secondary:hover {
+            background: #F5F5F5;
+        }
+
+        .btn-link {
+            background: transparent;
+            border: none;
+            color: #666666;
+            text-decoration: underline;
+            font-size: 14px;
+            padding: 8px;
+        }
+
+        /* Load More Section */
+        .load-more-section {
+            padding: 24px 16px;
+            text-align: center;
+        }
+
+        .load-more-info {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 16px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            padding: 48px 24px;
+            text-align: center;
+            background: #FFFFFF;
+            margin: 16px;
+            border: 1px solid #E0E0E0;
+        }
+
+        .empty-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 16px;
+            background: #E0E0E0;
+            border: 2px dashed #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .empty-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .empty-text {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 24px;
+        }
+
+        /* Bottom Sheet */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            display: none;
+        }
+
+        .modal-overlay.active {
+            display: block;
+        }
+
+        .bottom-sheet {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-width: 430px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            max-height: 70vh;
+            overflow-y: auto;
+            padding: 24px 16px;
+            border-radius: 20px 20px 0 0;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .modal-overlay.active .bottom-sheet {
+            transform: translateY(0);
+        }
+
+        .sheet-handle {
+            width: 40px;
+            height: 4px;
+            background: #E0E0E0;
+            border-radius: 2px;
+            margin: 0 auto 24px;
+        }
+
+        .sheet-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 24px;
+        }
+
+        .filter-section {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .filter-section:last-of-type {
+            border-bottom: none;
+        }
+
+        .filter-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .checkbox-group,
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .checkbox-item,
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            cursor: pointer;
+        }
+
+        .checkbox-item:hover,
+        .radio-item:hover {
+            background: #E0E0E0;
+        }
+
+        .checkbox-box,
+        .radio-box {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #333333;
+            flex-shrink: 0;
+        }
+
+        .radio-box {
+            border-radius: 50%;
+        }
+
+        .checkbox-box.checked,
+        .radio-box.checked {
+            background: #333333;
+            position: relative;
+        }
+
+        .checkbox-box.checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FFFFFF;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .radio-box.checked::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: #FFFFFF;
+            border-radius: 50%;
+        }
+
+        .checkbox-label,
+        .radio-label {
+            font-size: 14px;
+            color: #333333;
+        }
+
+        .price-slider {
+            width: 100%;
+            height: 8px;
+            background: #E0E0E0;
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+
+        .slider-track {
+            height: 100%;
+            background: #333333;
+            width: 60%;
+            border-radius: 4px;
+        }
+
+        .price-range-display {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .sheet-actions {
+            position: sticky;
+            bottom: 0;
+            background: #FFFFFF;
+            padding: 16px 0 0;
+            border-top: 1px solid #E0E0E0;
+            margin-top: 24px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333333;
+            color: #FFFFFF;
+            padding: 32px 16px;
+        }
+
+        .footer-logo {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .footer-contact {
+            margin-bottom: 16px;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #444444;
+            margin-bottom: 8px;
+            text-decoration: none;
+            color: #FFFFFF;
+            border: 1px solid #555555;
+        }
+
+        .footer-contact-item:hover {
+            background: #555555;
+        }
+
+        .footer-copyright {
+            font-size: 12px;
+            color: #999999;
+            text-align: center;
+            padding-top: 16px;
+            border-top: 1px solid #555555;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            border: 2px solid #20BA5A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            cursor: pointer;
+            border-radius: 28px;
+            animation: bounce 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            background: #20BA5A;
+        }
+
+        .whatsapp-float i {
+            font-size: 28px;
+            color: #FFFFFF;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Annotations */
+        .annotation {
+            font-size: 12px;
+            color: #999999;
+            font-style: italic;
+            padding: 8px;
+            background: #F9F9F9;
+            border-left: 2px solid #999999;
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wireframe-container">
+    
+    <!-- Header -->
+    <div class="header">
+        <div class="header-icon">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+        <div class="header-title">Available Puppies</div>
+        <div class="header-icon" id="filterToggle">
+            <i class="fas fa-sliders-h"></i>
+        </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <div class="filter-button" id="filterButton">
+            <span><i class="fas fa-filter"></i> Filter &amp; Sort</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        
+        <div class="filter-chips">
+            <div class="filter-chip">
+                All Breeds
+                <div class="filter-chip-close">×</div>
+            </div>
+            <div class="filter-chip">
+                Any Age
+                <div class="filter-chip-close">×</div>
+            </div>
+            <div class="filter-chip">
+                Any Gender
+                <div class="filter-chip-close">×</div>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="results-count">Showing 12 puppies</div>
+            <a href="#" class="clear-filters">Clear all</a>
+        </div>
+    </div>
+
+    <!-- Puppies Grid -->
+    <div class="puppies-grid">
+        
+        <!-- Puppy Card 1 -->
+        <div class="puppy-card">
+            <div class="puppy-image-container">
+                <div class="puppy-image">
+                    <span style="position: relative; z-index: 10; color: #666; font-size: 14px;">Golden Retriever Puppy Photo</span>
+                </div>
+                <div class="photo-counter">1 of 5</div>
+                <div class="badge-overlay badge-new">NEW</div>
+                <div class="swipe-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <div class="puppy-info">
+                <h3 class="puppy-breed">Golden Retriever</h3>
+                <div class="puppy-meta">
+                    <span>8 weeks</span>
+                    <span class="meta-separator">|</span>
+                    <span>Male</span>
+                    <span class="meta-separator">|</span>
+                    <span>Golden</span>
+                </div>
+                <div class="puppy-tags">
+                    <span class="tag">Family Friendly</span>
+                    <span class="tag">Playful</span>
+                    <span class="tag">Good with Kids</span>
+                </div>
+                <div class="puppy-price">₦180,000</div>
+                <p class="puppy-description">Beautiful Golden Retriever puppy with excellent temperament. Vet-checked, vaccinated, and ready for a loving home. Great with children and other pets.</p>
+                <button class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Reserve on WhatsApp
+                </button>
+                <button class="btn-link">View Full Details</button>
+            </div>
+        </div>
+
+        <div class="annotation">
+            Swipe left/right on photo to see more images. Dots indicate current photo position.
+        </div>
+
+        <!-- Puppy Card 2 -->
+        <div class="puppy-card">
+            <div class="puppy-image-container">
+                <div class="puppy-image" style="background: linear-gradient(135deg, #FFD93D 0%, #FFA07A 100%);">
+                    <span style="position: relative; z-index: 10; color: #333; font-size: 14px;">German Shepherd Puppy (Transparent PNG on Gradient)</span>
+                </div>
+                <div class="photo-counter">1 of 4</div>
+                <div class="swipe-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <div class="puppy-info">
+                <h3 class="puppy-breed">German Shepherd</h3>
+                <div class="puppy-meta">
+                    <span>10 weeks</span>
+                    <span class="meta-separator">|</span>
+                    <span>Female</span>
+                    <span class="meta-separator">|</span>
+                    <span>Black &amp; Tan</span>
+                </div>
+                <div class="puppy-tags">
+                    <span class="tag">Intelligent</span>
+                    <span class="tag">Loyal</span>
+                    <span class="tag">Active</span>
+                </div>
+                <div class="puppy-price">₦220,000</div>
+                <p class="puppy-description">Smart and loyal German Shepherd female. Great with families, highly trainable. Excellent bloodline with champion parents.</p>
+                <button class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Reserve on WhatsApp
+                </button>
+                <button class="btn-link">View Full Details</button>
+            </div>
+        </div>
+
+        <div class="annotation">
+            Card alternates: transparent PNG on gradient background for visual variety.
+        </div>
+
+        <!-- Puppy Card 3 -->
+        <div class="puppy-card">
+            <div class="puppy-image-container">
+                <div class="puppy-image">
+                    <span style="position: relative; z-index: 10; color: #666; font-size: 14px;">French Bulldog Puppy Photo</span>
+                </div>
+                <div class="photo-counter">1 of 6</div>
+                <div class="swipe-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <div class="puppy-info">
+                <h3 class="puppy-breed">French Bulldog</h3>
+                <div class="puppy-meta">
+                    <span>12 weeks</span>
+                    <span class="meta-separator">|</span>
+                    <span>Male</span>
+                    <span class="meta-separator">|</span>
+                    <span>Brindle</span>
+                </div>
+                <div class="puppy-tags">
+                    <span class="tag">Compact</span>
+                    <span class="tag">Friendly</span>
+                    <span class="tag">Apartment</span>
+                </div>
+                <div class="puppy-price">₦350,000</div>
+                <p class="puppy-description">Adorable Frenchie perfect for apartment living. Very social, loves attention, and makes a great companion for city life.</p>
+                <button class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Reserve on WhatsApp
+                </button>
+                <button class="btn-link">View Full Details</button>
+            </div>
+        </div>
+
+        <!-- Puppy Card 4 (Reserved) -->
+        <div class="puppy-card">
+            <div class="puppy-image-container">
+                <div class="puppy-image" style="background: linear-gradient(135deg, #87CEEB 0%, #B0E0E6 100%);">
+                    <span style="position: relative; z-index: 10; color: #333; font-size: 14px;">Labrador Retriever (Transparent PNG on Blue Gradient)</span>
+                </div>
+                <div class="photo-counter">1 of 3</div>
+                <div class="badge-overlay badge-reserved">RESERVED</div>
+                <div class="swipe-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <div class="puppy-info">
+                <h3 class="puppy-breed">Labrador Retriever</h3>
+                <div class="puppy-meta">
+                    <span>9 weeks</span>
+                    <span class="meta-separator">|</span>
+                    <span>Female</span>
+                    <span class="meta-separator">|</span>
+                    <span>Yellow</span>
+                </div>
+                <div class="puppy-tags">
+                    <span class="tag">Gentle</span>
+                    <span class="tag">Friendly</span>
+                </div>
+                <div class="puppy-price">₦160,000</div>
+                <p class="puppy-description">Sweet-natured Labrador with beautiful coat. Great family dog, loves children. Currently reserved.</p>
+                <button class="btn btn-secondary" disabled="" style="opacity: 0.5; cursor: not-allowed;">
+                    Reserved
+                </button>
+            </div>
+        </div>
+
+        <!-- Puppy Card 5 -->
+        <div class="puppy-card">
+            <div class="puppy-image-container">
+                <div class="puppy-image">
+                    <span style="position: relative; z-index: 10; color: #666; font-size: 14px;">Rottweiler Puppy Photo</span>
+                </div>
+                <div class="photo-counter">1 of 5</div>
+                <div class="swipe-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <div class="puppy-info">
+                <h3 class="puppy-breed">Rottweiler</h3>
+                <div class="puppy-meta">
+                    <span>11 weeks</span>
+                    <span class="meta-separator">|</span>
+                    <span>Male</span>
+                    <span class="meta-separator">|</span>
+                    <span>Black &amp; Tan</span>
+                </div>
+                <div class="puppy-tags">
+                    <span class="tag">Confident</span>
+                    <span class="tag">Loyal</span>
+                    <span class="tag">Protective</span>
+                </div>
+                <div class="puppy-price">₦200,000</div>
+                <p class="puppy-description">Strong and confident Rottweiler puppy. Excellent guardian and family protector. Well-socialized and trainable.</p>
+                <button class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Reserve on WhatsApp
+                </button>
+                <button class="btn-link">View Full Details</button>
+            </div>
+        </div>
+
+        <!-- Puppy Card 6 -->
+        <div class="puppy-card">
+            <div class="puppy-image-container">
+                <div class="puppy-image" style="background: linear-gradient(135deg, #98D8C8 0%, #A8E6CF 100%);">
+                    <span style="position: relative; z-index: 10; color: #333; font-size: 14px;">Siberian Husky (Transparent PNG on Green Gradient)</span>
+                </div>
+                <div class="photo-counter">1 of 7</div>
+                <div class="badge-overlay badge-new">NEW</div>
+                <div class="swipe-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <div class="puppy-info">
+                <h3 class="puppy-breed">Siberian Husky</h3>
+                <div class="puppy-meta">
+                    <span>8 weeks</span>
+                    <span class="meta-separator">|</span>
+                    <span>Female</span>
+                    <span class="meta-separator">|</span>
+                    <span>Gray &amp; White</span>
+                </div>
+                <div class="puppy-tags">
+                    <span class="tag">Energetic</span>
+                    <span class="tag">Friendly</span>
+                    <span class="tag">Beautiful</span>
+                </div>
+                <div class="puppy-price">₦280,000</div>
+                <p class="puppy-description">Stunning Husky puppy with striking blue eyes. Very active and playful. Perfect for active families who love outdoor activities.</p>
+                <button class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Reserve on WhatsApp
+                </button>
+                <button class="btn-link">View Full Details</button>
+            </div>
+        </div>
+
+        <div class="annotation">
+            Cards continue with alternating photo treatments - full background, transparent on gradients, solid colors.
+        </div>
+
+        <!-- Puppy Card 7 -->
+        <div class="puppy-card">
+            <div class="puppy-image-container">
+                <div class="puppy-image">
+                    <span style="position: relative; z-index: 10; color: #666; font-size: 14px;">American Bully Puppy Photo</span>
+                </div>
+                <div class="photo-counter">1 of 4</div>
+                <div class="swipe-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <div class="puppy-info">
+                <h3 class="puppy-breed">American Bully</h3>
+                <div class="puppy-meta">
+                    <span>10 weeks</span>
+                    <span class="meta-separator">|</span>
+                    <span>Male</span>
+                    <span class="meta-separator">|</span>
+                    <span>Blue</span>
+                </div>
+                <div class="puppy-tags">
+                    <span class="tag">Muscular</span>
+                    <span class="tag">Gentle</span>
+                    <span class="tag">Friendly</span>
+                </div>
+                <div class="puppy-price">₦320,000</div>
+                <p class="puppy-description">Well-built American Bully with gentle temperament. Despite appearance, very friendly and good with kids. Champion bloodline.</p>
+                <button class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Reserve on WhatsApp
+                </button>
+                <button class="btn-link">View Full Details</button>
+            </div>
+        </div>
+
+        <!-- Puppy Card 8 -->
+        <div class="puppy-card">
+            <div class="puppy-image-container">
+                <div class="puppy-image" style="background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 100%);">
+                    <span style="position: relative; z-index: 10; color: #333; font-size: 14px;">Poodle Puppy (Transparent PNG on Pink Gradient)</span>
+                </div>
+                <div class="photo-counter">1 of 5</div>
+                <div class="swipe-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <div class="puppy-info">
+                <h3 class="puppy-breed">Standard Poodle</h3>
+                <div class="puppy-meta">
+                    <span>9 weeks</span>
+                    <span class="meta-separator">|</span>
+                    <span>Female</span>
+                    <span class="meta-separator">|</span>
+                    <span>Apricot</span>
+                </div>
+                <div class="puppy-tags">
+                    <span class="tag">Intelligent</span>
+                    <span class="tag">Hypoallergenic</span>
+                    <span class="tag">Elegant</span>
+                </div>
+                <div class="puppy-price">₦240,000</div>
+                <p class="puppy-description">Elegant Poodle puppy, highly intelligent and easy to train. Hypoallergenic coat perfect for families with allergies.</p>
+                <button class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Reserve on WhatsApp
+                </button>
+                <button class="btn-link">View Full Details</button>
+            </div>
+        </div>
+
+        <!-- Puppy Card 9 -->
+        <div class="puppy-card">
+            <div class="puppy-image-container">
+                <div class="puppy-image">
+                    <span style="position: relative; z-index: 10; color: #666; font-size: 14px;">Beagle Puppy Photo</span>
+                </div>
+                <div class="photo-counter">1 of 6</div>
+                <div class="swipe-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <div class="puppy-info">
+                <h3 class="puppy-breed">Beagle</h3>
+                <div class="puppy-meta">
+                    <span>11 weeks</span>
+                    <span class="meta-separator">|</span>
+                    <span>Male</span>
+                    <span class="meta-separator">|</span>
+                    <span>Tri-color</span>
+                </div>
+                <div class="puppy-tags">
+                    <span class="tag">Cheerful</span>
+                    <span class="tag">Curious</span>
+                    <span class="tag">Medium Size</span>
+                </div>
+                <div class="puppy-price">₦150,000</div>
+                <p class="puppy-description">Happy and curious Beagle puppy. Great with children and other pets. Perfect medium-sized family companion.</p>
+                <button class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Reserve on WhatsApp
+                </button>
+                <button class="btn-link">View Full Details</button>
+            </div>
+        </div>
+
+        <!-- Puppy Card 10 -->
+        <div class="puppy-card">
+            <div class="puppy-image-container">
+                <div class="puppy-image" style="background: linear-gradient(135deg, #DDA0DD 0%, #E6E6FA 100%);">
+                    <span style="position: relative; z-index: 10; color: #333; font-size: 14px;">Caucasian Shepherd (Transparent PNG on Purple Gradient)</span>
+                </div>
+                <div class="photo-counter">1 of 3</div>
+                <div class="swipe-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <div class="puppy-info">
+                <h3 class="puppy-breed">Caucasian Shepherd</h3>
+                <div class="puppy-meta">
+                    <span>12 weeks</span>
+                    <span class="meta-separator">|</span>
+                    <span>Male</span>
+                    <span class="meta-separator">|</span>
+                    <span>Gray</span>
+                </div>
+                <div class="puppy-tags">
+                    <span class="tag">Large</span>
+                    <span class="tag">Protective</span>
+                    <span class="tag">Strong</span>
+                </div>
+                <div class="puppy-price">₦380,000</div>
+                <p class="puppy-description">Impressive Caucasian Shepherd puppy. Extremely protective and loyal. Requires experienced owner with space.</p>
+                <button class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Reserve on WhatsApp
+                </button>
+                <button class="btn-link">View Full Details</button>
+            </div>
+        </div>
+
+        <!-- Puppy Card 11 -->
+        <div class="puppy-card">
+            <div class="puppy-image-container">
+                <div class="puppy-image">
+                    <span style="position: relative; z-index: 10; color: #666; font-size: 14px;">Boxer Puppy Photo</span>
+                </div>
+                <div class="photo-counter">1 of 4</div>
+                <div class="swipe-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <div class="puppy-info">
+                <h3 class="puppy-breed">Boxer</h3>
+                <div class="puppy-meta">
+                    <span>9 weeks</span>
+                    <span class="meta-separator">|</span>
+                    <span>Female</span>
+                    <span class="meta-separator">|</span>
+                    <span>Fawn</span>
+                </div>
+                <div class="puppy-tags">
+                    <span class="tag">Playful</span>
+                    <span class="tag">Energetic</span>
+                    <span class="tag">Loving</span>
+                </div>
+                <div class="puppy-price">₦190,000</div>
+                <p class="puppy-description">Playful Boxer puppy full of energy and love. Great with children, very affectionate. Needs active family.</p>
+                <button class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Reserve on WhatsApp
+                </button>
+                <button class="btn-link">View Full Details</button>
+            </div>
+        </div>
+
+        <!-- Puppy Card 12 -->
+        <div class="puppy-card">
+            <div class="puppy-image-container">
+                <div class="puppy-image" style="background: linear-gradient(135deg, #F0E68C 0%, #FFD700 100%);">
+                    <span style="position: relative; z-index: 10; color: #333; font-size: 14px;">Shih Tzu Puppy (Transparent PNG on Gold Gradient)</span>
+                </div>
+                <div class="photo-counter">1 of 5</div>
+                <div class="badge-overlay badge-new">NEW</div>
+                <div class="swipe-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <div class="puppy-info">
+                <h3 class="puppy-breed">Shih Tzu</h3>
+                <div class="puppy-meta">
+                    <span>8 weeks</span>
+                    <span class="meta-separator">|</span>
+                    <span>Male</span>
+                    <span class="meta-separator">|</span>
+                    <span>Gold &amp; White</span>
+                </div>
+                <div class="puppy-tags">
+                    <span class="tag">Small</span>
+                    <span class="tag">Affectionate</span>
+                    <span class="tag">Apartment</span>
+                </div>
+                <div class="puppy-price">₦210,000</div>
+                <p class="puppy-description">Adorable Shih Tzu puppy, perfect lap dog. Very affectionate and great for apartments. Low exercise needs.</p>
+                <button class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Reserve on WhatsApp
+                </button>
+                <button class="btn-link">View Full Details</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Load More Section -->
+    <div class="load-more-section">
+        <p class="load-more-info">Showing 12 of 12 puppies</p>
+        <button class="btn btn-secondary">All Puppies Loaded</button>
+    </div>
+
+    <div class="annotation" style="margin: 16px;">
+        Auto-loads more puppies when user scrolls near bottom. Skeleton screens show while loading.
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-logo">Business Name</div>
+        
+        <div class="footer-contact">
+            <a href="#" class="footer-contact-item">
+                <i class="fas fa-phone"></i>
+                <span>+234 XXX XXX XXXX</span>
+            </a>
+            <a href="#" class="footer-contact-item">
+                <i class="fab fa-whatsapp"></i>
+                <span>Chat on WhatsApp</span>
+            </a>
+        </div>
+
+        <div class="footer-copyright">© 2024 Business Name. All rights reserved.</div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
+    <!-- Bottom Sheet Filter Modal -->
+    <div class="modal-overlay" id="filterModal">
+        <div class="bottom-sheet">
+            <div class="sheet-handle"></div>
+            <h2 class="sheet-title">Filter &amp; Sort Puppies</h2>
+
+            <!-- Breed Filter -->
+            <div class="filter-section">
+                <label class="filter-label">Breed</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <div class="checkbox-box checked"></div>
+                        <span class="checkbox-label">All Breeds</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span class="checkbox-label">Golden Retriever</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span class="checkbox-label">German Shepherd</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span class="checkbox-label">French Bulldog</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span class="checkbox-label">Labrador Retriever</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span class="checkbox-label">Rottweiler</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Age Filter -->
+            <div class="filter-section">
+                <label class="filter-label">Age Range</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <div class="radio-box checked"></div>
+                        <span class="radio-label">Any Age</span>
+                    </div>
+                    <div class="radio-item">
+                        <div class="radio-box"></div>
+                        <span class="radio-label">Puppies (0-6 months)</span>
+                    </div>
+                    <div class="radio-item">
+                        <div class="radio-box"></div>
+                        <span class="radio-label">Young (6-12 months)</span>
+                    </div>
+                    <div class="radio-item">
+                        <div class="radio-box"></div>
+                        <span class="radio-label">Adult (1+ years)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gender Filter -->
+            <div class="filter-section">
+                <label class="filter-label">Gender</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <div class="radio-box checked"></div>
+                        <span class="radio-label">Any Gender</span>
+                    </div>
+                    <div class="radio-item">
+                        <div class="radio-box"></div>
+                        <span class="radio-label">Male</span>
+                    </div>
+                    <div class="radio-item">
+                        <div class="radio-box"></div>
+                        <span class="radio-label">Female</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Price Range Filter -->
+            <div class="filter-section">
+                <label class="filter-label">Price Range</label>
+                <div class="price-slider">
+                    <div class="slider-track"></div>
+                </div>
+                <div class="price-range-display">
+                    <span>₦50,000</span>
+                    <span>₦500,000</span>
+                </div>
+            </div>
+
+            <!-- Temperament Filter -->
+            <div class="filter-section">
+                <label class="filter-label">Temperament</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span class="checkbox-label">Family Friendly</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span class="checkbox-label">Good with Kids</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span class="checkbox-label">Playful</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span class="checkbox-label">Calm</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span class="checkbox-label">Energetic</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="sheet-actions">
+                <button class="btn btn-primary" id="applyFilters">Apply Filters</button>
+                <button class="btn-link" id="clearAllFilters">Clear All Filters</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="annotation" style="margin: 16px; background: #333; color: #fff; padding: 12px;">
+        Page length: ~3800px with 12 puppies | Bottom sheet opens from bottom with drag handle | Filters persist with URL parameters | Images lazy-load as user scrolls
+    </div>
+
+</div>
+
+<script>
+// Filter Modal Toggle
+const filterButton = document.getElementById('filterButton');
+const filterToggle = document.getElementById('filterToggle');
+const filterModal = document.getElementById('filterModal');
+const applyFiltersBtn = document.getElementById('applyFilters');
+const clearAllFiltersBtn = document.getElementById('clearAllFilters');
+
+function openFilterModal() {
+    filterModal.classList.add('active');
+}
+
+function closeFilterModal() {
+    filterModal.classList.remove('active');
+}
+
+filterButton.addEventListener('click', openFilterModal);
+filterToggle.addEventListener('click', openFilterModal);
+
+filterModal.addEventListener('click', function(e) {
+    if (e.target === filterModal) {
+        closeFilterModal();
+    }
+});
+
+applyFiltersBtn.addEventListener('click', function() {
+    closeFilterModal();
+    // In real implementation, this would update the puppy listing
+});
+
+clearAllFiltersBtn.addEventListener('click', function() {
+    // Reset all checkboxes and radio buttons
+    document.querySelectorAll('.checkbox-box').forEach(box => box.classList.remove('checked'));
+    document.querySelectorAll('.radio-box').forEach(box => box.classList.remove('checked'));
+    // Check "All" options
+    document.querySelector('.checkbox-item .checkbox-box').classList.add('checked');
+    document.querySelectorAll('.radio-item .radio-box')[0].classList.add('checked');
+});
+
+// Checkbox and Radio interactions
+document.querySelectorAll('.checkbox-item').forEach(item => {
+    item.addEventListener('click', function() {
+        const box = this.querySelector('.checkbox-box');
+        box.classList.toggle('checked');
+    });
+});
+
+document.querySelectorAll('.radio-item').forEach(item => {
+    item.addEventListener('click', function() {
+        // Remove checked from all radio boxes in the same group
+        const group = this.closest('.radio-group');
+        group.querySelectorAll('.radio-box').forEach(box => box.classList.remove('checked'));
+        // Add checked to clicked item
+        this.querySelector('.radio-box').classList.add('checked');
+    });
+});
+
+// Filter chip close buttons
+document.querySelectorAll('.filter-chip-close').forEach(close => {
+    close.addEventListener('click', function(e) {
+        e.stopPropagation();
+        this.parentElement.remove();
+    });
+});
+</script>
+
+
+</body></html>

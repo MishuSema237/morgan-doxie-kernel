@@ -1,0 +1,991 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Process - Dog Breeding Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F5F5F5;
+            color: #333333;
+            line-height: 1.5;
+        }
+
+        .wireframe-container {
+            max-width: 1728px;
+            margin: 0 auto;
+            background: #F5F5F5;
+        }
+
+        .annotation {
+            font-size: 12px;
+            color: #999999;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        /* Header */
+        .header {
+            height: 80px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 80px;
+        }
+
+        .logo-box {
+            width: 200px;
+            height: 60px;
+            border: 2px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-item {
+            font-size: 16px;
+            color: #333333;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .cta-button {
+            padding: 12px 24px;
+            border: 2px solid #333333;
+            font-size: 16px;
+            font-weight: 600;
+            background: #FFFFFF;
+        }
+
+        /* Progress Indicator */
+        .progress-section {
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            padding: 32px 80px;
+            height: 100px;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .progress-line {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #E0E0E0;
+            z-index: 0;
+        }
+
+        .progress-line-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 25%;
+            background: #333333;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #E0E0E0;
+            border-radius: 50%;
+            background: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .step-circle.completed {
+            background: #333333;
+            border-color: #333333;
+            color: #FFFFFF;
+        }
+
+        .step-circle.current {
+            border-color: #333333;
+            border-width: 3px;
+        }
+
+        .step-label {
+            font-size: 12px;
+            color: #666666;
+            white-space: nowrap;
+        }
+
+        .step-label.current {
+            font-weight: 600;
+            color: #333333;
+        }
+
+        /* Main Content Area */
+        .content-wrapper {
+            display: flex;
+            gap: 32px;
+            padding: 40px 80px;
+            align-items: flex-start;
+        }
+
+        /* Form Area (Left) */
+        .form-area {
+            flex: 0 0 60%;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 40px;
+        }
+
+        .form-section {
+            margin-bottom: 48px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-heading {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #DC2626;
+        }
+
+        .form-input {
+            width: 100%;
+            height: 48px;
+            padding: 0 16px;
+            border: 1px solid #E0E0E0;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-input:focus {
+            outline: 2px solid #333333;
+            outline-offset: 2px;
+            border-color: #333333;
+        }
+
+        .form-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 16px;
+            border: 1px solid #E0E0E0;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-select {
+            width: 100%;
+            height: 48px;
+            padding: 0 16px;
+            border: 1px solid #E0E0E0;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            background: #FFFFFF;
+        }
+
+        /* Checkbox Group */
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .checkbox-input {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #E0E0E0;
+        }
+
+        /* Radio Group */
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .radio-input {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #E0E0E0;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: #F9FAFB;
+            border: 1px solid #E0E0E0;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-box li {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .info-box li:before {
+            content: "• ";
+            color: #333333;
+            font-weight: 700;
+        }
+
+        .deposit-amount {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        /* Expandable Section */
+        .expandable {
+            border: 1px solid #E0E0E0;
+            margin-top: 16px;
+        }
+
+        .expandable-header {
+            padding: 16px;
+            background: #F9FAFB;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .expandable-content {
+            padding: 16px;
+            border-top: 1px solid #E0E0E0;
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        /* Action Buttons */
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid #E0E0E0;
+        }
+
+        .btn-back {
+            padding: 16px 32px;
+            background: #FFFFFF;
+            color: #333333;
+            border: 2px solid #333333;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .btn-continue {
+            padding: 16px 48px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 2px solid #333333;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .save-progress {
+            font-size: 14px;
+            color: #666666;
+            text-decoration: underline;
+            margin-top: 16px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid #E0E0E0;
+        }
+
+        .faq-item {
+            margin-bottom: 16px;
+        }
+
+        .faq-question {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .faq-answer {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        /* Sidebar (Right) */
+        .sidebar {
+            flex: 0 0 calc(40% - 32px);
+            position: sticky;
+            top: 24px;
+        }
+
+        .summary-card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 32px;
+        }
+
+        .summary-header {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .puppy-image {
+            width: 100%;
+            height: 250px;
+            border: 2px solid #E0E0E0;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #999999;
+            background: #F9FAFB;
+        }
+
+        .puppy-details {
+            margin-bottom: 24px;
+        }
+
+        .puppy-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .detail-label {
+            color: #666666;
+        }
+
+        .detail-value {
+            font-weight: 600;
+        }
+
+        .puppy-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            border: 1px solid #E0E0E0;
+            font-size: 12px;
+            background: #F9FAFB;
+        }
+
+        .price-box {
+            background: #F9FAFB;
+            border: 2px solid #333333;
+            padding: 24px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .price-label {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 8px;
+        }
+
+        .price-amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        .included-section {
+            margin-bottom: 24px;
+        }
+
+        .included-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .included-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .included-list li {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .included-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #333333;
+            font-weight: 700;
+        }
+
+        .change-selection {
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            color: #333333;
+            text-decoration: underline;
+            margin-bottom: 24px;
+        }
+
+        .trust-badges {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-top: 24px;
+            border-top: 1px solid #E0E0E0;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #666666;
+        }
+
+        .trust-icon {
+            width: 16px;
+            height: 16px;
+            border: 1px solid #E0E0E0;
+        }
+
+        /* Footer */
+        .footer {
+            background: #FFFFFF;
+            border-top: 1px solid #E0E0E0;
+            padding: 40px 80px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-link {
+            color: #666666;
+            text-decoration: none;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 60px;
+            height: 60px;
+            background: #FFFFFF;
+            border: 2px solid #333333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="wireframe-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-box">BUSINESS NAME + LOGO</div>
+            <nav class="navigation">
+                <a href="#" class="nav-item">Home</a>
+                <a href="#" class="nav-item">Available Puppies</a>
+                <a href="#" class="nav-item">About Us</a>
+                <a href="#" class="nav-item">Gallery</a>
+                <a href="#" class="nav-item">Contact</a>
+            </nav>
+            <button class="cta-button">WhatsApp Us</button>
+        </header>
+
+        <!-- Progress Indicator -->
+        <div class="progress-section">
+            <div class="progress-steps">
+                <div class="progress-line">
+                    <div class="progress-line-fill"></div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle completed">✓</div>
+                    <span class="step-label">Select Puppy</span>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle current">2</div>
+                    <span class="step-label current">Your Information</span>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">3</div>
+                    <span class="step-label">Review &amp; Payment</span>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">4</div>
+                    <span class="step-label">Confirmation</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-wrapper">
+            <!-- Form Area -->
+            <div class="form-area">
+                <!-- Personal Information -->
+                <div class="form-section">
+                    <h2 class="section-heading">Your Information</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Full Name <span class="required">*</span></label>
+                            <input type="text" class="form-input" placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email Address <span class="required">*</span></label>
+                            <input type="email" class="form-input" placeholder="your.email@example.com">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Phone Number <span class="required">*</span></label>
+                            <input type="tel" class="form-input" placeholder="+234 XXX XXX XXXX">
+                            <div class="annotation">Nigerian mobile number format validated</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">WhatsApp Number (if different)</label>
+                            <input type="tel" class="form-input" placeholder="+234 XXX XXX XXXX">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Address Line 1 <span class="required">*</span></label>
+                        <input type="text" class="form-input" placeholder="Street address or P.O. Box">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Address Line 2</label>
+                        <input type="text" class="form-input" placeholder="Apartment, suite, unit, building, floor, etc.">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">City <span class="required">*</span></label>
+                            <input type="text" class="form-input" placeholder="City">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">State <span class="required">*</span></label>
+                            <select class="form-select">
+                                <option>Select state</option>
+                                <option>Lagos</option>
+                                <option>Abuja</option>
+                                <option>Rivers</option>
+                                <option>Oyo</option>
+                                <option>Other states...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Postal Code</label>
+                        <input type="text" class="form-input" placeholder="Postal code">
+                    </div>
+                </div>
+
+                <!-- About You -->
+                <div class="form-section">
+                    <h2 class="section-heading">Tell Us About Your Home</h2>
+                    <div class="form-group">
+                        <label class="form-label">I am a:</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" class="checkbox-input">
+                                First-time dog owner
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" class="checkbox-input">
+                                Experienced owner
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" class="checkbox-input">
+                                Have other pets
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Living situation:</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="living" class="radio-input">
+                                House with yard
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="living" class="radio-input">
+                                House without yard
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="living" class="radio-input">
+                                Apartment
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="living" class="radio-input">
+                                Other
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Who will primarily care for the puppy?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="caregiver" class="radio-input">
+                                Me
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="caregiver" class="radio-input">
+                                Family member
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="caregiver" class="radio-input">
+                                Shared responsibility
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tell us why you chose this breed (optional but helpful)</label>
+                        <textarea class="form-textarea" placeholder="This helps us ensure the puppy is a good match for your family..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Pickup/Delivery -->
+                <div class="form-section">
+                    <h2 class="section-heading">Pickup or Delivery?</h2>
+                    <div class="form-group">
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="delivery" class="radio-input">
+                                I will pick up in Lagos (no additional charge)
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="delivery" class="radio-input">
+                                I need delivery within Lagos (₦15,000)
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="delivery" class="radio-input">
+                                I need delivery outside Lagos (price calculated based on location)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Preferred Date</label>
+                        <input type="date" class="form-input">
+                        <div class="annotation">Calendar widget for date/time preference</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Preferred Time</label>
+                        <select class="form-select">
+                            <option>Select time</option>
+                            <option>9:00 AM - 11:00 AM</option>
+                            <option>11:00 AM - 1:00 PM</option>
+                            <option>1:00 PM - 3:00 PM</option>
+                            <option>3:00 PM - 5:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Payment Method -->
+                <div class="form-section">
+                    <h2 class="section-heading">Payment Method</h2>
+                    <div class="form-group">
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="payment" class="radio-input">
+                                Bank Transfer (instructions will be provided)
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="payment" class="radio-input">
+                                Cash on Pickup/Delivery
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="payment" class="radio-input">
+                                Installment Plan (requires deposit, terms apply)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="expandable">
+                        <div class="expandable-header">
+                            Installment Plan Details
+                            <span>▼</span>
+                        </div>
+                        <div class="expandable-content">
+                            <ul>
+                                <li>50% deposit required to reserve puppy</li>
+                                <li>Remaining balance due before pickup</li>
+                                <li>Maximum 30 days payment period</li>
+                                <li>No interest charges</li>
+                                <li>Payment schedule agreement required</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reservation Deposit -->
+                <div class="form-section">
+                    <h2 class="section-heading">Reservation Deposit</h2>
+                    <div class="info-box">
+                        <ul>
+                            <li class="deposit-amount">A deposit of ₦54,000 (30% of total) reserves your puppy</li>
+                            <li class="deposit-amount">Remaining balance due at pickup: ₦126,000</li>
+                            <li>Deposit is non-refundable but transferable to another puppy within 6 months</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" class="checkbox-input">
+                            I understand and agree to the reservation terms <span class="required">*</span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <a href="#" style="font-size: 14px; color: #333333; text-decoration: underline;">View full reservation policy</a>
+                    </div>
+                </div>
+
+                <!-- Terms & Conditions -->
+                <div class="form-section">
+                    <h2 class="section-heading">Terms &amp; Conditions</h2>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" class="checkbox-input">
+                            I agree to the terms and conditions <span class="required">*</span>
+                        </label>
+                        <a href="#" style="font-size: 14px; color: #333333; text-decoration: underline; margin-left: 32px;">Read full terms</a>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" class="checkbox-input">
+                            I agree to receive updates about my puppy via WhatsApp and email
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="form-actions">
+                    <button class="btn-back">Back</button>
+                    <button class="btn-continue">Continue to Review</button>
+                </div>
+                <div class="save-progress">Save progress and continue later</div>
+                <div class="annotation">Form autosaves progress every 30 seconds</div>
+
+                <!-- FAQ Section -->
+                <div class="faq-section">
+                    <h3 class="section-heading">Have Questions?</h3>
+                    <div class="faq-item">
+                        <div class="faq-question">What if I need to cancel?</div>
+                        <div class="faq-answer">Deposits are non-refundable but can be transferred to another puppy within 6 months.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Can I change my pickup date?</div>
+                        <div class="faq-answer">Yes, contact us at least 48 hours before your scheduled pickup to reschedule.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">What payment methods do you accept?</div>
+                        <div class="faq-answer">We accept bank transfer, cash on pickup/delivery, and installment plans.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">When will I receive confirmation?</div>
+                        <div class="faq-answer">You'll receive confirmation via email and WhatsApp within 2 hours of completing your reservation.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="summary-card">
+                    <div class="summary-header">Your Selected Puppy</div>
+                    
+                    <div class="puppy-image">
+                        DOG PHOTO - TRANSPARENT<br>
+                        Golden Retriever
+                    </div>
+
+                    <div class="puppy-details">
+                        <div class="puppy-name">Golden Retriever</div>
+                        <div class="detail-row">
+                            <span class="detail-label">Age:</span>
+                            <span class="detail-value">8 weeks</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Gender:</span>
+                            <span class="detail-value">Male</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Puppy ID:</span>
+                            <span class="detail-value">GR-2024-001</span>
+                        </div>
+                        <div class="puppy-tags">
+                            <span class="tag">Family Friendly</span>
+                            <span class="tag">Good with Kids</span>
+                            <span class="tag">Active</span>
+                        </div>
+                    </div>
+
+                    <div class="price-box">
+                        <div class="price-label">Total Price</div>
+                        <div class="price-amount">₦180,000</div>
+                    </div>
+
+                    <div class="included-section">
+                        <div class="included-title">Included in Price:</div>
+                        <ul class="included-list">
+                            <li>Health certificate</li>
+                            <li>First vaccinations</li>
+                            <li>Deworming</li>
+                            <li>Starter kit (food, toys, blanket)</li>
+                            <li>30-day health guarantee</li>
+                        </ul>
+                    </div>
+
+                    <a href="#" class="change-selection">Change Selection</a>
+
+                    <div class="trust-badges">
+                        <div class="trust-badge">
+                            <div class="trust-icon"></div>
+                            Secure payment
+                        </div>
+                        <div class="trust-badge">
+                            <div class="trust-icon"></div>
+                            Health guarantee
+                        </div>
+                        <div class="trust-badge">
+                            <div class="trust-icon"></div>
+                            Lifetime support
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div>© 2024 Business Name. All rights reserved.</div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Contact Support</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Floating WhatsApp Button -->
+        <div class="whatsapp-float">
+            WhatsApp
+        </div>
+    </div>
+
+</body></html>

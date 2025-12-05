@@ -1,0 +1,3403 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Wireframes - Dog Breeding Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.2s ease-in-out;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFFFFF;
+            color: #333333;
+            line-height: 1.5;
+        }
+
+        .wireframe-container {
+            max-width: 430px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            box-shadow: 0 0 40px rgba(0,0,0,0.1);
+        }
+
+        .page {
+            background: #F5F5F5;
+            min-height: 932px;
+            position: relative;
+        }
+
+        /* Navigation */
+        .page-selector {
+            background: #333333;
+            padding: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .page-selector select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #E0E0E0;
+            background: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: #333333;
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            border-bottom: 1px solid #E0E0E0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .hamburger, .header-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #E0E0E0;
+            background: #F5F5F5;
+            cursor: pointer;
+        }
+
+        .hamburger:hover, .header-icon:hover {
+            background: #E0E0E0;
+        }
+
+        .logo {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 500px;
+            background: #E0E0E0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            overflow: hidden;
+        }
+
+        .hero-photo {
+            position: absolute;
+            background: #CCCCCC;
+            border: 2px solid #999999;
+        }
+
+        .hero-photo:nth-child(1) {
+            width: 180px;
+            height: 180px;
+            top: 40px;
+            left: 20px;
+            transform: rotate(-8deg);
+        }
+
+        .hero-photo:nth-child(2) {
+            width: 160px;
+            height: 160px;
+            top: 80px;
+            right: 30px;
+            transform: rotate(12deg);
+        }
+
+        .hero-photo:nth-child(3) {
+            width: 140px;
+            height: 140px;
+            bottom: 120px;
+            left: 40px;
+            transform: rotate(5deg);
+        }
+
+        .hero-photo:nth-child(4) {
+            width: 120px;
+            height: 120px;
+            bottom: 140px;
+            right: 50px;
+            transform: rotate(-10deg);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            background: rgba(255,255,255,0.9);
+            padding: 24px;
+            border: 2px solid #333333;
+        }
+
+        .hero-content h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #333333;
+        }
+
+        .hero-content p {
+            font-size: 16px;
+            color: #666666;
+            margin-bottom: 16px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px 24px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid #333333;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: #333333;
+            color: #FFFFFF;
+        }
+
+        .btn-primary:hover {
+            background: #555555;
+        }
+
+        .btn-secondary {
+            background: #FFFFFF;
+            color: #333333;
+        }
+
+        .btn-secondary:hover {
+            background: #F5F5F5;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: #FFFFFF;
+            border-color: #25D366;
+        }
+
+        .btn-whatsapp:hover {
+            background: #20BA5A;
+        }
+
+        /* Cards */
+        .card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            background: #E0E0E0;
+            border: 2px dashed #999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666666;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .image-placeholder::before,
+        .image-placeholder::after {
+            content: '';
+            position: absolute;
+            background: #999999;
+        }
+
+        .image-placeholder::before {
+            width: 100%;
+            height: 1px;
+            transform: rotate(45deg);
+        }
+
+        .image-placeholder::after {
+            width: 100%;
+            height: 1px;
+            transform: rotate(-45deg);
+        }
+
+        /* Section */
+        .section {
+            padding: 24px 16px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        .section-link {
+            font-size: 14px;
+            color: #666666;
+            text-decoration: none;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            padding: 16px;
+            background: #FFFFFF;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 16px;
+            border: 1px solid #E0E0E0;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 8px;
+            background: #E0E0E0;
+            border: 1px solid #999999;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666666;
+        }
+
+        /* Puppy Card */
+        .puppy-card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            margin-bottom: 16px;
+        }
+
+        .puppy-image {
+            height: 400px;
+        }
+
+        .puppy-info {
+            padding: 16px;
+        }
+
+        .puppy-breed {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #333333;
+        }
+
+        .puppy-meta {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .puppy-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            font-size: 12px;
+            color: #666666;
+        }
+
+        .puppy-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 12px;
+        }
+
+        .puppy-description {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333333;
+            color: #FFFFFF;
+            padding: 32px 16px;
+        }
+
+        .footer-logo {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .footer-contact {
+            margin-bottom: 24px;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #444444;
+            margin-bottom: 8px;
+            text-decoration: none;
+            color: #FFFFFF;
+            border: 1px solid #555555;
+        }
+
+        .footer-contact-item:hover {
+            background: #555555;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .social-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #444444;
+            border: 1px solid #555555;
+        }
+
+        .social-icon:hover {
+            background: #555555;
+        }
+
+        .footer-hours {
+            font-size: 14px;
+            color: #CCCCCC;
+            margin-bottom: 16px;
+        }
+
+        .footer-copyright {
+            font-size: 12px;
+            color: #999999;
+            text-align: center;
+            padding-top: 16px;
+            border-top: 1px solid #555555;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            border: 2px solid #20BA5A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            background: #20BA5A;
+        }
+
+        .whatsapp-float i {
+            font-size: 28px;
+            color: #FFFFFF;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Annotations */
+        .annotation {
+            font-size: 12px;
+            color: #999999;
+            font-style: italic;
+            padding: 8px;
+            background: #F9F9F9;
+            border-left: 2px solid #999999;
+            margin: 8px 0;
+        }
+
+        /* Trust Badges */
+        .trust-badges {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 12px 16px;
+            background: #FFFFFF;
+        }
+
+        .trust-badge {
+            padding: 8px 16px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            white-space: nowrap;
+            font-size: 12px;
+            color: #666666;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #E0E0E0;
+            background: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: #333333;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: 2px solid #333333;
+            outline-offset: 2px;
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 16px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            font-size: 14px;
+            color: #666666;
+        }
+
+        /* Filter Bar */
+        .filter-bar {
+            padding: 16px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .filter-button {
+            width: 100%;
+            padding: 12px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .filter-button:hover {
+            background: #E0E0E0;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            padding: 16px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: #E0E0E0;
+            border: 1px solid #CCCCCC;
+        }
+
+        /* Testimonial Card */
+        .testimonial-card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-header {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .testimonial-avatar {
+            width: 48px;
+            height: 48px;
+            background: #E0E0E0;
+            border: 1px solid #CCCCCC;
+        }
+
+        .testimonial-info {
+            flex: 1;
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333333;
+        }
+
+        .testimonial-location {
+            font-size: 12px;
+            color: #666666;
+        }
+
+        .testimonial-text {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            padding: 16px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .progress-circle {
+            width: 32px;
+            height: 32px;
+            border: 2px solid #E0E0E0;
+            background: #F5F5F5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #666666;
+            position: relative;
+            z-index: 2;
+        }
+
+        .progress-step.active .progress-circle {
+            background: #333333;
+            border-color: #333333;
+            color: #FFFFFF;
+        }
+
+        .progress-step.completed .progress-circle {
+            background: #25D366;
+            border-color: #25D366;
+            color: #FFFFFF;
+        }
+
+        .progress-label {
+            font-size: 10px;
+            color: #666666;
+            margin-top: 4px;
+            text-align: center;
+        }
+
+        .progress-line {
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            right: -50%;
+            height: 2px;
+            background: #E0E0E0;
+            z-index: 1;
+        }
+
+        .progress-step.completed .progress-line {
+            background: #25D366;
+        }
+
+        .progress-step:last-child .progress-line {
+            display: none;
+        }
+
+        /* Info Box */
+        .info-box {
+            padding: 16px;
+            background: #F9F9F9;
+            border: 1px solid #E0E0E0;
+            border-left: 4px solid #333333;
+            margin-bottom: 16px;
+        }
+
+        .info-box-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .info-box-text {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        /* Checklist */
+        .checklist-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            margin-bottom: 8px;
+        }
+
+        .checklist-icon {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #333333;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .checklist-icon.checked {
+            background: #25D366;
+            border-color: #25D366;
+            position: relative;
+        }
+
+        .checklist-icon.checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FFFFFF;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .checklist-text {
+            font-size: 14px;
+            color: #333333;
+        }
+
+        /* Summary Box */
+        .summary-box {
+            background: #FFFFFF;
+            border: 2px solid #333333;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .summary-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .summary-label {
+            color: #666666;
+        }
+
+        .summary-value {
+            color: #333333;
+            font-weight: 600;
+        }
+
+        .summary-total {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 2px solid #333333;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: #E0E0E0;
+            border: 1px solid #CCCCCC;
+            flex-shrink: 0;
+        }
+
+        .feature-content {
+            flex: 1;
+        }
+
+        .feature-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .feature-description {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        /* Accordion */
+        .accordion-item {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            margin-bottom: 8px;
+        }
+
+        .accordion-header {
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            color: #333333;
+        }
+
+        .accordion-header:hover {
+            background: #F5F5F5;
+        }
+
+        .accordion-icon {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #333333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .accordion-content {
+            padding: 0 16px 16px;
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .accordion-item.active .accordion-content {
+            display: block;
+        }
+
+        /* Price Display */
+        .price-display {
+            background: #F5F5F5;
+            border: 2px solid #333333;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .price-label {
+            font-size: 12px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .price-amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        .price-note {
+            font-size: 12px;
+            color: #666666;
+            margin-top: 8px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            padding: 48px 24px;
+            text-align: center;
+        }
+
+        .empty-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 16px;
+            background: #E0E0E0;
+            border: 2px dashed #999999;
+        }
+
+        .empty-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .empty-text {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 24px;
+        }
+
+        /* Success State */
+        .success-state {
+            padding: 48px 24px;
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 16px;
+            background: #25D366;
+            border: 2px solid #20BA5A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-icon::after {
+            content: '✓';
+            font-size: 48px;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .success-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .success-text {
+            font-size: 16px;
+            color: #666666;
+            margin-bottom: 24px;
+        }
+
+        /* Timeline */
+        .timeline {
+            padding: 16px;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 32px;
+            bottom: -24px;
+            width: 2px;
+            background: #E0E0E0;
+        }
+
+        .timeline-item:last-child::before {
+            display: none;
+        }
+
+        .timeline-marker {
+            width: 32px;
+            height: 32px;
+            background: #FFFFFF;
+            border: 2px solid #333333;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: #333333;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-item.completed .timeline-marker {
+            background: #25D366;
+            border-color: #25D366;
+            color: #FFFFFF;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .timeline-description {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        .timeline-time {
+            font-size: 12px;
+            color: #999999;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Rating Display */
+        .rating {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .rating-star {
+            width: 16px;
+            height: 16px;
+            background: #E0E0E0;
+            border: 1px solid #CCCCCC;
+            position: relative;
+        }
+
+        .rating-star.filled {
+            background: #333333;
+            border-color: #333333;
+        }
+
+        .rating-star.filled::after {
+            content: '★';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FFFFFF;
+            font-size: 12px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            background: #FFFFFF;
+            border-bottom: 2px solid #E0E0E0;
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 16px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #666666;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            cursor: pointer;
+        }
+
+        .tab:hover {
+            color: #333333;
+        }
+
+        .tab.active {
+            color: #333333;
+            border-bottom-color: #333333;
+        }
+
+        /* Modal Overlay (for filter sheets, etc) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            display: none;
+        }
+
+        .modal-overlay.active {
+            display: block;
+        }
+
+        .modal-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #FFFFFF;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 24px 16px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            background: #F5F5F5;
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .mb-8 { margin-bottom: 8px; }
+        .mb-16 { margin-bottom: 16px; }
+        .mb-24 { margin-bottom: 24px; }
+        .mt-8 { margin-top: 8px; }
+        .mt-16 { margin-top: 16px; }
+        .mt-24 { margin-top: 24px; }
+        .p-16 { padding: 16px; }
+        .p-24 { padding: 24px; }
+    </style>
+</head>
+<body>
+
+<div class="page-selector">
+    <select id="pageSelect" onchange="showPage(this.value)">
+        <option value="homepage">1. Homepage</option>
+        <option value="listing">2. Available Puppies (Listing)</option>
+        <option value="detail">3. Individual Puppy Detail</option>
+        <option value="about">4. About Us</option>
+        <option value="gallery">5. Gallery</option>
+        <option value="contact">6. Contact</option>
+        <option value="breeds">7. Breeds Information</option>
+        <option value="breed-detail">8. Individual Breed Detail</option>
+        <option value="reservation">9. Reservation Form</option>
+        <option value="review">10. Review &amp; Confirm</option>
+        <option value="confirmation">11. Confirmation</option>
+    </select>
+</div>
+
+<div class="wireframe-container">
+    
+    <!-- PAGE 1: HOMEPAGE -->
+    <div id="homepage" class="page">
+        <!-- Header -->
+        <div class="header">
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="logo">Business Name</div>
+            <div class="header-icon">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-photo">
+                <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 12px; color: #666;">PUPPY</span>
+            </div>
+            <div class="hero-photo">
+                <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 12px; color: #666;">PUPPY</span>
+            </div>
+            <div class="hero-photo">
+                <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 12px; color: #666;">PUPPY</span>
+            </div>
+            <div class="hero-photo">
+                <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 12px; color: #666;">PUPPY</span>
+            </div>
+            <div class="hero-content">
+                <h1>Find Your Perfect Companion</h1>
+                <p>Premium Breeding in Lagos</p>
+                <button class="btn btn-primary">See Available Puppies</button>
+            </div>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="trust-badges">
+            <div class="trust-badge">5+ Years</div>
+            <div class="trust-badge">Healthy Puppies</div>
+            <div class="trust-badge">Lifetime Support</div>
+            <div class="trust-badge">Licensed</div>
+        </div>
+
+        <div class="annotation" style="margin: 16px;">
+            Hero photos scatter and rotate at different angles. Mix of transparent PNGs on gradients and full background photos.
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"></div>
+                <div class="stat-number">20+</div>
+                <div class="stat-label">Happy Families</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"></div>
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Puppies Placed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"></div>
+                <div class="stat-number">5</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"></div>
+                <div class="stat-number">Lagos</div>
+                <div class="stat-label">Based</div>
+            </div>
+        </div>
+
+        <!-- Featured Puppies -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Available Puppies Now</h2>
+                <a href="#" class="section-link">View All →</a>
+            </div>
+
+            <div class="puppy-card">
+                <div class="image-placeholder puppy-image">
+                    <span>Golden Retriever Puppy Photo</span>
+                </div>
+                <div class="puppy-info">
+                    <h3 class="puppy-breed">Golden Retriever</h3>
+                    <div class="puppy-meta">
+                        <span>8 weeks</span>
+                        <span>Male</span>
+                    </div>
+                    <div class="puppy-tags">
+                        <span class="tag">Family Friendly</span>
+                        <span class="tag">Playful</span>
+                    </div>
+                    <div class="puppy-price">₦180,000</div>
+                    <p class="puppy-description">Healthy, vaccinated Golden Retriever puppy. Great with kids, very playful and affectionate.</p>
+                    <button class="btn btn-whatsapp mb-8">Reserve on WhatsApp</button>
+                    <a href="#" class="section-link">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="annotation">
+                Card alternates: transparent PNG on yellow gradient background
+            </div>
+
+            <div class="puppy-card">
+                <div class="image-placeholder puppy-image">
+                    <span>German Shepherd Puppy Photo</span>
+                </div>
+                <div class="puppy-info">
+                    <h3 class="puppy-breed">German Shepherd</h3>
+                    <div class="puppy-meta">
+                        <span>10 weeks</span>
+                        <span>Female</span>
+                    </div>
+                    <div class="puppy-tags">
+                        <span class="tag">Intelligent</span>
+                        <span class="tag">Loyal</span>
+                    </div>
+                    <div class="puppy-price">₦220,000</div>
+                    <p class="puppy-description">Beautiful German Shepherd with excellent temperament. Smart and trainable.</p>
+                    <button class="btn btn-whatsapp mb-8">Reserve on WhatsApp</button>
+                    <a href="#" class="section-link">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="annotation">
+                Card alternates: full background photo with puppy in environment
+            </div>
+
+            <div class="puppy-card">
+                <div class="image-placeholder puppy-image">
+                    <span>French Bulldog Puppy Photo</span>
+                </div>
+                <div class="puppy-info">
+                    <h3 class="puppy-breed">French Bulldog</h3>
+                    <div class="puppy-meta">
+                        <span>12 weeks</span>
+                        <span>Male</span>
+                    </div>
+                    <div class="puppy-tags">
+                        <span class="tag">Compact</span>
+                        <span class="tag">Friendly</span>
+                    </div>
+                    <div class="puppy-price">₦350,000</div>
+                    <p class="puppy-description">Adorable Frenchie puppy, perfect for apartment living. Very social and loving.</p>
+                    <button class="btn btn-whatsapp mb-8">Reserve on WhatsApp</button>
+                    <a href="#" class="section-link">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="annotation">
+                Card alternates: transparent PNG on blue gradient background
+            </div>
+        </div>
+
+        <!-- Why Choose Us -->
+        <div class="section" style="background: #FFFFFF;">
+            <h2 class="section-title mb-16">Why Families Trust Us</h2>
+
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Health Guaranteed</h3>
+                    <p class="feature-description">All puppies vet-checked, vaccinated, and come with health certificate.</p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Expert Care</h3>
+                    <p class="feature-description">5+ years breeding experience. Puppies raised in loving home environment.</p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Lifetime Support</h3>
+                    <p class="feature-description">We're here for advice and help throughout your dog's life.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="section">
+            <h2 class="section-title mb-16">Happy Families</h2>
+
+            <div class="annotation">
+                Horizontal swipe carousel - show 1 card at a time with dot indicators
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar"></div>
+                    <div class="testimonial-info">
+                        <div class="testimonial-name">Chidi Okonkwo</div>
+                        <div class="testimonial-location">Lekki, Lagos</div>
+                        <div class="rating">
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Best breeder in Lagos! Our Golden Retriever is healthy, well-socialized, and has the sweetest temperament. The support we received was amazing."</p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar"></div>
+                    <div class="testimonial-info">
+                        <div class="testimonial-name">Amara Nwosu</div>
+                        <div class="testimonial-location">Victoria Island, Lagos</div>
+                        <div class="rating">
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Very professional and caring breeder. Our German Shepherd puppy came with all health records and has been doing wonderfully. Highly recommend!"</p>
+            </div>
+        </div>
+
+        <!-- Instagram Preview -->
+        <div class="section" style="background: #FFFFFF;">
+            <h2 class="section-title mb-16">Follow Our Journey @businessname</h2>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+            </div>
+
+            <button class="btn btn-secondary">Follow on Instagram</button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-logo">Business Name</div>
+            
+            <div class="footer-contact">
+                <a href="#" class="footer-contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+234 XXX XXX XXXX</span>
+                </a>
+                <a href="#" class="footer-contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Chat on WhatsApp</span>
+                </a>
+                <a href="#" class="footer-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@businessname.com</span>
+                </a>
+            </div>
+
+            <div class="footer-social">
+                <div class="social-icon"><i class="fab fa-instagram"></i></div>
+                <div class="social-icon"><i class="fab fa-facebook"></i></div>
+                <div class="social-icon"><i class="fab fa-tiktok"></i></div>
+                <div class="social-icon"><i class="fab fa-youtube"></i></div>
+            </div>
+
+            <div class="footer-hours">Mon-Sat 9AM-6PM WAT</div>
+
+            <div class="footer-copyright">© 2024 Business Name. All rights reserved.</div>
+        </div>
+
+        <!-- Floating WhatsApp -->
+        <div class="whatsapp-float">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+
+        <div class="annotation" style="margin: 16px; background: #333; color: #fff;">
+            Page length: ~2400px | Hamburger opens full-screen menu | Photos lazy-load for Nigerian networks
+        </div>
+    </div>
+
+    <!-- PAGE 2: AVAILABLE PUPPIES (LISTING) -->
+    <div id="listing" class="page" style="display: none;">
+        <!-- Header -->
+        <div class="header">
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="logo">Available Puppies</div>
+            <div class="header-icon">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+        </div>
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            Home &gt; Available Puppies
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <div class="filter-button">
+                <span><i class="fas fa-filter"></i> Filter &amp; Sort</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="annotation mt-8">
+                Opens bottom sheet with breed, age, gender, price range filters
+            </div>
+        </div>
+
+        <!-- Results Count -->
+        <div class="section">
+            <p style="font-size: 14px; color: #666666;">Showing 12 puppies</p>
+        </div>
+
+        <!-- Puppy Listing -->
+        <div class="section" style="padding-top: 0;">
+            <div class="puppy-card">
+                <div style="position: relative;">
+                    <div class="image-placeholder puppy-image">
+                        <span>Puppy Photo (transparent PNG)</span>
+                    </div>
+                    <div style="position: absolute; top: 8px; right: 8px; background: #25D366; color: #fff; padding: 4px 8px; font-size: 12px; font-weight: 600;">NEW</div>
+                </div>
+                <div class="puppy-info">
+                    <h3 class="puppy-breed">Golden Retriever</h3>
+                    <div class="puppy-meta">
+                        <span>8 weeks</span>
+                        <span>Male</span>
+                    </div>
+                    <div class="puppy-tags">
+                        <span class="tag">Family Friendly</span>
+                        <span class="tag">Playful</span>
+                        <span class="tag">Good with Kids</span>
+                    </div>
+                    <div class="puppy-price">₦180,000</div>
+                    <p class="puppy-description">Beautiful Golden Retriever puppy with excellent temperament. Vet-checked, vaccinated, and ready for loving home.</p>
+                    <div class="annotation mb-8">
+                        Swipe left/right on card to see more photos
+                    </div>
+                    <button class="btn btn-whatsapp mb-8">Reserve on WhatsApp</button>
+                    <button class="btn btn-secondary">View Full Details</button>
+                </div>
+            </div>
+
+            <div class="puppy-card">
+                <div class="image-placeholder puppy-image">
+                    <span>Puppy Photo (full background)</span>
+                </div>
+                <div class="puppy-info">
+                    <h3 class="puppy-breed">German Shepherd</h3>
+                    <div class="puppy-meta">
+                        <span>10 weeks</span>
+                        <span>Female</span>
+                    </div>
+                    <div class="puppy-tags">
+                        <span class="tag">Intelligent</span>
+                        <span class="tag">Loyal</span>
+                        <span class="tag">Active</span>
+                    </div>
+                    <div class="puppy-price">₦220,000</div>
+                    <p class="puppy-description">Smart and loyal German Shepherd female. Great with families, highly trainable. Excellent bloodline.</p>
+                    <button class="btn btn-whatsapp mb-8">Reserve on WhatsApp</button>
+                    <button class="btn btn-secondary">View Full Details</button>
+                </div>
+            </div>
+
+            <div class="puppy-card">
+                <div class="image-placeholder puppy-image" style="background: linear-gradient(135deg, #FFD93D 0%, #FFA07A 100%);">
+                    <span style="color: #333;">Puppy Photo (gradient bg)</span>
+                </div>
+                <div class="puppy-info">
+                    <h3 class="puppy-breed">French Bulldog</h3>
+                    <div class="puppy-meta">
+                        <span>12 weeks</span>
+                        <span>Male</span>
+                    </div>
+                    <div class="puppy-tags">
+                        <span class="tag">Compact</span>
+                        <span class="tag">Friendly</span>
+                        <span class="tag">Apartment</span>
+                    </div>
+                    <div class="puppy-price">₦350,000</div>
+                    <p class="puppy-description">Adorable Frenchie perfect for apartment living. Very social, loves attention, great companion.</p>
+                    <button class="btn btn-whatsapp mb-8">Reserve on WhatsApp</button>
+                    <button class="btn btn-secondary">View Full Details</button>
+                </div>
+            </div>
+
+            <div class="puppy-card">
+                <div style="position: relative;">
+                    <div class="image-placeholder puppy-image">
+                        <span>Puppy Photo</span>
+                    </div>
+                    <div style="position: absolute; top: 8px; right: 8px; background: #FF6B6B; color: #fff; padding: 4px 8px; font-size: 12px; font-weight: 600;">RESERVED</div>
+                </div>
+                <div class="puppy-info">
+                    <h3 class="puppy-breed">Labrador Retriever</h3>
+                    <div class="puppy-meta">
+                        <span>9 weeks</span>
+                        <span>Female</span>
+                    </div>
+                    <div class="puppy-tags">
+                        <span class="tag">Gentle</span>
+                        <span class="tag">Friendly</span>
+                    </div>
+                    <div class="puppy-price">₦160,000</div>
+                    <p class="puppy-description">Sweet-natured Labrador with beautiful coat. Great family dog, loves children.</p>
+                    <button class="btn btn-secondary" disabled="" style="opacity: 0.5;">Reserved</button>
+                </div>
+            </div>
+
+            <div class="annotation">
+                Continue pattern with more puppy cards - alternating photo treatments
+            </div>
+
+            <!-- Load More -->
+            <div style="text-align: center; padding: 24px 0;">
+                <button class="btn btn-secondary">Load More Puppies</button>
+                <p style="font-size: 14px; color: #666666; margin-top: 8px;">Showing 4 of 12</p>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="section" style="background: #FFFFFF;">
+            <h3 class="section-title mb-16">Can't Find What You're Looking For?</h3>
+            <p class="mb-16" style="font-size: 14px; color: #666666;">We have new litters regularly. Contact us about upcoming puppies or specific breeds.</p>
+            <button class="btn btn-primary mb-8">Contact About Future Litters</button>
+            <button class="btn btn-secondary">Join Waiting List</button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-logo">Business Name</div>
+            <div class="footer-contact">
+                <a href="#" class="footer-contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+234 XXX XXX XXXX</span>
+                </a>
+                <a href="#" class="footer-contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Chat on WhatsApp</span>
+                </a>
+            </div>
+            <div class="footer-copyright">© 2024 Business Name</div>
+        </div>
+
+        <!-- Floating WhatsApp -->
+        <div class="whatsapp-float">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+    </div>
+
+    <!-- PAGE 3: INDIVIDUAL PUPPY DETAIL -->
+    <div id="detail" class="page" style="display: none;">
+        <!-- Header -->
+        <div class="header">
+            <div class="hamburger">
+                <i class="fas fa-arrow-left"></i>
+            </div>
+            <div class="logo">Puppy Details</div>
+            <div class="header-icon">
+                <i class="fas fa-share-alt"></i>
+            </div>
+        </div>
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            Home &gt; Puppies &gt; Golden Retriever &gt; #GR-001
+        </div>
+
+        <!-- Photo Gallery -->
+        <div style="position: relative;">
+            <div class="image-placeholder" style="height: 400px;">
+                <span>Main Puppy Photo</span>
+            </div>
+            <div class="annotation" style="position: absolute; bottom: 8px; left: 8px; right: 8px; background: rgba(255,255,255,0.9);">
+                Swipe left/right to see more photos. Tap to view full-screen gallery.
+            </div>
+            <div style="position: absolute; top: 8px; right: 8px; background: #25D366; color: #fff; padding: 4px 8px; font-size: 12px; font-weight: 600;">AVAILABLE</div>
+        </div>
+
+        <!-- Thumbnail Strip -->
+        <div style="display: flex; gap: 8px; padding: 8px; background: #FFFFFF; overflow-x: auto;">
+            <div style="width: 80px; height: 80px; flex-shrink: 0; background: #E0E0E0; border: 2px solid #333333;"></div>
+            <div style="width: 80px; height: 80px; flex-shrink: 0; background: #E0E0E0; border: 1px solid #CCCCCC;"></div>
+            <div style="width: 80px; height: 80px; flex-shrink: 0; background: #E0E0E0; border: 1px solid #CCCCCC;"></div>
+            <div style="width: 80px; height: 80px; flex-shrink: 0; background: #E0E0E0; border: 1px solid #CCCCCC;"></div>
+            <div style="width: 80px; height: 80px; flex-shrink: 0; background: #E0E0E0; border: 1px solid #CCCCCC;"></div>
+        </div>
+
+        <!-- Puppy Info -->
+        <div class="section" style="background: #FFFFFF;">
+            <h1 style="font-size: 24px; font-weight: 700; color: #333333; margin-bottom: 8px;">Golden Retriever Puppy</h1>
+            <p style="font-size: 14px; color: #666666; margin-bottom: 16px;">ID: #GR-001</p>
+
+            <div class="price-display">
+                <div class="price-label">Price</div>
+                <div class="price-amount">₦180,000</div>
+                <div class="price-note">Includes health certificate, vaccinations, starter kit</div>
+            </div>
+
+            <!-- Quick Details -->
+            <div style="background: #F5F5F5; border: 1px solid #E0E0E0; padding: 16px; margin-bottom: 16px;">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px;">Quick Details</h3>
+                <div class="summary-row">
+                    <span class="summary-label">Breed</span>
+                    <span class="summary-value">Golden Retriever</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Age</span>
+                    <span class="summary-value">8 weeks old</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Date of Birth</span>
+                    <span class="summary-value">Oct 15, 2024</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Gender</span>
+                    <span class="summary-value">Male</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Color</span>
+                    <span class="summary-value">Golden</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Current Weight</span>
+                    <span class="summary-value">4.5 kg</span>
+                </div>
+            </div>
+
+            <!-- Temperament Tags -->
+            <div style="margin-bottom: 16px;">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Temperament</h3>
+                <div class="puppy-tags">
+                    <span class="tag">Family Friendly</span>
+                    <span class="tag">Playful</span>
+                    <span class="tag">Good with Kids</span>
+                    <span class="tag">Energetic</span>
+                    <span class="tag">Intelligent</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <button class="btn btn-whatsapp mb-8">
+                <i class="fab fa-whatsapp"></i> Reserve on WhatsApp
+            </button>
+            <button class="btn btn-primary mb-8">
+                <i class="fas fa-phone"></i> Call to Discuss
+            </button>
+            <button class="btn btn-secondary mb-16">
+                <i class="fas fa-calendar"></i> Schedule a Visit
+            </button>
+        </div>
+
+        <!-- About This Puppy -->
+        <div class="section">
+            <h2 class="section-title mb-16">About This Puppy</h2>
+            <p style="font-size: 14px; color: #666666; line-height: 1.6; margin-bottom: 12px;">
+                This beautiful Golden Retriever puppy has an exceptional temperament and is perfect for families. He's been raised in a loving home environment with lots of socialization.
+            </p>
+            <p style="font-size: 14px; color: #666666; line-height: 1.6; margin-bottom: 12px;">
+                Very playful and energetic, loves to play fetch and enjoys being around people. He's already showing signs of being highly intelligent and trainable.
+            </p>
+            <p style="font-size: 14px; color: #666666; line-height: 1.6; margin-bottom: 12px;">
+                Great with children and other pets. Has been well-socialized from birth and is comfortable with household noises and activities.
+            </p>
+            <p style="font-size: 14px; color: #666666; line-height: 1.6;">
+                Ready to go to his forever home now. Will make an excellent family companion and is sure to bring lots of joy and love.
+            </p>
+        </div>
+
+        <!-- Health Information -->
+        <div class="section" style="background: #FFFFFF;">
+            <h2 class="section-title mb-16">Health Information</h2>
+            
+            <div class="checklist-item">
+                <div class="checklist-icon checked"></div>
+                <div class="checklist-text">First vaccination completed (Nov 1, 2024)</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon checked"></div>
+                <div class="checklist-text">Dewormed (Oct 30, 2024)</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon checked"></div>
+                <div class="checklist-text">Vet health check passed (Nov 5, 2024)</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon checked"></div>
+                <div class="checklist-text">Health certificate available</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon"></div>
+                <div class="checklist-text">Microchipped (optional add-on: ₦15,000)</div>
+            </div>
+
+            <div class="info-box mt-16">
+                <div class="info-box-title">30-Day Health Guarantee</div>
+                <div class="info-box-text">Full health records provided at pickup. We stand behind the health of all our puppies.</div>
+            </div>
+        </div>
+
+        <!-- Parent Information -->
+        <div class="section">
+            <h2 class="section-title mb-16">Meet the Parents</h2>
+
+            <div class="card mb-16">
+                <div style="display: flex; gap: 16px; margin-bottom: 12px;">
+                    <div style="width: 80px; height: 80px; flex-shrink: 0; background: #E0E0E0; border: 1px solid #CCCCCC;"></div>
+                    <div>
+                        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 4px;">Mother (Dam)</h3>
+                        <p style="font-size: 14px; color: #666666; margin-bottom: 4px;"><strong>Name:</strong> Bella</p>
+                        <p style="font-size: 14px; color: #666666; margin-bottom: 4px;"><strong>Breed:</strong> Golden Retriever</p>
+                        <p style="font-size: 14px; color: #666666;"><strong>Age:</strong> 3 years</p>
+                    </div>
+                </div>
+                <p style="font-size: 14px; color: #666666;">Gentle, loving temperament. Excellent with children. Health tested.</p>
+            </div>
+
+            <div class="card">
+                <div style="display: flex; gap: 16px; margin-bottom: 12px;">
+                    <div style="width: 80px; height: 80px; flex-shrink: 0; background: #E0E0E0; border: 1px solid #CCCCCC;"></div>
+                    <div>
+                        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 4px;">Father (Sire)</h3>
+                        <p style="font-size: 14px; color: #666666; margin-bottom: 4px;"><strong>Name:</strong> Max</p>
+                        <p style="font-size: 14px; color: #666666; margin-bottom: 4px;"><strong>Breed:</strong> Golden Retriever</p>
+                        <p style="font-size: 14px; color: #666666;"><strong>Age:</strong> 4 years</p>
+                    </div>
+                </div>
+                <p style="font-size: 14px; color: #666666;">Intelligent, athletic build. Champion bloodline. Health tested.</p>
+            </div>
+        </div>
+
+        <!-- What's Included -->
+        <div class="section" style="background: #FFFFFF;">
+            <h2 class="section-title mb-16">What's Included</h2>
+            
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Health Certificate</h3>
+                    <p class="feature-description">Official health certificate from licensed vet</p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Vaccination Records</h3>
+                    <p class="feature-description">Complete vaccination history and schedule</p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Starter Kit</h3>
+                    <p class="feature-description">Food sample, toy, blanket with mother's scent</p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Lifetime Support</h3>
+                    <p class="feature-description">Always available for questions and advice</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Breeder Contact -->
+        <div class="section">
+            <div class="summary-box">
+                <div style="text-align: center; margin-bottom: 16px;">
+                    <div style="width: 80px; height: 80px; margin: 0 auto 12px; background: #E0E0E0; border: 1px solid #CCCCCC;"></div>
+                    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 4px;">[Sister's Name]</h3>
+                    <p style="font-size: 14px; color: #666666; margin-bottom: 4px;">Professional Dog Breeder</p>
+                    <p style="font-size: 14px; color: #666666;">Lagos, Nigeria</p>
+                </div>
+                <div style="padding: 12px; background: #F5F5F5; border: 1px solid #E0E0E0; text-align: center;">
+                    <p style="font-size: 12px; color: #666666;">Response time: Usually within 2 hours</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Similar Puppies -->
+        <div class="section" style="background: #FFFFFF;">
+            <h2 class="section-title mb-16">Other Puppies You Might Like</h2>
+
+            <div class="annotation mb-16">
+                Horizontal scroll of similar breed/price puppies
+            </div>
+
+            <div style="display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px;">
+                <div style="min-width: 200px; flex-shrink: 0; border: 1px solid #E0E0E0;">
+                    <div style="width: 200px; height: 200px; background: #E0E0E0; border-bottom: 1px solid #CCCCCC;"></div>
+                    <div style="padding: 12px;">
+                        <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">Golden Retriever</h4>
+                        <p style="font-size: 12px; color: #666666; margin-bottom: 4px;">10 weeks, Female</p>
+                        <p style="font-size: 14px; font-weight: 600; color: #333333;">₦180,000</p>
+                    </div>
+                </div>
+                <div style="min-width: 200px; flex-shrink: 0; border: 1px solid #E0E0E0;">
+                    <div style="width: 200px; height: 200px; background: #E0E0E0; border-bottom: 1px solid #CCCCCC;"></div>
+                    <div style="padding: 12px;">
+                        <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">Labrador Retriever</h4>
+                        <p style="font-size: 12px; color: #666666; margin-bottom: 4px;">9 weeks, Male</p>
+                        <p style="font-size: 14px; font-weight: 600; color: #333333;">₦160,000</p>
+                    </div>
+                </div>
+                <div style="min-width: 200px; flex-shrink: 0; border: 1px solid #E0E0E0;">
+                    <div style="width: 200px; height: 200px; background: #E0E0E0; border-bottom: 1px solid #CCCCCC;"></div>
+                    <div style="padding: 12px;">
+                        <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">Golden Retriever</h4>
+                        <p style="font-size: 12px; color: #666666; margin-bottom: 4px;">7 weeks, Male</p>
+                        <p style="font-size: 14px; font-weight: 600; color: #333333;">₦180,000</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sticky Bottom CTA -->
+        <div style="position: sticky; bottom: 0; padding: 16px; background: #FFFFFF; border-top: 2px solid #333333; box-shadow: 0 -4px 12px rgba(0,0,0,0.1);">
+            <button class="btn btn-whatsapp">Reserve This Puppy on WhatsApp</button>
+        </div>
+
+        <!-- Floating WhatsApp -->
+        <div class="whatsapp-float">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+    </div>
+
+    <!-- PAGE 4: ABOUT US -->
+    <div id="about" class="page" style="display: none;">
+        <!-- Header -->
+        <div class="header">
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="logo">About Us</div>
+            <div class="header-icon">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+        </div>
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            Home &gt; About Us
+        </div>
+
+        <!-- Hero -->
+        <div style="height: 300px; background: #E0E0E0; position: relative; display: flex; align-items: center; justify-content: center;">
+            <span style="font-size: 14px; color: #666;">Photo of breeder with dogs</span>
+            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); padding: 16px; text-align: center;">
+                <h1 style="font-size: 24px; font-weight: 700; color: #333333;">About [Business Name]</h1>
+                <p style="font-size: 14px; color: #666666; margin-top: 4px;">Breeding healthy, happy puppies in Lagos since [Year]</p>
+            </div>
+        </div>
+
+        <!-- Our Story -->
+        <div class="section">
+            <h2 class="section-title mb-16">Our Story</h2>
+            
+            <div class="image-placeholder mb-16" style="height: 250px;">
+                <span>Breeder with puppies photo</span>
+            </div>
+
+            <p style="font-size: 14px; color: #666666; line-height: 1.6; margin-bottom: 12px;">
+                I started breeding dogs over 5 years ago out of my love for these amazing animals. What began as a passion project has grown into a trusted breeding business serving families across Lagos.
+            </p>
+            <p style="font-size: 14px; color: #666666; line-height: 1.6; margin-bottom: 12px;">
+                My approach to breeding is simple: every puppy deserves the best start in life. I raise all puppies in my home, ensuring they receive constant love, attention, and proper socialization from birth.
+            </p>
+            <p style="font-size: 14px; color: #666666; line-height: 1.6; margin-bottom: 12px;">
+                Each puppy is vet-checked, vaccinated, and comes with complete health records. I take pride in matching the right puppy with the right family and providing lifetime support.
+            </p>
+            <p style="font-size: 14px; color: #666666; line-height: 1.6;">
+                Over the years, I've had the joy of placing 50+ puppies with loving families. Seeing these dogs grow up healthy and happy is what makes this work so rewarding.
+            </p>
+        </div>
+
+        <!-- What Sets Us Apart -->
+        <div class="section" style="background: #FFFFFF;">
+            <h2 class="section-title mb-16">What Sets Us Apart</h2>
+
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Health-First Approach</h3>
+                    <p class="feature-description">All breeding dogs are health tested. Puppies receive early vet care, vaccinations, and health certificates.</p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Socialized Puppies</h3>
+                    <p class="feature-description">Raised in home environment with lots of human interaction. Well-adjusted and ready for family life.</p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Lifetime Support</h3>
+                    <p class="feature-description">I'm here for advice and help throughout your dog's entire life. You're joining our extended family.</p>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Transparent Process</h3>
+                    <p class="feature-description">Visit anytime by appointment. See where puppies are raised. Meet the parents. Complete health records provided.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Our Standards -->
+        <div class="section">
+            <h2 class="section-title mb-16">Our Breeding Standards</h2>
+
+            <div class="checklist-item">
+                <div class="checklist-icon checked"></div>
+                <div class="checklist-text">All breeding dogs health tested</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon checked"></div>
+                <div class="checklist-text">Puppies raised in home environment</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon checked"></div>
+                <div class="checklist-text">Early socialization and training</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon checked"></div>
+                <div class="checklist-text">Regular veterinary care</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon checked"></div>
+                <div class="checklist-text">Proper nutrition and exercise</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon checked"></div>
+                <div class="checklist-text">Genetic health screening</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon checked"></div>
+                <div class="checklist-text">Responsible breeding practices</div>
+            </div>
+        </div>
+
+        <!-- Our Facility -->
+        <div class="section" style="background: #FFFFFF;">
+            <h2 class="section-title mb-16">Where Puppies Grow Up</h2>
+
+            <div class="gallery-grid">
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+            </div>
+
+            <p style="font-size: 14px; color: #666666; text-align: center; margin-top: 16px; margin-bottom: 16px;">
+                Indoor play areas • Outdoor exercise spaces • Clean sleeping quarters
+            </p>
+
+            <button class="btn btn-primary">Schedule a Visit</button>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="section">
+            <h2 class="section-title mb-16">What Families Say</h2>
+
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar"></div>
+                    <div class="testimonial-info">
+                        <div class="testimonial-name">Chidi Okonkwo</div>
+                        <div class="testimonial-location">Lekki, Lagos</div>
+                        <div class="rating">
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Best breeder in Lagos! Our Golden Retriever is healthy, well-socialized, and has the sweetest temperament. The support we received was amazing. Highly recommend to anyone looking for a quality puppy."</p>
+                <div class="image-placeholder mt-8" style="height: 150px;">
+                    <span>Customer's puppy photo</span>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar"></div>
+                    <div class="testimonial-info">
+                        <div class="testimonial-name">Amara Nwosu</div>
+                        <div class="testimonial-location">Victoria Island</div>
+                        <div class="rating">
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Very professional and caring breeder. Our German Shepherd puppy came with all health records and has been doing wonderfully. She always responds quickly to our questions. Can't thank her enough!"</p>
+                <div class="image-placeholder mt-8" style="height: 150px;">
+                    <span>Customer's puppy photo</span>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar"></div>
+                    <div class="testimonial-info">
+                        <div class="testimonial-name">Ibrahim Sule</div>
+                        <div class="testimonial-location">Ikeja, Lagos</div>
+                        <div class="rating">
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                            <div class="rating-star filled"></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="testimonial-text">"We got our Rottweiler from her 2 years ago and he's been the perfect family dog. She really knows her breeds and helped us choose the right puppy for our home. Still in touch and she's always helpful!"</p>
+                <div class="image-placeholder mt-8" style="height: 150px;">
+                    <span>Customer's puppy photo</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQs -->
+        <div class="section" style="background: #FFFFFF;">
+            <h2 class="section-title mb-16">Frequently Asked Questions</h2>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>What health guarantees do you provide?</span>
+                    <div class="accordion-icon">+</div>
+                </div>
+                <div class="accordion-content">
+                    All puppies come with 30-day health guarantee, vet health certificate, complete vaccination records, and deworming history. We stand behind the health of every puppy we place.
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>Can I visit the puppies before purchasing?</span>
+                    <div class="accordion-icon">+</div>
+                </div>
+                <div class="accordion-content">
+                    Yes! We welcome and encourage visits by appointment. You can meet the puppy, see where they're raised, and meet the parent dogs. Please call ahead to schedule.
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>What's included in the purchase price?</span>
+                    <div class="accordion-icon">+</div>
+                </div>
+                <div class="accordion-content">
+                    Purchase includes health certificate, first vaccinations, deworming, starter food, toy, blanket with mother's scent, and lifetime support. Microchipping available for additional fee.
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>Do you offer payment plans?</span>
+                    <div class="accordion-icon">+</div>
+                </div>
+                <div class="accordion-content">
+                    Yes, we offer installment plans. 50% deposit required to reserve puppy, remaining balance due before pickup. Contact us to discuss terms.
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>Do you ship puppies outside Lagos?</span>
+                    <div class="accordion-icon">+</div>
+                </div>
+                <div class="accordion-content">
+                    We prefer local pickup but can arrange delivery within Nigeria for additional fee. We ensure safe transport with proper care and documentation.
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>What ongoing support do you provide?</span>
+                    <div class="accordion-icon">+</div>
+                </div>
+                <div class="accordion-content">
+                    Lifetime support! I'm always available via WhatsApp, phone, or email for questions about training, health, nutrition, or behavior. You're part of our extended family.
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="section">
+            <h2 class="section-title mb-16">Ready to Welcome a Puppy Home?</h2>
+            <button class="btn btn-primary mb-8">View Available Puppies</button>
+            <button class="btn btn-secondary">Contact Us</button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-logo">Business Name</div>
+            <div class="footer-contact">
+                <a href="#" class="footer-contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+234 XXX XXX XXXX</span>
+                </a>
+                <a href="#" class="footer-contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Chat on WhatsApp</span>
+                </a>
+            </div>
+            <div class="footer-copyright">© 2024 Business Name</div>
+        </div>
+
+        <!-- Floating WhatsApp -->
+        <div class="whatsapp-float">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+    </div>
+
+    <!-- Continuing with remaining pages... -->
+    <!-- Due to length constraints, I'll create the remaining pages in abbreviated form -->
+
+    <!-- PAGE 5: GALLERY -->
+    <div id="gallery" class="page" style="display: none;">
+        <div class="header">
+            <div class="hamburger"><i class="fas fa-bars"></i></div>
+            <div class="logo">Gallery</div>
+            <div class="header-icon"><i class="fab fa-whatsapp"></i></div>
+        </div>
+        
+        <div class="breadcrumb">Home &gt; Gallery</div>
+        
+        <div class="tabs">
+            <div class="tab active">All Photos</div>
+            <div class="tab">Available</div>
+            <div class="tab">Past Puppies</div>
+            <div class="tab">Families</div>
+        </div>
+        
+        <div class="section">
+            <div class="gallery-grid">
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+            </div>
+            <div class="annotation">Tap any photo to view in full-screen gallery with swipe navigation</div>
+            <div class="text-center mt-24">
+                <button class="btn btn-secondary">Load More Photos</button>
+                <p style="font-size: 14px; color: #666666; margin-top: 8px;">Showing 8 of 156 photos</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-logo">Business Name</div>
+            <div class="footer-copyright">© 2024 Business Name</div>
+        </div>
+        
+        <div class="whatsapp-float"><i class="fab fa-whatsapp"></i></div>
+    </div>
+
+    <!-- PAGE 6: CONTACT -->
+    <div id="contact" class="page" style="display: none;">
+        <div class="header">
+            <div class="hamburger"><i class="fas fa-bars"></i></div>
+            <div class="logo">Contact Us</div>
+            <div class="header-icon"><i class="fab fa-whatsapp"></i></div>
+        </div>
+        
+        <div class="breadcrumb">Home &gt; Contact</div>
+        
+        <div class="section">
+            <h1 style="font-size: 24px; font-weight: 700; margin-bottom: 8px;">Get in Touch</h1>
+            <p style="font-size: 14px; color: #666666; margin-bottom: 24px;">We're here to help you find your perfect puppy</p>
+            
+            <!-- Quick Contact -->
+            <div class="summary-box mb-24">
+                <div class="summary-title">Contact Options</div>
+                <a href="#" class="footer-contact-item mb-8" style="background: #25D366;">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Chat on WhatsApp (Fastest)</span>
+                </a>
+                <a href="#" class="footer-contact-item mb-8" style="background: #444;">
+                    <i class="fas fa-phone"></i>
+                    <span>+234 XXX XXX XXXX</span>
+                </a>
+                <a href="#" class="footer-contact-item mb-8" style="background: #444;">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@businessname.com</span>
+                </a>
+                <a href="#" class="footer-contact-item" style="background: #444;">
+                    <i class="fab fa-instagram"></i>
+                    <span>@businessname</span>
+                </a>
+            </div>
+            
+            <!-- Contact Form -->
+            <h2 class="section-title mb-16">Send Us a Message</h2>
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Full Name *</label>
+                    <input type="text" class="form-input" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address *</label>
+                    <input type="email" class="form-input" placeholder="your.email@example.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone Number *</label>
+                    <input type="tel" class="form-input" placeholder="+234">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Subject *</label>
+                    <select class="form-select">
+                        <option>Interested in a specific puppy</option>
+                        <option>General inquiry</option>
+                        <option>Schedule a visit</option>
+                        <option>Breeding information</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Message *</label>
+                    <textarea class="form-textarea" placeholder="Tell us how we can help..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+            
+            <div class="annotation mt-16">Form validates on submit. Success shows confirmation message.</div>
+        </div>
+        
+        <!-- Office Hours -->
+        <div class="section" style="background: #FFFFFF;">
+            <h2 class="section-title mb-16">Office Hours</h2>
+            <div class="info-box">
+                <div class="info-box-text">
+                    Monday - Friday: 9:00 AM - 6:00 PM<br>
+                    Saturday: 10:00 AM - 4:00 PM<br>
+                    Sunday: By appointment only<br><br>
+                    <em>All times West Africa Time (WAT)</em>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Location -->
+        <div class="section">
+            <h2 class="section-title mb-16">Our Location</h2>
+            <div class="card mb-16">
+                <p style="font-size: 14px; color: #333; font-weight: 600; margin-bottom: 4px;">[Business Name]</p>
+                <p style="font-size: 14px; color: #666; margin-bottom: 4px;">[Area], Lagos</p>
+                <p style="font-size: 14px; color: #666; margin-bottom: 12px;">Nigeria</p>
+                <div class="image-placeholder" style="height: 200px; margin-bottom: 12px;">
+                    <span>Google Maps Embed</span>
+                </div>
+                <button class="btn btn-secondary">Get Directions</button>
+            </div>
+            <div class="info-box">
+                <div class="info-box-text" style="font-size: 12px;">
+                    Exact address provided upon visit appointment for security
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-logo">Business Name</div>
+            <div class="footer-copyright">© 2024 Business Name</div>
+        </div>
+        
+        <div class="whatsapp-float"><i class="fab fa-whatsapp"></i></div>
+    </div>
+
+    <!-- PAGE 7: BREEDS INFORMATION -->
+    <div id="breeds" class="page" style="display: none;">
+        <div class="header">
+            <div class="hamburger"><i class="fas fa-bars"></i></div>
+            <div class="logo">Our Breeds</div>
+            <div class="header-icon"><i class="fab fa-whatsapp"></i></div>
+        </div>
+        
+        <div class="breadcrumb">Home &gt; Breeds</div>
+        
+        <div class="section">
+            <h1 style="font-size: 24px; font-weight: 700; margin-bottom: 8px;">Dog Breeds We Specialize In</h1>
+            <p style="font-size: 14px; color: #666666; margin-bottom: 24px;">Learn about the breeds we carefully raise</p>
+            
+            <!-- Filter -->
+            <div class="filter-bar" style="margin: 0 -16px 24px;">
+                <div class="filter-button">
+                    <span><i class="fas fa-filter"></i> Filter by Size &amp; Temperament</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            
+            <!-- Breed Cards -->
+            <div class="card mb-16">
+                <div class="image-placeholder mb-12" style="height: 200px;">
+                    <span>Golden Retriever Photo</span>
+                </div>
+                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px;">Golden Retriever</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+                    <div style="font-size: 12px; color: #666;"><strong>Size:</strong> Large</div>
+                    <div style="font-size: 12px; color: #666;"><strong>Energy:</strong> High</div>
+                    <div style="font-size: 12px; color: #666;"><strong>With Kids:</strong> Excellent</div>
+                    <div style="font-size: 12px; color: #666;"><strong>Grooming:</strong> Medium</div>
+                </div>
+                <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 12px;">
+                    Friendly, intelligent, and devoted. Perfect family dogs that are great with children.
+                </p>
+                <div class="price-display mb-12" style="padding: 12px;">
+                    <div class="price-label" style="font-size: 10px;">Starting From</div>
+                    <div class="price-amount" style="font-size: 24px;">₦180,000</div>
+                </div>
+                <div style="background: #25D366; color: #fff; padding: 4px 8px; display: inline-block; font-size: 12px; font-weight: 600; margin-bottom: 12px;">
+                    2 Puppies Available
+                </div>
+                <button class="btn btn-primary mb-8">Learn More About Golden Retrievers</button>
+                <button class="btn btn-secondary">View Available Puppies</button>
+            </div>
+            
+            <div class="card mb-16">
+                <div class="image-placeholder mb-12" style="height: 200px;">
+                    <span>German Shepherd Photo</span>
+                </div>
+                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px;">German Shepherd</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+                    <div style="font-size: 12px; color: #666;"><strong>Size:</strong> Large</div>
+                    <div style="font-size: 12px; color: #666;"><strong>Energy:</strong> High</div>
+                    <div style="font-size: 12px; color: #666;"><strong>With Kids:</strong> Very Good</div>
+                    <div style="font-size: 12px; color: #666;"><strong>Grooming:</strong> Medium</div>
+                </div>
+                <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 12px;">
+                    Intelligent, confident, and courageous. Excellent guard dogs and loyal companions.
+                </p>
+                <div class="price-display mb-12" style="padding: 12px;">
+                    <div class="price-label" style="font-size: 10px;">Starting From</div>
+                    <div class="price-amount" style="font-size: 24px;">₦220,000</div>
+                </div>
+                <div style="background: #25D366; color: #fff; padding: 4px 8px; display: inline-block; font-size: 12px; font-weight: 600; margin-bottom: 12px;">
+                    1 Puppy Available
+                </div>
+                <button class="btn btn-primary mb-8">Learn More About German Shepherds</button>
+                <button class="btn btn-secondary">View Available Puppies</button>
+            </div>
+            
+            <div class="card mb-16">
+                <div class="image-placeholder mb-12" style="height: 200px;">
+                    <span>French Bulldog Photo</span>
+                </div>
+                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px;">French Bulldog</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+                    <div style="font-size: 12px; color: #666;"><strong>Size:</strong> Small</div>
+                    <div style="font-size: 12px; color: #666;"><strong>Energy:</strong> Medium</div>
+                    <div style="font-size: 12px; color: #666;"><strong>With Kids:</strong> Excellent</div>
+                    <div style="font-size: 12px; color: #666;"><strong>Grooming:</strong> Low</div>
+                </div>
+                <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 12px;">
+                    Playful, adaptable, and smart. Perfect for apartment living and urban families.
+                </p>
+                <div class="price-display mb-12" style="padding: 12px;">
+                    <div class="price-label" style="font-size: 10px;">Starting From</div>
+                    <div class="price-amount" style="font-size: 24px;">₦350,000</div>
+                </div>
+                <div style="background: #E0E0E0; color: #666; padding: 4px 8px; display: inline-block; font-size: 12px; font-weight: 600; margin-bottom: 12px;">
+                    Coming Soon
+                </div>
+                <button class="btn btn-primary mb-8">Learn More About French Bulldogs</button>
+                <button class="btn btn-secondary">Join Waiting List</button>
+            </div>
+            
+            <div class="annotation">More breed cards following same pattern...</div>
+        </div>
+        
+        <!-- Not Sure Section -->
+        <div class="section" style="background: #FFFFFF;">
+            <h2 class="section-title mb-16">Not Sure Which Breed is Right for You?</h2>
+            <p style="font-size: 14px; color: #666; margin-bottom: 16px;">
+                Take our 2-minute quiz to get personalized breed recommendations based on your lifestyle.
+            </p>
+            <button class="btn btn-primary">Take the Breed Quiz</button>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-logo">Business Name</div>
+            <div class="footer-copyright">© 2024 Business Name</div>
+        </div>
+        
+        <div class="whatsapp-float"><i class="fab fa-whatsapp"></i></div>
+    </div>
+
+    <!-- PAGE 8: INDIVIDUAL BREED DETAIL -->
+    <div id="breed-detail" class="page" style="display: none;">
+        <div class="header">
+            <div class="hamburger"><i class="fas fa-arrow-left"></i></div>
+            <div class="logo">Golden Retriever</div>
+            <div class="header-icon"><i class="fas fa-share-alt"></i></div>
+        </div>
+        
+        <div class="breadcrumb">Home &gt; Breeds &gt; Golden Retriever</div>
+        
+        <!-- Hero -->
+        <div style="height: 300px; background: #E0E0E0; position: relative;">
+            <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 14px; color: #666;">Golden Retriever Photo</span>
+            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); padding: 16px;">
+                <h1 style="font-size: 24px; font-weight: 700; margin-bottom: 4px;">Golden Retriever</h1>
+                <div class="puppy-tags">
+                    <span class="tag">Family Friendly</span>
+                    <span class="tag">Medium Size</span>
+                    <span class="tag">High Energy</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Stats -->
+        <div class="section" style="background: #FFFFFF;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div>
+                    <div style="font-size: 12px; color: #666; margin-bottom: 4px;">Size</div>
+                    <div style="font-size: 16px; font-weight: 600; color: #333;">Large</div>
+                </div>
+                <div>
+                    <div style="font-size: 12px; color: #666; margin-bottom: 4px;">Energy Level</div>
+                    <div style="font-size: 16px; font-weight: 600; color: #333;">High</div>
+                </div>
+                <div>
+                    <div style="font-size: 12px; color: #666; margin-bottom: 4px;">Grooming</div>
+                    <div style="font-size: 16px; font-weight: 600; color: #333;">Medium</div>
+                </div>
+                <div>
+                    <div style="font-size: 12px; color: #666; margin-bottom: 4px;">Intelligence</div>
+                    <div style="font-size: 16px; font-weight: 600; color: #333;">Very High</div>
+                </div>
+            </div>
+            
+            <div class="price-display mt-16">
+                <div class="price-label">Price Range</div>
+                <div class="price-amount" style="font-size: 28px;">₦180,000 - ₦200,000</div>
+            </div>
+            
+            <button class="btn btn-primary mt-16 mb-8">View Available Golden Retrievers</button>
+            <button class="btn btn-secondary">Schedule a Visit</button>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab active">Overview</div>
+            <div class="tab">Temperament</div>
+            <div class="tab">Care</div>
+            <div class="tab">Health</div>
+        </div>
+        
+        <!-- Overview Content -->
+        <div class="section">
+            <h2 class="section-title mb-16">About Golden Retrievers</h2>
+            <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 12px;">
+                Golden Retrievers are one of the most popular dog breeds in the world, and for good reason. They are friendly, intelligent, and devoted family companions.
+            </p>
+            <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 12px;">
+                Originally bred as hunting dogs in Scotland, Golden Retrievers excel at retrieving game for hunters. Today, they're beloved family pets known for their gentle temperament and trainability.
+            </p>
+            <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 12px;">
+                They're excellent with children and make wonderful therapy and service dogs. Their eagerness to please and high intelligence make them very trainable.
+            </p>
+            
+            <div class="info-box mt-16">
+                <div class="info-box-title">Breed Facts</div>
+                <div class="summary-row">
+                    <span class="summary-label">Origin</span>
+                    <span class="summary-value">Scotland</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Height</span>
+                    <span class="summary-value">51-61 cm</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Weight</span>
+                    <span class="summary-value">25-34 kg</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Life Expectancy</span>
+                    <span class="summary-value">10-12 years</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Group</span>
+                    <span class="summary-value">Sporting</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Temperament Section -->
+        <div class="section" style="background: #FFFFFF;">
+            <h2 class="section-title mb-16">Personality &amp; Temperament</h2>
+            
+            <div class="annotation mb-16">Rating bars show breed characteristics</div>
+            
+            <div class="mb-16">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                    <span style="font-size: 14px; color: #333;">Affectionate</span>
+                    <span style="font-size: 14px; color: #666;">10/10</span>
+                </div>
+                <div style="height: 8px; background: #E0E0E0;">
+                    <div style="height: 100%; width: 100%; background: #333;"></div>
+                </div>
+            </div>
+            
+            <div class="mb-16">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                    <span style="font-size: 14px; color: #333;">Good with Children</span>
+                    <span style="font-size: 14px; color: #666;">10/10</span>
+                </div>
+                <div style="height: 8px; background: #E0E0E0;">
+                    <div style="height: 100%; width: 100%; background: #333;"></div>
+                </div>
+            </div>
+            
+            <div class="mb-16">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                    <span style="font-size: 14px; color: #333;">Energy Level</span>
+                    <span style="font-size: 14px; color: #666;">9/10</span>
+                </div>
+                <div style="height: 8px; background: #E0E0E0;">
+                    <div style="height: 100%; width: 90%; background: #333;"></div>
+                </div>
+            </div>
+            
+            <div class="mb-16">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                    <span style="font-size: 14px; color: #333;">Trainability</span>
+                    <span style="font-size: 14px; color: #666;">10/10</span>
+                </div>
+                <div style="height: 8px; background: #E0E0E0;">
+                    <div style="height: 100%; width: 100%; background: #333;"></div>
+                </div>
+            </div>
+            
+            <div class="info-box mt-16">
+                <div class="info-box-title">Best For</div>
+                <div class="info-box-text">
+                    ✓ Families with children<br>
+                    ✓ Active owners<br>
+                    ✓ First-time dog owners<br>
+                    ✓ Homes with yards<br>
+                    ✓ Those wanting a loyal companion
+                </div>
+            </div>
+        </div>
+        
+        <!-- Available Puppies -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Available Golden Retrievers</h2>
+                <a href="#" class="section-link">View All →</a>
+            </div>
+            
+            <div class="annotation mb-16">Shows current available puppies of this breed</div>
+            
+            <div style="display: flex; gap: 12px; overflow-x: auto;">
+                <div style="min-width: 250px; flex-shrink: 0; border: 1px solid #E0E0E0; background: #fff;">
+                    <div style="width: 250px; height: 250px; background: #E0E0E0;"></div>
+                    <div style="padding: 12px;">
+                        <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 4px;">8 weeks, Male</h4>
+                        <p style="font-size: 14px; font-weight: 600; color: #333; margin-bottom: 8px;">₦180,000</p>
+                        <button class="btn btn-whatsapp" style="font-size: 14px; padding: 8px 16px;">Reserve</button>
+                    </div>
+                </div>
+                <div style="min-width: 250px; flex-shrink: 0; border: 1px solid #E0E0E0; background: #fff;">
+                    <div style="width: 250px; height: 250px; background: #E0E0E0;"></div>
+                    <div style="padding: 12px;">
+                        <h4 style="font-size: 16px; font-weight: 600; margin-bottom: 4px;">10 weeks, Female</h4>
+                        <p style="font-size: 14px; font-weight: 600; color: #333; margin-bottom: 8px;">₦180,000</p>
+                        <button class="btn btn-whatsapp" style="font-size: 14px; padding: 8px 16px;">Reserve</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-logo">Business Name</div>
+            <div class="footer-copyright">© 2024 Business Name</div>
+        </div>
+        
+        <div class="whatsapp-float"><i class="fab fa-whatsapp"></i></div>
+    </div>
+
+    <!-- PAGE 9: RESERVATION FORM -->
+    <div id="reservation" class="page" style="display: none;">
+        <div class="header">
+            <div class="hamburger"><i class="fas fa-arrow-left"></i></div>
+            <div class="logo">Reserve Puppy</div>
+            <div class="header-icon"><i class="fas fa-times"></i></div>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-steps">
+                <div class="progress-step completed">
+                    <div class="progress-circle">✓</div>
+                    <div class="progress-label">Select</div>
+                    <div class="progress-line"></div>
+                </div>
+                <div class="progress-step active">
+                    <div class="progress-circle">2</div>
+                    <div class="progress-label">Your Info</div>
+                    <div class="progress-line"></div>
+                </div>
+                <div class="progress-step">
+                    <div class="progress-circle">3</div>
+                    <div class="progress-label">Review</div>
+                    <div class="progress-line"></div>
+                </div>
+                <div class="progress-step">
+                    <div class="progress-circle">4</div>
+                    <div class="progress-label">Confirm</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Selected Puppy Summary -->
+        <div class="section" style="background: #FFFFFF;">
+            <div class="summary-box">
+                <div class="summary-title">Your Selected Puppy</div>
+                <div class="image-placeholder mb-12" style="height: 150px;">
+                    <span>Puppy Photo</span>
+                </div>
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Golden Retriever</h3>
+                <div style="font-size: 14px; color: #666; margin-bottom: 8px;">8 weeks old • Male • #GR-001</div>
+                <div class="puppy-tags mb-12">
+                    <span class="tag">Family Friendly</span>
+                    <span class="tag">Playful</span>
+                </div>
+                <div class="price-display">
+                    <div class="price-label">Total Price</div>
+                    <div class="price-amount">₦180,000</div>
+                </div>
+                <a href="#" style="font-size: 14px; color: #666; text-decoration: underline; display: block; text-align: center; margin-top: 12px;">Change Selection</a>
+            </div>
+        </div>
+        
+        <!-- Form -->
+        <div class="section">
+            <h2 class="section-title mb-16">Your Information</h2>
+            
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Full Name *</label>
+                    <input type="text" class="form-input" placeholder="Enter your full name">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Email Address *</label>
+                    <input type="email" class="form-input" placeholder="your.email@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Phone Number *</label>
+                    <input type="tel" class="form-input" placeholder="+234">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">WhatsApp Number</label>
+                    <input type="tel" class="form-input" placeholder="If different from phone">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Address *</label>
+                    <input type="text" class="form-input" placeholder="Street address" style="margin-bottom: 8px;">
+                    <input type="text" class="form-input" placeholder="City" style="margin-bottom: 8px;">
+                    <select class="form-select">
+                        <option>Select State</option>
+                        <option>Lagos</option>
+                        <option>Abuja</option>
+                        <option>Rivers</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        
+        <!-- About You -->
+        <div class="section" style="background: #FFFFFF;">
+            <h2 class="section-title mb-16">Tell Us About Your Home</h2>
+            
+            <div class="form-group">
+                <label class="form-label">I am a</label>
+                <div class="checklist-item">
+                    <div class="checklist-icon"></div>
+                    <div class="checklist-text">First-time dog owner</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-icon"></div>
+                    <div class="checklist-text">Experienced owner</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-icon"></div>
+                    <div class="checklist-text">Have other pets</div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Living Situation</label>
+                <select class="form-select">
+                    <option>House with yard</option>
+                    <option>House without yard</option>
+                    <option>Apartment</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Why did you choose this breed? (Optional)</label>
+                <textarea class="form-textarea" placeholder="This helps us understand your expectations..."></textarea>
+            </div>
+        </div>
+        
+        <!-- Pickup/Delivery -->
+        <div class="section">
+            <h2 class="section-title mb-16">Pickup or Delivery?</h2>
+            
+            <div class="card mb-8">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 20px; height: 20px; border: 2px solid #333; flex-shrink: 0;"></div>
+                    <div style="flex: 1;">
+                        <div style="font-size: 14px; font-weight: 600; color: #333; margin-bottom: 4px;">Pickup in Lagos</div>
+                        <div style="font-size: 12px; color: #666;">No additional charge</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-8">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 20px; height: 20px; border: 2px solid #333; flex-shrink: 0;"></div>
+                    <div style="flex: 1;">
+                        <div style="font-size: 14px; font-weight: 600; color: #333; margin-bottom: 4px;">Delivery within Lagos</div>
+                        <div style="font-size: 12px; color: #666;">Additional ₦10,000</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 20px; height: 20px; border: 2px solid #333; flex-shrink: 0;"></div>
+                    <div style="flex: 1;">
+                        <div style="font-size: 14px; font-weight: 600; color: #333; margin-bottom: 4px;">Delivery outside Lagos</div>
+                        <div style="font-size: 12px; color: #666;">Price calculated based on location</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Payment Method -->
+        <div class="section" style="background: #FFFFFF;">
+            <h2 class="section-title mb-16">Payment Method</h2>
+            
+            <div class="card mb-8">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 20px; height: 20px; border: 2px solid #333; flex-shrink: 0;"></div>
+                    <div style="flex: 1;">
+                        <div style="font-size: 14px; font-weight: 600; color: #333;">Bank Transfer</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-8">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 20px; height: 20px; border: 2px solid #333; flex-shrink: 0;"></div>
+                    <div style="flex: 1;">
+                        <div style="font-size: 14px; font-weight: 600; color: #333;">Cash on Pickup/Delivery</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 20px; height: 20px; border: 2px solid #333; flex-shrink: 0;"></div>
+                    <div style="flex: 1;">
+                        <div style="font-size: 14px; font-weight: 600; color: #333; margin-bottom: 4px;">Installment Plan</div>
+                        <div style="font-size: 12px; color: #666;">50% deposit, balance before pickup</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-box mt-16">
+                <div class="info-box-title">Reservation Deposit</div>
+                <div class="info-box-text">
+                    A deposit of ₦54,000 (30%) reserves your puppy. Remaining ₦126,000 due at pickup. Deposit is non-refundable but transferable within 6 months.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Terms -->
+        <div class="section">
+            <div class="checklist-item mb-8">
+                <div class="checklist-icon"></div>
+                <div class="checklist-text">I understand and agree to the reservation terms</div>
+            </div>
+            <div class="checklist-item mb-16">
+                <div class="checklist-icon"></div>
+                <div class="checklist-text">I agree to receive updates via WhatsApp and email</div>
+            </div>
+            
+            <button class="btn btn-primary mb-8">Continue to Review</button>
+            <button class="btn btn-secondary">Save Progress</button>
+        </div>
+        
+        <div class="annotation p-16">
+            Form validates on continue. Auto-saves every 30 seconds. All required fields marked with *
+        </div>
+        
+        <div class="whatsapp-float"><i class="fab fa-whatsapp"></i></div>
+    </div>
+
+    <!-- PAGE 10: REVIEW & CONFIRM -->
+    <div id="review" class="page" style="display: none;">
+        <div class="header">
+            <div class="hamburger"><i class="fas fa-arrow-left"></i></div>
+            <div class="logo">Review &amp; Confirm</div>
+            <div class="header-icon"></div>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-steps">
+                <div class="progress-step completed">
+                    <div class="progress-circle">✓</div>
+                    <div class="progress-label">Select</div>
+                    <div class="progress-line"></div>
+                </div>
+                <div class="progress-step completed">
+                    <div class="progress-circle">✓</div>
+                    <div class="progress-label">Your Info</div>
+                    <div class="progress-line"></div>
+                </div>
+                <div class="progress-step active">
+                    <div class="progress-circle">3</div>
+                    <div class="progress-label">Review</div>
+                    <div class="progress-line"></div>
+                </div>
+                <div class="progress-step">
+                    <div class="progress-circle">4</div>
+                    <div class="progress-label">Confirm</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h1 style="font-size: 24px; font-weight: 700; margin-bottom: 8px;">Review Your Reservation</h1>
+            <p style="font-size: 14px; color: #666;">Please review all details before confirming</p>
+        </div>
+        
+        <!-- Selected Puppy -->
+        <div class="section" style="background: #FFFFFF;">
+            <div class="section-header">
+                <h2 class="section-title">Selected Puppy</h2>
+                <a href="#" class="section-link">Edit</a>
+            </div>
+            
+            <div style="display: flex; gap: 16px;">
+                <div style="width: 120px; height: 120px; flex-shrink: 0; background: #E0E0E0; border: 1px solid #CCC;"></div>
+                <div style="flex: 1;">
+                    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 4px;">Golden Retriever</h3>
+                    <div style="font-size: 14px; color: #666; margin-bottom: 4px;">Puppy ID: #GR-001</div>
+                    <div class="summary-row" style="margin-bottom: 2px;">
+                        <span class="summary-label">Age:</span>
+                        <span class="summary-value">8 weeks</span>
+                    </div>
+                    <div class="summary-row" style="margin-bottom: 2px;">
+                        <span class="summary-label">Gender:</span>
+                        <span class="summary-value">Male</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Price:</span>
+                        <span class="summary-value">₦180,000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Your Information -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Your Information</h2>
+                <a href="#" class="section-link">Edit</a>
+            </div>
+            
+            <div class="card">
+                <div class="summary-row">
+                    <span class="summary-label">Name:</span>
+                    <span class="summary-value">John Doe</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Email:</span>
+                    <span class="summary-value">john@example.com</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Phone:</span>
+                    <span class="summary-value">+234 XXX XXX XXXX</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Address:</span>
+                    <span class="summary-value">123 Street, Lekki, Lagos</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pickup/Delivery -->
+        <div class="section" style="background: #FFFFFF;">
+            <div class="section-header">
+                <h2 class="section-title">Pickup Details</h2>
+                <a href="#" class="section-link">Edit</a>
+            </div>
+            
+            <div class="card">
+                <div class="summary-row">
+                    <span class="summary-label">Method:</span>
+                    <span class="summary-value">Pickup in Lagos</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Date:</span>
+                    <span class="summary-value">Dec 25, 2024</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Fee:</span>
+                    <span class="summary-value">No charge</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Payment Summary -->
+        <div class="section">
+            <h2 class="section-title mb-16">Payment Summary</h2>
+            
+            <div class="summary-box">
+                <div class="summary-row">
+                    <span class="summary-label">Puppy Price</span>
+                    <span class="summary-value">₦180,000</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Delivery Fee</span>
+                    <span class="summary-value">₦0</span>
+                </div>
+                <div class="summary-row summary-total">
+                    <span class="summary-label">Total</span>
+                    <span class="summary-value">₦180,000</span>
+                </div>
+                <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #E0E0E0;">
+                    <div class="summary-row">
+                        <span class="summary-label">Due Today (30% Deposit)</span>
+                        <span class="summary-value" style="color: #25D366;">₦54,000</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Due at Pickup</span>
+                        <span class="summary-value">₦126,000</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-box mt-16">
+                <div class="info-box-title">Payment Method</div>
+                <div class="info-box-text">Bank Transfer</div>
+            </div>
+        </div>
+        
+        <!-- What Happens Next -->
+        <div class="section" style="background: #FFFFFF;">
+            <h2 class="section-title mb-16">What Happens Next</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Confirmation</div>
+                        <div class="timeline-description">You'll receive confirmation via email and WhatsApp</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Payment Instructions</div>
+                        <div class="timeline-description">Bank details sent immediately for deposit payment</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Puppy Reserved</div>
+                        <div class="timeline-description">Once payment confirmed, puppy is officially yours</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">4</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Regular Updates</div>
+                        <div class="timeline-description">Photos and videos sent weekly until pickup</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Terms Confirmation -->
+        <div class="section">
+            <div class="checklist-item mb-8">
+                <div class="checklist-icon"></div>
+                <div class="checklist-text">I have reviewed all details and confirm they are correct</div>
+            </div>
+            <div class="checklist-item mb-16">
+                <div class="checklist-icon"></div>
+                <div class="checklist-text">I agree to the reservation terms and cancellation policy</div>
+            </div>
+            
+            <button class="btn btn-primary mb-8" disabled="" style="opacity: 0.5;">Confirm Reservation</button>
+            <div class="annotation mb-16">Button enabled when both checkboxes checked</div>
+            <button class="btn btn-secondary">Back to Edit</button>
+        </div>
+        
+        <div class="whatsapp-float"><i class="fab fa-whatsapp"></i></div>
+    </div>
+
+    <!-- PAGE 11: CONFIRMATION -->
+    <div id="confirmation" class="page" style="display: none;">
+        <div class="header">
+            <div class="hamburger"></div>
+            <div class="logo">Reservation Confirmed</div>
+            <div class="header-icon"></div>
+        </div>
+        
+        <!-- Success State -->
+        <div class="success-state">
+            <div class="success-icon"></div>
+            <h1 class="success-title">Reservation Confirmed! 🎉</h1>
+            <p class="success-text">Your puppy is officially reserved</p>
+            <div style="background: #F5F5F5; border: 2px solid #333; padding: 16px; margin-top: 16px;">
+                <div style="font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Reservation Number</div>
+                <div style="font-size: 24px; font-weight: 700; color: #333;">#REF-12345</div>
+            </div>
+            <p style="font-size: 14px; color: #666; margin-top: 12px;">Confirmation sent to john@example.com</p>
+        </div>
+        
+        <!-- Your Puppy -->
+        <div class="section" style="background: #FFFFFF;">
+            <h2 class="section-title mb-16">Your Reserved Puppy</h2>
+            
+            <div class="image-placeholder mb-12" style="height: 250px;">
+                <span>Golden Retriever Puppy</span>
+            </div>
+            
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 4px;">Golden Retriever</h3>
+            <div style="font-size: 14px; color: #666; margin-bottom: 12px;">Puppy ID: #GR-001</div>
+            
+            <div class="summary-box">
+                <div class="summary-row">
+                    <span class="summary-label">Age</span>
+                    <span class="summary-value">8 weeks</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Gender</span>
+                    <span class="summary-value">Male</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Ready for Pickup</span>
+                    <span class="summary-value">Now</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Pickup Date</span>
+                    <span class="summary-value">Dec 25, 2024</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Next Steps -->
+        <div class="section">
+            <h2 class="section-title mb-16">Your Next Steps</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item completed">
+                    <div class="timeline-marker">✓</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Complete Your Payment</div>
+                        <div class="timeline-description">
+                            Pay deposit of ₦54,000 within 24 hours
+                        </div>
+                        <div class="timeline-time">Now</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Payment Confirmation</div>
+                        <div class="timeline-description">
+                            We'll confirm your payment via WhatsApp and email
+                        </div>
+                        <div class="timeline-time">Within 24 hours</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Stay Connected</div>
+                        <div class="timeline-description">
+                            Receive weekly photos and videos of your puppy
+                        </div>
+                        <div class="timeline-time">Weekly updates</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">4</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Final Preparations</div>
+                        <div class="timeline-description">
+                            Final balance payment reminder and pickup details
+                        </div>
+                        <div class="timeline-time">7 days before</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">5</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Welcome Your Puppy Home!</div>
+                        <div class="timeline-description">
+                            Bring valid ID and remaining payment
+                        </div>
+                        <div class="timeline-time">Dec 25, 2024</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Payment Instructions -->
+        <div class="section" style="background: #FFFFFF;">
+            <div style="background: #FFF3CD; border: 2px solid #FFC107; padding: 16px; margin-bottom: 16px;">
+                <div style="font-weight: 600; color: #333; margin-bottom: 4px;">⚠️ Payment Deadline</div>
+                <div style="font-size: 14px; color: #666;">Please pay within 24 hours to hold your reservation</div>
+            </div>
+            
+            <h2 class="section-title mb-16">Bank Transfer Details</h2>
+            
+            <div class="card mb-16">
+                <div class="summary-row" style="margin-bottom: 8px;">
+                    <span class="summary-label">Account Name</span>
+                    <span class="summary-value">[Business Name]</span>
+                </div>
+                <div class="summary-row" style="margin-bottom: 8px;">
+                    <span class="summary-label">Bank</span>
+                    <span class="summary-value">GTBank</span>
+                </div>
+                <div class="summary-row" style="margin-bottom: 8px;">
+                    <span class="summary-label">Account Number</span>
+                    <span class="summary-value">0123456789</span>
+                </div>
+                <div class="summary-row" style="margin-bottom: 8px;">
+                    <span class="summary-label">Reference</span>
+                    <span class="summary-value">REF-12345</span>
+                </div>
+                <div class="summary-row summary-total" style="margin-top: 12px; padding-top: 12px; border-top: 2px solid #333;">
+                    <span class="summary-label">Amount to Pay Now</span>
+                    <span class="summary-value">₦54,000</span>
+                </div>
+            </div>
+            
+            <button class="btn btn-secondary mb-8">Copy Account Details</button>
+            <button class="btn btn-primary">Upload Payment Proof</button>
+        </div>
+        
+        <!-- Payment Summary -->
+        <div class="section">
+            <h2 class="section-title mb-16">Payment Breakdown</h2>
+            
+            <div class="summary-box">
+                <div class="summary-row">
+                    <span class="summary-label">Total Price</span>
+                    <span class="summary-value">₦180,000</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Deposit (Paid Now)</span>
+                    <span class="summary-value">₦54,000</span>
+                </div>
+                <div class="summary-row summary-total">
+                    <span class="summary-label">Balance Due at Pickup</span>
+                    <span class="summary-value">₦126,000</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="section" style="background: #FFFFFF;">
+            <h2 class="section-title mb-16">Quick Actions</h2>
+            
+            <button class="btn btn-whatsapp mb-8">
+                <i class="fab fa-whatsapp"></i> Contact Us on WhatsApp
+            </button>
+            <button class="btn btn-primary mb-8">
+                <i class="fas fa-phone"></i> Call Us
+            </button>
+            <button class="btn btn-secondary mb-8">
+                <i class="fas fa-download"></i> Download Receipt (PDF)
+            </button>
+            <button class="btn btn-secondary">
+                <i class="fas fa-calendar"></i> Add Pickup Date to Calendar
+            </button>
+        </div>
+        
+        <!-- Get Ready -->
+        <div class="section">
+            <h2 class="section-title mb-16">Get Ready for Your Puppy</h2>
+            
+            <div class="checklist-item">
+                <div class="checklist-icon"></div>
+                <div class="checklist-text">Purchase food and water bowls</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon"></div>
+                <div class="checklist-text">Get puppy food (we'll recommend brand)</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon"></div>
+                <div class="checklist-text">Prepare sleeping area</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon"></div>
+                <div class="checklist-text">Buy toys and chews</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon"></div>
+                <div class="checklist-text">Puppy-proof your home</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon"></div>
+                <div class="checklist-text">Find a local vet</div>
+            </div>
+            <div class="checklist-item">
+                <div class="checklist-icon"></div>
+                <div class="checklist-text">Get collar, leash, and ID tag</div>
+            </div>
+            
+            <button class="btn btn-secondary mt-16">Download Full Checklist</button>
+        </div>
+        
+        <!-- Need Help -->
+        <div class="section" style="background: #FFFFFF;">
+            <h2 class="section-title mb-16">Need Help?</h2>
+            
+            <div class="info-box">
+                <div class="info-box-title">We're Here for You</div>
+                <div class="info-box-text">
+                    <strong>WhatsApp:</strong> +234 XXX XXX XXXX<br>
+                    <strong>Phone:</strong> +234 XXX XXX XXXX<br>
+                    <strong>Email:</strong> info@businessname.com<br><br>
+                    Available Mon-Sat, 9AM-6PM WAT<br>
+                    Usually respond within 2 hours
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-logo">Business Name</div>
+            <div class="footer-copyright">© 2024 Business Name</div>
+        </div>
+        
+        <div class="whatsapp-float"><i class="fab fa-whatsapp"></i></div>
+    </div>
+
+</div>
+
+<script>
+function showPage(pageId) {
+    // Hide all pages
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(page => {
+        page.style.display = 'none';
+    });
+    
+    // Show selected page
+    const selectedPage = document.getElementById(pageId);
+    if (selectedPage) {
+        selectedPage.style.display = 'block';
+        // Scroll to top
+        window.scrollTo(0, 0);
+    }
+}
+
+// Show homepage by default
+document.addEventListener('DOMContentLoaded', function() {
+    showPage('homepage');
+    
+    // Add click handlers for accordions
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const item = this.parentElement;
+            item.classList.toggle('active');
+        });
+    });
+});
+</script>
+
+
+</body></html>

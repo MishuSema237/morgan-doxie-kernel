@@ -1,0 +1,1223 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Individual Puppy Detail - Dog Breeding Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFFFFF;
+            color: #333333;
+            line-height: 1.5;
+        }
+
+        .wireframe-container {
+            max-width: 1728px;
+            margin: 0 auto;
+            background: #F5F5F5;
+        }
+
+        .annotation {
+            font-size: 12px;
+            color: #999999;
+            font-style: italic;
+            margin-top: 4px;
+        }
+
+        /* Header */
+        .header {
+            height: 80px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 80px;
+        }
+
+        .logo-box {
+            width: 200px;
+            height: 60px;
+            border: 2px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-item {
+            font-size: 16px;
+            color: #333333;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .cta-button {
+            padding: 12px 24px;
+            border: 2px solid #333333;
+            font-size: 16px;
+            font-weight: 600;
+            background: #FFFFFF;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            height: 80px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            padding: 0 80px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .breadcrumb a {
+            color: #333333;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb-separator {
+            color: #999999;
+        }
+
+        .breadcrumb-current {
+            color: #666666;
+        }
+
+        /* Main Content Layout */
+        .main-content {
+            display: flex;
+            gap: 40px;
+            padding: 60px 80px;
+            background: #F5F5F5;
+            align-items: flex-start;
+        }
+
+        .left-column {
+            flex: 1;
+            max-width: 60%;
+        }
+
+        .right-column {
+            flex: 0 0 480px;
+            position: sticky;
+            top: 24px;
+        }
+
+        /* Photo Gallery Section */
+        .photo-gallery {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .main-photo {
+            width: 100%;
+            height: 600px;
+            border: 2px solid #E0E0E0;
+            background: #FAFAFA;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #999999;
+            margin-bottom: 16px;
+            position: relative;
+            cursor: zoom-in;
+        }
+
+        .zoom-icon {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #E0E0E0;
+            background: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+        }
+
+        .thumbnail {
+            aspect-ratio: 1;
+            border: 2px solid #E0E0E0;
+            background: #FAFAFA;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #999999;
+            cursor: pointer;
+        }
+
+        .thumbnail.active {
+            border-color: #333333;
+        }
+
+        /* Description Section */
+        .description-section {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 40px;
+            margin-bottom: 32px;
+        }
+
+        .section-heading {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .description-text {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .timestamp {
+            font-size: 12px;
+            color: #999999;
+            margin-top: 24px;
+        }
+
+        /* Parent Information Section */
+        .parent-section {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 40px;
+            margin-bottom: 32px;
+        }
+
+        .parent-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .parent-card {
+            border: 1px solid #E0E0E0;
+            padding: 24px;
+            background: #FAFAFA;
+        }
+
+        .parent-photo {
+            width: 100%;
+            height: 200px;
+            border: 2px solid #E0E0E0;
+            background: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #999999;
+            margin-bottom: 16px;
+        }
+
+        .parent-info {
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .parent-name {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .health-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            font-size: 12px;
+            margin-top: 16px;
+        }
+
+        /* Health Section */
+        .health-section {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 40px;
+            margin-bottom: 32px;
+        }
+
+        .health-checklist {
+            margin-top: 24px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #E0E0E0;
+            font-size: 14px;
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checkmark {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #333333;
+        }
+
+        .health-note {
+            margin-top: 24px;
+            padding: 16px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            font-size: 14px;
+            color: #666666;
+        }
+
+        /* Puppy Info Card (Sidebar) */
+        .puppy-info-card {
+            background: #FFFFFF;
+            border: 2px solid #333333;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .puppy-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .puppy-name {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .status-badge {
+            padding: 6px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 2px solid #E0E0E0;
+        }
+
+        .status-badge.available {
+            background: #F5F5F5;
+            border-color: #333333;
+            color: #333333;
+        }
+
+        .key-details {
+            border: 1px solid #E0E0E0;
+            padding: 24px;
+            background: #FAFAFA;
+            margin-bottom: 24px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: #666666;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            color: #333333;
+            font-weight: 600;
+        }
+
+        /* Temperament Tags */
+        .temperament-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .tag {
+            padding: 6px 16px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            font-size: 12px;
+            border-radius: 20px;
+        }
+
+        /* Price Section */
+        .price-section {
+            border: 2px solid #333333;
+            padding: 24px;
+            margin-bottom: 24px;
+            background: #FAFAFA;
+        }
+
+        .price-amount {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .price-includes {
+            font-size: 12px;
+            color: #666666;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .payment-options {
+            font-size: 12px;
+            color: #666666;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .primary-action {
+            padding: 16px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 2px solid #333333;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .secondary-action {
+            padding: 16px;
+            background: #FFFFFF;
+            color: #333333;
+            border: 2px solid #333333;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .tertiary-action {
+            padding: 16px;
+            background: #FFFFFF;
+            color: #333333;
+            border: 1px solid #E0E0E0;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .share-link {
+            text-align: center;
+            font-size: 14px;
+            color: #666666;
+            text-decoration: underline;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* Breeder Contact Card */
+        .breeder-card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .breeder-photo {
+            width: 80px;
+            height: 80px;
+            border: 2px solid #E0E0E0;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            background: #FAFAFA;
+        }
+
+        .breeder-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .breeder-title {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 4px;
+        }
+
+        .breeder-location {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 12px;
+        }
+
+        .response-time {
+            font-size: 12px;
+            color: #999999;
+            padding: 8px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+        }
+
+        /* Trust Box */
+        .trust-box {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            font-size: 14px;
+        }
+
+        .trust-icon {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #E0E0E0;
+            flex-shrink: 0;
+        }
+
+        /* Recently Added Section */
+        .recently-added {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 24px;
+        }
+
+        .recently-added-heading {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .small-puppy-card {
+            display: flex;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .small-puppy-card:last-child {
+            border-bottom: none;
+        }
+
+        .small-thumbnail {
+            width: 80px;
+            height: 80px;
+            border: 2px solid #E0E0E0;
+            background: #FAFAFA;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #999999;
+        }
+
+        .small-puppy-info {
+            flex: 1;
+        }
+
+        .small-puppy-breed {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .small-puppy-price {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 8px;
+        }
+
+        .view-link {
+            font-size: 12px;
+            color: #333333;
+            text-decoration: underline;
+        }
+
+        /* Similar Puppies Section */
+        .similar-section {
+            background: #FFFFFF;
+            padding: 60px 80px;
+            border-top: 1px solid #E0E0E0;
+        }
+
+        .similar-heading {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 32px;
+        }
+
+        .carousel-container {
+            position: relative;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            padding-bottom: 16px;
+        }
+
+        .carousel-card {
+            min-width: 300px;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+        }
+
+        .carousel-image {
+            height: 250px;
+            border-bottom: 1px solid #E0E0E0;
+            background: #FAFAFA;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .carousel-content {
+            padding: 20px;
+        }
+
+        .carousel-breed {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .carousel-details {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 12px;
+        }
+
+        .carousel-price {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .carousel-button {
+            width: 100%;
+            padding: 12px;
+            background: #FFFFFF;
+            border: 2px solid #333333;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Footer */
+        .footer {
+            background: #FFFFFF;
+            border-top: 1px solid #E0E0E0;
+            padding: 60px 80px 24px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-link {
+            font-size: 14px;
+            color: #666666;
+            text-decoration: none;
+        }
+
+        .footer-info {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.8;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-icon {
+            width: 32px;
+            height: 32px;
+            border: 2px solid #E0E0E0;
+            border-radius: 50%;
+        }
+
+        .newsletter-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #E0E0E0;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        .newsletter-button {
+            width: 100%;
+            padding: 12px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 2px solid #333333;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #E0E0E0;
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 24px;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 60px;
+            height: 60px;
+            background: #FFFFFF;
+            border: 2px solid #333333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            z-index: 1000;
+        }
+
+        .diagonal-line {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: #E0E0E0;
+            transform: rotate(45deg);
+        }
+
+        /* Side Annotations */
+        .side-annotation {
+            position: fixed;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            padding: 16px;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            font-size: 12px;
+            color: #999999;
+            line-height: 1.8;
+        }
+
+        .side-annotation h4 {
+            font-size: 14px;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .side-annotation ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .side-annotation li {
+            margin-bottom: 4px;
+        }
+
+        .side-annotation li:before {
+            content: "• ";
+            color: #999999;
+        }
+    </style>
+</head>
+<body>
+    <div class="wireframe-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-box">BUSINESS NAME + LOGO</div>
+            <nav class="navigation">
+                <a href="#" class="nav-item">Home</a>
+                <a href="#" class="nav-item">Available Puppies</a>
+                <a href="#" class="nav-item">About Us</a>
+                <a href="#" class="nav-item">Gallery</a>
+                <a href="#" class="nav-item">Contact</a>
+            </nav>
+            <button class="cta-button">WhatsApp Us</button>
+        </header>
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="#">Home</a>
+            <span class="breadcrumb-separator">&gt;</span>
+            <a href="#">Available Puppies</a>
+            <span class="breadcrumb-separator">&gt;</span>
+            <a href="#">Golden Retriever</a>
+            <span class="breadcrumb-separator">&gt;</span>
+            <span class="breadcrumb-current">Max - ID #GR2401</span>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Column -->
+            <div class="left-column">
+                <!-- Photo Gallery -->
+                <div class="photo-gallery">
+                    <div class="main-photo">
+                        <div class="diagonal-line"></div>
+                        PRIMARY PUPPY PHOTO
+                        <div class="zoom-icon">🔍</div>
+                    </div>
+                    <div class="thumbnail-grid">
+                        <div class="thumbnail active">THUMB 1</div>
+                        <div class="thumbnail">THUMB 2</div>
+                        <div class="thumbnail">THUMB 3</div>
+                        <div class="thumbnail">THUMB 4</div>
+                        <div class="thumbnail">THUMB 5</div>
+                        <div class="thumbnail">THUMB 6</div>
+                    </div>
+                    <div class="annotation">Click to view full gallery | Lightbox with swipe navigation</div>
+                </div>
+
+                <!-- Description Section -->
+                <div class="description-section">
+                    <h2 class="section-heading">About This Puppy</h2>
+                    <p class="description-text">
+                        Meet Max, a stunning 8-week-old Golden Retriever male with an exceptional temperament. Max comes from champion bloodlines with both parents health tested and certified. His gentle nature and playful personality make him the perfect family companion.
+                    </p>
+                    <p class="description-text">
+                        Max is already showing signs of high intelligence and eagerness to learn. He responds well to his name and has begun basic house training. His socialization has been a priority from day one, with exposure to various sounds, surfaces, and gentle handling by adults and children.
+                    </p>
+                    <p class="description-text">
+                        His energy level is moderate to high, typical of the Golden Retriever breed. Max loves playtime but also enjoys quiet cuddles. He gets along wonderfully with other dogs and has been raised with children, making him an ideal choice for families.
+                    </p>
+                    <p class="description-text">
+                        Max has a beautiful golden coat that is soft and fluffy. Regular grooming will be needed as he grows. His structure is excellent with good angulation and a level topline, indicating he will mature into a handsome, well-built adult dog.
+                    </p>
+                    <p class="description-text">
+                        He has been fed premium puppy food and his growth has been monitored weekly. Max is at the perfect weight for his age and shows no signs of any health concerns. His eyes are clear, ears clean, and teeth healthy.
+                    </p>
+                    <p class="description-text">
+                        This puppy has been raised in a home environment with lots of love and attention. He is comfortable with household sounds including vacuum cleaners, television, and doorbells. Early neurological stimulation exercises were performed during his critical development period.
+                    </p>
+                    <p class="description-text">
+                        Max will come with a comprehensive puppy pack including his health certificate, vaccination records, microchip information, feeding schedule, and a blanket with familiar scents from his mother and littermates. We also provide lifetime breeder support for any questions or concerns.
+                    </p>
+                    <p class="description-text">
+                        Ideal home: Active family with children or individuals who enjoy outdoor activities. Golden Retrievers thrive with regular exercise and mental stimulation. A secure yard is recommended though not required. Max will need ongoing training and socialization to become the best companion possible.
+                    </p>
+                    <div class="timestamp">Last Updated: January 15, 2024</div>
+                </div>
+
+                <!-- Parent Information -->
+                <div class="parent-section">
+                    <h2 class="section-heading">Meet the Parents</h2>
+                    <div class="parent-cards">
+                        <div class="parent-card">
+                            <div class="parent-photo">
+                                <div class="diagonal-line"></div>
+                                MOTHER PHOTO
+                            </div>
+                            <div class="parent-name">Golden Belle (Dam)</div>
+                            <div class="parent-info">
+                                <p><strong>Breed:</strong> Golden Retriever</p>
+                                <p><strong>Age:</strong> 4 years</p>
+                                <p><strong>Weight:</strong> 28kg</p>
+                                <p><strong>Temperament:</strong> Gentle, patient, excellent with children</p>
+                                <p><strong>Health Tests:</strong> Hips, Elbows, Eyes cleared</p>
+                            </div>
+                        </div>
+                        <div class="parent-card">
+                            <div class="parent-photo">
+                                <div class="diagonal-line"></div>
+                                FATHER PHOTO
+                            </div>
+                            <div class="parent-name">Golden King (Sire)</div>
+                            <div class="parent-info">
+                                <p><strong>Breed:</strong> Golden Retriever</p>
+                                <p><strong>Age:</strong> 5 years</p>
+                                <p><strong>Weight:</strong> 32kg</p>
+                                <p><strong>Temperament:</strong> Intelligent, loyal, athletic</p>
+                                <p><strong>Health Tests:</strong> Hips, Elbows, Eyes, Heart cleared</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="health-badge">✓ Both parents health tested and certified</div>
+                </div>
+
+                <!-- Health Information -->
+                <div class="health-section">
+                    <h2 class="section-heading">Health Information</h2>
+                    <div class="health-checklist">
+                        <div class="checklist-item">
+                            <div class="checkmark">✓</div>
+                            <div>First vaccination completed - January 10, 2024</div>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkmark">✓</div>
+                            <div>Dewormed - December 28, 2023 &amp; January 8, 2024</div>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkmark">✓</div>
+                            <div>Vet health check completed - January 12, 2024</div>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkmark">✓</div>
+                            <div>Health certificate issued by licensed veterinarian</div>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkmark">✓</div>
+                            <div>Microchipped - Chip #123456789012345</div>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkmark">✓</div>
+                            <div>Regular weight monitoring and growth tracking</div>
+                        </div>
+                    </div>
+                    <div class="health-note">
+                        Full health records, vaccination schedule, and veterinarian contact information provided at pickup. Next vaccination due: February 10, 2024
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column (Sticky Sidebar) -->
+            <div class="right-column">
+                <!-- Puppy Info Card -->
+                <div class="puppy-info-card">
+                    <div class="puppy-header">
+                        <div class="puppy-name">Max</div>
+                        <div class="status-badge available">AVAILABLE</div>
+                    </div>
+
+                    <div class="key-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Breed:</span>
+                            <span class="detail-value">Golden Retriever</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Age:</span>
+                            <span class="detail-value">8 weeks old</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Date of Birth:</span>
+                            <span class="detail-value">Nov 20, 2023</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Gender:</span>
+                            <span class="detail-value">Male ♂</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Color:</span>
+                            <span class="detail-value">Golden</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Adult Size:</span>
+                            <span class="detail-value">Large (30-35kg)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Current Weight:</span>
+                            <span class="detail-value">4.2kg</span>
+                        </div>
+                    </div>
+
+                    <div class="temperament-tags">
+                        <span class="tag">Family Friendly</span>
+                        <span class="tag">Playful</span>
+                        <span class="tag">Good with Kids</span>
+                        <span class="tag">Energetic</span>
+                        <span class="tag">Intelligent</span>
+                        <span class="tag">Gentle</span>
+                    </div>
+
+                    <div class="price-section">
+                        <div class="price-amount">₦180,000</div>
+                        <div class="price-includes">
+                            Includes: Health certificate, first vaccinations, deworming, microchip, starter food pack, blanket with mother's scent, training guide
+                        </div>
+                        <div class="payment-options">
+                            Payment options: Cash | Bank Transfer | Installment Available
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="primary-action">Reserve on WhatsApp</button>
+                        <button class="secondary-action">Call to Discuss</button>
+                        <button class="tertiary-action">Schedule a Visit</button>
+                        <div class="share-link">Share This Puppy</div>
+                    </div>
+                </div>
+
+                <!-- Breeder Contact Card -->
+                <div class="breeder-card">
+                    <div class="breeder-photo"></div>
+                    <div class="breeder-name">[Sister's Name]</div>
+                    <div class="breeder-title">Professional Dog Breeder</div>
+                    <div class="breeder-location">Lagos, Nigeria</div>
+                    <div class="response-time">Usually responds within 2 hours</div>
+                </div>
+
+                <!-- Trust & Security Box -->
+                <div class="trust-box">
+                    <div class="trust-item">
+                        <div class="trust-icon"></div>
+                        <div>Meet puppy before purchase</div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon"></div>
+                        <div>Health guarantee included</div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon"></div>
+                        <div>Lifetime breeder support</div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon"></div>
+                        <div>Secure payment options</div>
+                    </div>
+                </div>
+
+                <!-- Recently Added -->
+                <div class="recently-added">
+                    <div class="recently-added-heading">Other Puppies You Might Like</div>
+                    <div class="small-puppy-card">
+                        <div class="small-thumbnail">PHOTO</div>
+                        <div class="small-puppy-info">
+                            <div class="small-puppy-breed">German Shepherd</div>
+                            <div class="small-puppy-price">₦220,000</div>
+                            <a href="#" class="view-link">View Details →</a>
+                        </div>
+                    </div>
+                    <div class="small-puppy-card">
+                        <div class="small-thumbnail">PHOTO</div>
+                        <div class="small-puppy-info">
+                            <div class="small-puppy-breed">Labrador Retriever</div>
+                            <div class="small-puppy-price">₦170,000</div>
+                            <a href="#" class="view-link">View Details →</a>
+                        </div>
+                    </div>
+                    <div class="small-puppy-card">
+                        <div class="small-thumbnail">PHOTO</div>
+                        <div class="small-puppy-info">
+                            <div class="small-puppy-breed">Golden Retriever</div>
+                            <div class="small-puppy-price">₦180,000</div>
+                            <a href="#" class="view-link">View Details →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Similar Puppies Section -->
+        <section class="similar-section">
+            <h2 class="similar-heading">Similar Available Puppies</h2>
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <div class="carousel-card">
+                        <div class="carousel-image">
+                            <div class="diagonal-line"></div>
+                            DOG PHOTO
+                        </div>
+                        <div class="carousel-content">
+                            <div class="carousel-breed">Golden Retriever</div>
+                            <div class="carousel-details">Female • 6 weeks old</div>
+                            <div class="carousel-price">₦175,000</div>
+                            <button class="carousel-button">View Details</button>
+                        </div>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="carousel-image">
+                            <div class="diagonal-line"></div>
+                            DOG PHOTO
+                        </div>
+                        <div class="carousel-content">
+                            <div class="carousel-breed">Golden Retriever</div>
+                            <div class="carousel-details">Male • 10 weeks old</div>
+                            <div class="carousel-price">₦180,000</div>
+                            <button class="carousel-button">View Details</button>
+                        </div>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="carousel-image">
+                            <div class="diagonal-line"></div>
+                            DOG PHOTO
+                        </div>
+                        <div class="carousel-content">
+                            <div class="carousel-breed">Labrador Retriever</div>
+                            <div class="carousel-details">Male • 8 weeks old</div>
+                            <div class="carousel-price">₦170,000</div>
+                            <button class="carousel-button">View Details</button>
+                        </div>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="carousel-image">
+                            <div class="diagonal-line"></div>
+                            DOG PHOTO
+                        </div>
+                        <div class="carousel-content">
+                            <div class="carousel-breed">Golden Retriever</div>
+                            <div class="carousel-details">Female • 7 weeks old</div>
+                            <div class="carousel-price">₦178,000</div>
+                            <button class="carousel-button">View Details</button>
+                        </div>
+                    </div>
+                    <div class="carousel-card">
+                        <div class="carousel-image">
+                            <div class="diagonal-line"></div>
+                            DOG PHOTO
+                        </div>
+                        <div class="carousel-content">
+                            <div class="carousel-breed">Golden Retriever</div>
+                            <div class="carousel-details">Male • 9 weeks old</div>
+                            <div class="carousel-price">₦185,000</div>
+                            <button class="carousel-button">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="annotation">Horizontal scroll with similar breeds or price range</div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo-box" style="margin-bottom: 16px;">LOGO</div>
+                    <p class="footer-info">Premium dog breeding in Lagos, Nigeria. Healthy, happy puppies for loving families.</p>
+                    <div class="social-icons">
+                        <div class="social-icon"></div>
+                        <div class="social-icon"></div>
+                        <div class="social-icon"></div>
+                        <div class="social-icon"></div>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Home</a>
+                        <a href="#" class="footer-link">Available Puppies</a>
+                        <a href="#" class="footer-link">About Us</a>
+                        <a href="#" class="footer-link">Gallery</a>
+                        <a href="#" class="footer-link">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <div class="footer-info">
+                        <p>Phone: +234 XXX XXX XXXX</p>
+                        <p>WhatsApp: +234 XXX XXX XXXX</p>
+                        <p>Email: info@businessname.com</p>
+                        <p>Location: Lagos, Nigeria</p>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p class="footer-info" style="margin-bottom: 8px;">Get updates on available puppies</p>
+                    <input type="email" class="newsletter-input" placeholder="Your email address">
+                    <button class="newsletter-button">Subscribe</button>
+                    <p class="footer-info" style="margin-top: 16px;">Business Hours:<br>Mon-Sat: 9AM - 6PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2024 Business Name. All rights reserved.</div>
+                <div class="footer-legal">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Floating WhatsApp Button -->
+        <div class="whatsapp-float">
+            WhatsApp
+        </div>
+
+        <!-- Side Annotations -->
+        <div class="side-annotation">
+            <h4>Page Notes</h4>
+            <ul>
+                <li>Right sidebar sticky during scroll</li>
+                <li>Photo gallery lightbox on click</li>
+                <li>WhatsApp links to specific puppy</li>
+                <li>Total page length: ~2800px</li>
+                <li>Mobile: stack sidebar below content</li>
+            </ul>
+        </div>
+    </div>
+
+</body></html>

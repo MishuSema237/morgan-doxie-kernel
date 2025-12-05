@@ -1,0 +1,1466 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breed Information - Dog Breeding Website Wireframe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFFFFF;
+            color: #333333;
+            line-height: 1.5;
+        }
+
+        .wireframe-container {
+            max-width: 1728px;
+            margin: 0 auto;
+            background: #F5F5F5;
+        }
+
+        .annotation {
+            font-size: 12px;
+            color: #999999;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        /* Header - Same as Homepage */
+        .header {
+            height: 80px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 80px;
+        }
+
+        .logo-box {
+            width: 200px;
+            height: 60px;
+            border: 2px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-item {
+            font-size: 16px;
+            color: #333333;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav-item.active {
+            font-weight: 700;
+            border-bottom: 2px solid #333333;
+            padding-bottom: 4px;
+        }
+
+        .cta-button {
+            padding: 12px 24px;
+            border: 2px solid #333333;
+            font-size: 16px;
+            font-weight: 600;
+            background: #FFFFFF;
+        }
+
+        /* Page Header */
+        .page-header {
+            height: 200px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 80px;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 16px;
+        }
+
+        .breadcrumb a {
+            color: #666666;
+            text-decoration: none;
+        }
+
+        .breadcrumb span {
+            margin: 0 8px;
+            color: #999999;
+        }
+
+        .page-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: #666666;
+        }
+
+        /* Filter Bar */
+        .filter-bar {
+            height: 100px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            padding: 0 80px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .filter-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 8px;
+            padding-right: 24px;
+            border-right: 1px solid #E0E0E0;
+        }
+
+        .filter-group:last-child {
+            border-right: none;
+        }
+
+        .filter-button {
+            padding: 8px 16px;
+            border: 1px solid #E0E0E0;
+            background: #FFFFFF;
+            font-size: 14px;
+            color: #333333;
+            cursor: pointer;
+        }
+
+        .filter-button.active {
+            background: #333333;
+            color: #FFFFFF;
+            border-color: #333333;
+        }
+
+        .filter-count {
+            font-size: 14px;
+            color: #666666;
+            margin-left: auto;
+        }
+
+        /* Section */
+        .section {
+            padding: 80px;
+            background: #F5F5F5;
+        }
+
+        .section.white-bg {
+            background: #FFFFFF;
+        }
+
+        /* Breed Grid */
+        .breed-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-bottom: 24px;
+        }
+
+        .breed-card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            position: relative;
+        }
+
+        .available-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            padding: 8px 16px;
+            background: #333333;
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .breed-image {
+            height: 350px;
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #999999;
+            background: #FAFAFA;
+            position: relative;
+        }
+
+        .diagonal-line {
+            position: absolute;
+            width: 141%;
+            height: 1px;
+            background: #E0E0E0;
+            transform: rotate(45deg);
+            top: 50%;
+            left: -20%;
+        }
+
+        .breed-content {
+            padding: 24px;
+        }
+
+        .breed-name {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+        }
+
+        .stat-icon {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #E0E0E0;
+            flex-shrink: 0;
+        }
+
+        .stat-label {
+            color: #666666;
+            font-size: 11px;
+            display: block;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            color: #333333;
+        }
+
+        .breed-description {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .breed-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 16px;
+        }
+
+        .breed-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .learn-more-button {
+            padding: 12px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 2px solid #333333;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .view-puppies-link {
+            padding: 12px;
+            background: #FFFFFF;
+            color: #333333;
+            border: 2px solid #E0E0E0;
+            font-size: 14px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Breed Comparison Tool */
+        .comparison-tool {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 40px;
+            margin-bottom: 24px;
+        }
+
+        .comparison-header {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .comparison-selectors {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .breed-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .selector-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        .selector-dropdown {
+            padding: 12px;
+            border: 1px solid #E0E0E0;
+            font-size: 14px;
+            background: #FFFFFF;
+        }
+
+        .compare-button {
+            padding: 16px 48px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 2px solid #333333;
+            font-size: 16px;
+            font-weight: 600;
+            display: block;
+            margin: 0 auto 32px;
+        }
+
+        .comparison-results {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            padding-top: 32px;
+            border-top: 1px solid #E0E0E0;
+        }
+
+        .comparison-column {
+            border: 1px solid #E0E0E0;
+            padding: 24px;
+        }
+
+        .comparison-breed-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .comparison-attribute {
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #F5F5F5;
+        }
+
+        .comparison-attribute:last-child {
+            border-bottom: none;
+        }
+
+        .attribute-label {
+            font-size: 12px;
+            color: #666666;
+            margin-bottom: 4px;
+        }
+
+        .attribute-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        .help-link {
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .help-link a {
+            font-size: 14px;
+            color: #333333;
+            text-decoration: underline;
+        }
+
+        /* Choosing Guide Section */
+        .guide-section {
+            background: #FFFFFF;
+            padding: 60px 80px;
+            border-top: 1px solid #E0E0E0;
+        }
+
+        .guide-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .guide-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .guide-subtitle {
+            font-size: 16px;
+            color: #666666;
+        }
+
+        .accordion-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            border: 1px solid #E0E0E0;
+            margin-bottom: 16px;
+            background: #FFFFFF;
+        }
+
+        .accordion-header {
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .accordion-icon {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #E0E0E0;
+            flex-shrink: 0;
+        }
+
+        .accordion-title {
+            font-size: 18px;
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .accordion-toggle {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .accordion-content {
+            padding: 24px;
+            display: none;
+        }
+
+        .accordion-content.expanded {
+            display: block;
+        }
+
+        .accordion-text {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .accordion-tips {
+            background: #F5F5F5;
+            padding: 16px;
+            font-size: 14px;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        /* Quiz CTA Section */
+        .quiz-cta {
+            background: #F5F5F5;
+            padding: 80px;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .quiz-content {
+            flex: 1;
+        }
+
+        .quiz-heading {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .quiz-description {
+            font-size: 16px;
+            color: #666666;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .quiz-button {
+            padding: 16px 48px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 2px solid #333333;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .quiz-illustration {
+            width: 500px;
+            height: 300px;
+            border: 2px dashed #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #999999;
+            background: #FFFFFF;
+        }
+
+        /* Footer - Same as Homepage */
+        .footer {
+            background: #FFFFFF;
+            border-top: 1px solid #E0E0E0;
+            padding: 60px 80px 24px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-link {
+            font-size: 14px;
+            color: #666666;
+            text-decoration: none;
+        }
+
+        .footer-info {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.8;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-icon {
+            width: 32px;
+            height: 32px;
+            border: 2px solid #E0E0E0;
+            border-radius: 50%;
+        }
+
+        .newsletter-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #E0E0E0;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        .newsletter-button {
+            width: 100%;
+            padding: 12px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 2px solid #333333;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #E0E0E0;
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 24px;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 60px;
+            height: 60px;
+            background: #FFFFFF;
+            border: 2px solid #333333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="wireframe-container">
+        <!-- Header - Same as Homepage -->
+        <header class="header">
+            <div class="logo-box">BUSINESS NAME + LOGO</div>
+            <nav class="navigation">
+                <a href="#" class="nav-item">Home</a>
+                <a href="#" class="nav-item">Available Puppies</a>
+                <a href="#" class="nav-item active">Breeds</a>
+                <a href="#" class="nav-item">About Us</a>
+                <a href="#" class="nav-item">Gallery</a>
+                <a href="#" class="nav-item">Contact</a>
+            </nav>
+            <button class="cta-button">WhatsApp Us</button>
+        </header>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="breadcrumb">
+                <a href="#">Home</a>
+                <span>›</span>
+                <span>Breeds</span>
+            </div>
+            <h1 class="page-title">Dog Breeds We Specialize In</h1>
+            <p class="page-subtitle">Learn about the breeds we carefully raise and find your perfect match</p>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <span class="filter-label">Filter by:</span>
+            <div class="filter-group">
+                <button class="filter-button active">All Sizes</button>
+                <button class="filter-button">Small</button>
+                <button class="filter-button">Medium</button>
+                <button class="filter-button">Large</button>
+            </div>
+            <div class="filter-group">
+                <button class="filter-button active">All Temperaments</button>
+                <button class="filter-button">Family Dogs</button>
+                <button class="filter-button">Active</button>
+                <button class="filter-button">Calm</button>
+                <button class="filter-button">Guard Dogs</button>
+            </div>
+            <span class="filter-count">Showing 8 breeds</span>
+        </div>
+
+        <!-- Breed Grid Section -->
+        <section class="section">
+            <div class="breed-grid">
+                <!-- Breed Card 1 -->
+                <div class="breed-card">
+                    <div class="available-badge">3 Puppies Available</div>
+                    <div class="breed-image">
+                        <div class="diagonal-line"></div>
+                        GOLDEN RETRIEVER PHOTO
+                    </div>
+                    <div class="breed-content">
+                        <h3 class="breed-name">Golden Retriever</h3>
+                        <div class="quick-stats">
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">SIZE</span>
+                                    <div class="stat-value">Large</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">ENERGY</span>
+                                    <div class="stat-value">High</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">WITH KIDS</span>
+                                    <div class="stat-value">Excellent</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">GROOMING</span>
+                                    <div class="stat-value">Medium</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="breed-description">
+                            Intelligent, friendly, and devoted. Golden Retrievers are excellent family dogs known for their gentle temperament and love of play. Great with children and easy to train.
+                        </p>
+                        <div class="breed-price">From ₦180,000</div>
+                        <div class="breed-buttons">
+                            <button class="learn-more-button">Learn More About This Breed</button>
+                            <a href="#" class="view-puppies-link">View Available Golden Retrievers</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breed Card 2 -->
+                <div class="breed-card">
+                    <div class="available-badge">2 Puppies Available</div>
+                    <div class="breed-image">
+                        <div class="diagonal-line"></div>
+                        GERMAN SHEPHERD PHOTO
+                    </div>
+                    <div class="breed-content">
+                        <h3 class="breed-name">German Shepherd</h3>
+                        <div class="quick-stats">
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">SIZE</span>
+                                    <div class="stat-value">Large</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">ENERGY</span>
+                                    <div class="stat-value">High</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">WITH KIDS</span>
+                                    <div class="stat-value">Very Good</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">GROOMING</span>
+                                    <div class="stat-value">Medium</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="breed-description">
+                            Confident, courageous, and smart. German Shepherds are loyal protectors and working dogs. Excellent for families seeking security and a devoted companion. Highly trainable.
+                        </p>
+                        <div class="breed-price">From ₦220,000</div>
+                        <div class="breed-buttons">
+                            <button class="learn-more-button">Learn More About This Breed</button>
+                            <a href="#" class="view-puppies-link">View Available German Shepherds</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breed Card 3 -->
+                <div class="breed-card">
+                    <div class="available-badge">4 Puppies Available</div>
+                    <div class="breed-image">
+                        <div class="diagonal-line"></div>
+                        LABRADOR RETRIEVER PHOTO
+                    </div>
+                    <div class="breed-content">
+                        <h3 class="breed-name">Labrador Retriever</h3>
+                        <div class="quick-stats">
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">SIZE</span>
+                                    <div class="stat-value">Large</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">ENERGY</span>
+                                    <div class="stat-value">High</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">WITH KIDS</span>
+                                    <div class="stat-value">Excellent</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">GROOMING</span>
+                                    <div class="stat-value">Low</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="breed-description">
+                            Outgoing, even-tempered, and gentle. Labradors are one of the most popular family dogs worldwide. Friendly, loyal, and great with children of all ages. Easy to care for.
+                        </p>
+                        <div class="breed-price">From ₦170,000</div>
+                        <div class="breed-buttons">
+                            <button class="learn-more-button">Learn More About This Breed</button>
+                            <a href="#" class="view-puppies-link">View Available Labrador Retrievers</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breed Card 4 -->
+                <div class="breed-card">
+                    <div class="breed-image">
+                        <div class="diagonal-line"></div>
+                        ROTTWEILER PHOTO
+                    </div>
+                    <div class="breed-content">
+                        <h3 class="breed-name">Rottweiler</h3>
+                        <div class="quick-stats">
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">SIZE</span>
+                                    <div class="stat-value">Large</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">ENERGY</span>
+                                    <div class="stat-value">Medium</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">WITH KIDS</span>
+                                    <div class="stat-value">Good</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">GROOMING</span>
+                                    <div class="stat-value">Low</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="breed-description">
+                            Loyal, loving, and confident guardian. Rottweilers are protective family dogs with calm temperament when properly trained. Excellent watchdogs who form strong bonds.
+                        </p>
+                        <div class="breed-price">From ₦250,000</div>
+                        <div class="breed-buttons">
+                            <button class="learn-more-button">Learn More About This Breed</button>
+                            <a href="#" class="view-puppies-link">View Available Rottweilers</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breed Card 5 -->
+                <div class="breed-card">
+                    <div class="available-badge">1 Puppy Available</div>
+                    <div class="breed-image">
+                        <div class="diagonal-line"></div>
+                        AMERICAN BULLY PHOTO
+                    </div>
+                    <div class="breed-content">
+                        <h3 class="breed-name">American Bully</h3>
+                        <div class="quick-stats">
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">SIZE</span>
+                                    <div class="stat-value">Medium</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">ENERGY</span>
+                                    <div class="stat-value">Medium</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">WITH KIDS</span>
+                                    <div class="stat-value">Excellent</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">GROOMING</span>
+                                    <div class="stat-value">Low</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="breed-description">
+                            Gentle, affectionate, and people-oriented. American Bullies have a muscular build but surprisingly soft temperament. Great family companions who are excellent with children.
+                        </p>
+                        <div class="breed-price">From ₦300,000</div>
+                        <div class="breed-buttons">
+                            <button class="learn-more-button">Learn More About This Breed</button>
+                            <a href="#" class="view-puppies-link">View Available American Bullies</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breed Card 6 -->
+                <div class="breed-card">
+                    <div class="breed-image">
+                        <div class="diagonal-line"></div>
+                        FRENCH BULLDOG PHOTO
+                    </div>
+                    <div class="breed-content">
+                        <h3 class="breed-name">French Bulldog</h3>
+                        <div class="quick-stats">
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">SIZE</span>
+                                    <div class="stat-value">Small</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">ENERGY</span>
+                                    <div class="stat-value">Low</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">WITH KIDS</span>
+                                    <div class="stat-value">Very Good</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">GROOMING</span>
+                                    <div class="stat-value">Low</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="breed-description">
+                            Playful, adaptable, and smart. French Bulldogs are perfect for apartment living and smaller spaces. Affectionate lap dogs with big personalities who love being with people.
+                        </p>
+                        <div class="breed-price">From ₦350,000</div>
+                        <div class="breed-buttons">
+                            <button class="learn-more-button">Learn More About This Breed</button>
+                            <a href="#" class="view-puppies-link">View Available French Bulldogs</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breed Card 7 -->
+                <div class="breed-card">
+                    <div class="breed-image">
+                        <div class="diagonal-line"></div>
+                        CAUCASIAN SHEPHERD PHOTO
+                    </div>
+                    <div class="breed-content">
+                        <h3 class="breed-name">Caucasian Shepherd</h3>
+                        <div class="quick-stats">
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">SIZE</span>
+                                    <div class="stat-value">X-Large</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">ENERGY</span>
+                                    <div class="stat-value">Medium</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">WITH KIDS</span>
+                                    <div class="stat-value">Good*</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">GROOMING</span>
+                                    <div class="stat-value">High</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="breed-description">
+                            Fearless, powerful, and devoted guardian. Caucasian Shepherds are excellent guard dogs for large properties. Requires experienced owner and early socialization. Very protective.
+                        </p>
+                        <div class="breed-price">From ₦400,000</div>
+                        <div class="breed-buttons">
+                            <button class="learn-more-button">Learn More About This Breed</button>
+                            <a href="#" class="view-puppies-link">View Available Caucasian Shepherds</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breed Card 8 -->
+                <div class="breed-card">
+                    <div class="breed-image">
+                        <div class="diagonal-line"></div>
+                        SIBERIAN HUSKY PHOTO
+                    </div>
+                    <div class="breed-content">
+                        <h3 class="breed-name">Siberian Husky</h3>
+                        <div class="quick-stats">
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">SIZE</span>
+                                    <div class="stat-value">Medium</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">ENERGY</span>
+                                    <div class="stat-value">Very High</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">WITH KIDS</span>
+                                    <div class="stat-value">Good</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon"></div>
+                                <div>
+                                    <span class="stat-label">GROOMING</span>
+                                    <div class="stat-value">High</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="breed-description">
+                            Energetic, mischievous, and loyal. Siberian Huskies are beautiful working dogs who need plenty of exercise. Independent thinkers with strong pack drive. Best for active families.
+                        </p>
+                        <div class="breed-price">From ₦280,000</div>
+                        <div class="breed-buttons">
+                            <button class="learn-more-button">Learn More About This Breed</button>
+                            <a href="#" class="view-puppies-link">View Available Siberian Huskies</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="annotation">Breed cards link to individual breed detail pages with complete information</div>
+        </section>
+
+        <!-- Breed Comparison Tool -->
+        <section class="section white-bg">
+            <div class="comparison-tool">
+                <h2 class="comparison-header">Compare Breeds Side-by-Side</h2>
+                <div class="comparison-selectors">
+                    <div class="breed-selector">
+                        <label class="selector-label">Select Breed 1</label>
+                        <select class="selector-dropdown">
+                            <option>Choose a breed...</option>
+                            <option>Golden Retriever</option>
+                            <option>German Shepherd</option>
+                            <option>Labrador Retriever</option>
+                            <option>Rottweiler</option>
+                            <option>American Bully</option>
+                            <option>French Bulldog</option>
+                            <option>Caucasian Shepherd</option>
+                            <option>Siberian Husky</option>
+                        </select>
+                    </div>
+                    <div class="breed-selector">
+                        <label class="selector-label">Select Breed 2</label>
+                        <select class="selector-dropdown">
+                            <option>Choose a breed...</option>
+                            <option>Golden Retriever</option>
+                            <option>German Shepherd</option>
+                            <option>Labrador Retriever</option>
+                            <option>Rottweiler</option>
+                            <option>American Bully</option>
+                            <option>French Bulldog</option>
+                            <option>Caucasian Shepherd</option>
+                            <option>Siberian Husky</option>
+                        </select>
+                    </div>
+                    <div class="breed-selector">
+                        <label class="selector-label">Select Breed 3 (Optional)</label>
+                        <select class="selector-dropdown">
+                            <option>Choose a breed...</option>
+                            <option>Golden Retriever</option>
+                            <option>German Shepherd</option>
+                            <option>Labrador Retriever</option>
+                            <option>Rottweiler</option>
+                            <option>American Bully</option>
+                            <option>French Bulldog</option>
+                            <option>Caucasian Shepherd</option>
+                            <option>Siberian Husky</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="compare-button">Compare Breeds</button>
+                
+                <div class="comparison-results">
+                    <div class="comparison-column">
+                        <h4 class="comparison-breed-name">Golden Retriever</h4>
+                        <div class="comparison-attribute">
+                            <div class="attribute-label">SIZE</div>
+                            <div class="attribute-value">Large (55-75 lbs)</div>
+                        </div>
+                        <div class="comparison-attribute">
+                            <div class="attribute-label">ENERGY LEVEL</div>
+                            <div class="attribute-value">High - Needs daily exercise</div>
+                        </div>
+                        <div class="comparison-attribute">
+                            <div class="attribute-label">TEMPERAMENT</div>
+                            <div class="attribute-value">Friendly, Intelligent, Devoted</div>
+                        </div>
+                        <div class="comparison-attribute">
+                            <div class="attribute-label">CARE NEEDS</div>
+                            <div class="attribute-value">Medium grooming, High exercise</div>
+                        </div>
+                        <div class="comparison-attribute">
+                            <div class="attribute-label">PRICE RANGE</div>
+                            <div class="attribute-value">₦180,000 - ₦250,000</div>
+                        </div>
+                        <div class="comparison-attribute">
+                            <div class="attribute-label">AVAILABILITY</div>
+                            <div class="attribute-value">3 puppies available</div>
+                        </div>
+                    </div>
+
+                    <div class="comparison-column">
+                        <h4 class="comparison-breed-name">German Shepherd</h4>
+                        <div class="comparison-attribute">
+                            <div class="attribute-label">SIZE</div>
+                            <div class="attribute-value">Large (50-90 lbs)</div>
+                        </div>
+                        <div class="comparison-attribute">
+                            <div class="attribute-label">ENERGY LEVEL</div>
+                            <div class="attribute-value">High - Very active breed</div>
+                        </div>
+                        <div class="comparison-attribute">
+                            <div class="attribute-label">TEMPERAMENT</div>
+                            <div class="attribute-value">Confident, Courageous, Smart</div>
+                        </div>
+                        <div class="comparison-attribute">
+                            <div class="attribute-label">CARE NEEDS</div>
+                            <div class="attribute-value">Medium grooming, High exercise</div>
+                        </div>
+                        <div class="comparison-attribute">
+                            <div class="attribute-label">PRICE RANGE</div>
+                            <div class="attribute-value">₦220,000 - ₦300,000</div>
+                        </div>
+                        <div class="comparison-attribute">
+                            <div class="attribute-label">AVAILABILITY</div>
+                            <div class="attribute-value">2 puppies available</div>
+                        </div>
+                    </div>
+
+                    <div class="comparison-column">
+                        <h4 class="comparison-breed-name">French Bulldog</h4>
+                        <div class="comparison-attribute">
+                            <div class="attribute-label">SIZE</div>
+                            <div class="attribute-value">Small (16-28 lbs)</div>
+                        </div>
+                        <div class="comparison-attribute">
+                            <div class="attribute-label">ENERGY LEVEL</div>
+                            <div class="attribute-value">Low - Moderate activity</div>
+                        </div>
+                        <div class="comparison-attribute">
+                            <div class="attribute-label">TEMPERAMENT</div>
+                            <div class="attribute-value">Playful, Adaptable, Smart</div>
+                        </div>
+                        <div class="comparison-attribute">
+                            <div class="attribute-label">CARE NEEDS</div>
+                            <div class="attribute-value">Low grooming, Low exercise</div>
+                        </div>
+                        <div class="comparison-attribute">
+                            <div class="attribute-label">PRICE RANGE</div>
+                            <div class="attribute-value">₦350,000 - ₦500,000</div>
+                        </div>
+                        <div class="comparison-attribute">
+                            <div class="attribute-label">AVAILABILITY</div>
+                            <div class="attribute-value">Contact for availability</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-link">
+                    <a href="#">Still not sure? Take our breed matching quiz →</a>
+                </div>
+            </div>
+            <div class="annotation">Comparison tool updates dynamically based on breed selections</div>
+        </section>
+
+        <!-- Choosing Guide Section -->
+        <div class="guide-section">
+            <div class="guide-header">
+                <h2 class="guide-title">How to Choose Your Perfect Breed</h2>
+                <p class="guide-subtitle">Important factors to consider when selecting a dog breed for your family</p>
+            </div>
+
+            <div class="accordion-container">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-icon"></div>
+                        <h3 class="accordion-title">Consider Your Lifestyle</h3>
+                        <div class="accordion-toggle">+</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p class="accordion-text">
+                            Your daily routine and activity level should match your dog's needs. Active families who enjoy outdoor activities might prefer high-energy breeds like Golden Retrievers or German Shepherds. If you have a more relaxed lifestyle or live in an apartment, consider lower-energy breeds like French Bulldogs.
+                        </p>
+                        <div class="accordion-tips">
+                            <strong>Key Questions:</strong><br>
+                            • How many hours per day can you dedicate to exercise?<br>
+                            • Do you work from home or have someone home during the day?<br>
+                            • Are you an active outdoor person or prefer staying indoors?
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-icon"></div>
+                        <h3 class="accordion-title">Space Requirements</h3>
+                        <div class="accordion-toggle">+</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p class="accordion-text">
+                            Living space is crucial for your dog's wellbeing. Large breeds like Caucasian Shepherds need significant space and are better suited to homes with yards. Small to medium breeds like French Bulldogs or American Bullies can adapt well to apartment living with proper exercise.
+                        </p>
+                        <div class="accordion-tips">
+                            <strong>Space Guidelines:</strong><br>
+                            • Small breeds (up to 25 lbs): Apartments or small homes<br>
+                            • Medium breeds (25-60 lbs): Medium homes with some outdoor access<br>
+                            • Large breeds (60+ lbs): Large homes with yards preferred
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-icon"></div>
+                        <h3 class="accordion-title">Activity Level Match</h3>
+                        <div class="accordion-toggle">+</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p class="accordion-text">
+                            Different breeds have vastly different exercise needs. High-energy breeds like Siberian Huskies need 2+ hours of vigorous exercise daily, while breeds like French Bulldogs are satisfied with shorter, moderate walks. Matching energy levels prevents behavioral problems and ensures happiness for both you and your dog.
+                        </p>
+                        <div class="accordion-tips">
+                            <strong>Exercise Requirements:</strong><br>
+                            • Low energy: 30-45 minutes daily (French Bulldog)<br>
+                            • Medium energy: 1-1.5 hours daily (Rottweiler)<br>
+                            • High energy: 2+ hours daily (German Shepherd, Husky)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-icon"></div>
+                        <h3 class="accordion-title">Grooming Commitment</h3>
+                        <div class="accordion-toggle">+</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p class="accordion-text">
+                            Grooming needs vary significantly by breed. Some dogs require professional grooming every 6-8 weeks, while others need only occasional brushing. Long-haired breeds like Caucasian Shepherds require daily brushing, while short-haired breeds like Labradors are low-maintenance.
+                        </p>
+                        <div class="accordion-tips">
+                            <strong>Grooming Levels:</strong><br>
+                            • Low: Weekly brushing, occasional baths (Labrador, Rottweiler)<br>
+                            • Medium: Twice-weekly brushing, monthly grooming (Golden Retriever)<br>
+                            • High: Daily brushing, professional grooming (Caucasian Shepherd, Husky)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-icon"></div>
+                        <h3 class="accordion-title">Training Needs</h3>
+                        <div class="accordion-toggle">+</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p class="accordion-text">
+                            All dogs need training, but some breeds are easier than others. First-time owners might prefer highly trainable breeds like Golden Retrievers or Labradors. Independent thinkers like Huskies or protective breeds like Caucasian Shepherds require experienced handlers and consistent training.
+                        </p>
+                        <div class="accordion-tips">
+                            <strong>Training Difficulty:</strong><br>
+                            • Beginner-friendly: Golden Retriever, Labrador (eager to please)<br>
+                            • Intermediate: German Shepherd, Rottweiler (needs consistency)<br>
+                            • Advanced: Husky, Caucasian Shepherd (independent, strong-willed)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-icon"></div>
+                        <h3 class="accordion-title">Cost of Ownership</h3>
+                        <div class="accordion-toggle">+</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p class="accordion-text">
+                            Beyond the initial purchase price, consider ongoing costs: food (larger dogs eat more), veterinary care, grooming, training, supplies, and insurance. Large breeds can cost ₦30,000-50,000 monthly, while small breeds may cost ₦15,000-25,000 monthly in Nigeria.
+                        </p>
+                        <div class="accordion-tips">
+                            <strong>Monthly Cost Estimates (Lagos):</strong><br>
+                            • Small breeds: ₦15,000-25,000 (food, basic care)<br>
+                            • Medium breeds: ₦20,000-35,000<br>
+                            • Large breeds: ₦30,000-50,000+<br>
+                            • Additional: Vet visits, vaccinations, emergencies
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-icon"></div>
+                        <h3 class="accordion-title">Health Considerations</h3>
+                        <div class="accordion-toggle">+</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p class="accordion-text">
+                            Different breeds have different health predispositions. Large breeds may develop hip dysplasia, while flat-faced breeds like French Bulldogs can have breathing issues. Understanding breed-specific health concerns helps you prepare for potential veterinary needs and costs.
+                        </p>
+                        <div class="accordion-tips">
+                            <strong>Common Health Considerations:</strong><br>
+                            • Large breeds: Joint issues, bloat prevention<br>
+                            • Small breeds: Dental care, weight management<br>
+                            • All breeds: Regular vaccinations, parasite prevention<br>
+                            • Choose breeders who health-test breeding dogs
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="annotation">Accordion sections expand/collapse on click, showing detailed guidance</div>
+        </div>
+
+        <!-- Quiz CTA Section -->
+        <section class="quiz-cta">
+            <div class="quiz-content">
+                <h2 class="quiz-heading">Not Sure Which Breed is Right for You?</h2>
+                <p class="quiz-description">
+                    Take our comprehensive 2-minute quiz to get personalized breed recommendations based on your lifestyle, living situation, experience level, and preferences. Our quiz considers all important factors to match you with the perfect companion.
+                </p>
+                <button class="quiz-button">Take the Breed Matching Quiz</button>
+            </div>
+            <div class="quiz-illustration">
+                ILLUSTRATION<br>
+                Multiple dog breeds<br>
+                in playful arrangement
+            </div>
+        </section>
+
+        <!-- Footer - Same as Homepage -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo-box" style="margin-bottom: 16px;">LOGO</div>
+                    <p class="footer-info">Premium dog breeding in Lagos, Nigeria. Healthy, happy puppies for loving families.</p>
+                    <div class="social-icons">
+                        <div class="social-icon"></div>
+                        <div class="social-icon"></div>
+                        <div class="social-icon"></div>
+                        <div class="social-icon"></div>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Home</a>
+                        <a href="#" class="footer-link">Available Puppies</a>
+                        <a href="#" class="footer-link">Breeds</a>
+                        <a href="#" class="footer-link">About Us</a>
+                        <a href="#" class="footer-link">Gallery</a>
+                        <a href="#" class="footer-link">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <div class="footer-info">
+                        <p>Phone: +234 XXX XXX XXXX</p>
+                        <p>WhatsApp: +234 XXX XXX XXXX</p>
+                        <p>Email: info@businessname.com</p>
+                        <p>Location: Lagos, Nigeria</p>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p class="footer-info" style="margin-bottom: 8px;">Get updates on available puppies</p>
+                    <input type="email" class="newsletter-input" placeholder="Your email address">
+                    <button class="newsletter-button">Subscribe</button>
+                    <p class="footer-info" style="margin-top: 16px;">Business Hours:<br>Mon-Sat: 9AM - 6PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2024 Business Name. All rights reserved.</div>
+                <div class="footer-legal">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Floating WhatsApp Button -->
+        <div class="whatsapp-float">
+            WhatsApp
+        </div>
+    </div>
+
+</body></html>

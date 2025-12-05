@@ -1,0 +1,1044 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Dog Breeding Website Wireframe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFFFFF;
+            color: #333333;
+            line-height: 1.5;
+        }
+
+        .wireframe-container {
+            max-width: 1728px;
+            margin: 0 auto;
+            background: #F5F5F5;
+        }
+
+        .annotation {
+            font-size: 12px;
+            color: #999999;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        /* Header - Consistent with Homepage */
+        .header {
+            height: 80px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 80px;
+        }
+
+        .logo-box {
+            width: 200px;
+            height: 60px;
+            border: 2px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-item {
+            font-size: 16px;
+            color: #333333;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav-item.active {
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        .cta-button {
+            padding: 12px 24px;
+            border: 2px solid #333333;
+            font-size: 16px;
+            font-weight: 600;
+            background: #FFFFFF;
+        }
+
+        /* Page Header */
+        .page-header {
+            height: 200px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 0 80px;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .breadcrumb a {
+            color: #333333;
+            text-decoration: none;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: #666666;
+            text-align: center;
+        }
+
+        /* Filter Tabs */
+        .filter-section {
+            height: 120px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 80px;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 16px;
+        }
+
+        .filter-tab {
+            padding: 16px 32px;
+            border: 2px solid #E0E0E0;
+            font-size: 16px;
+            font-weight: 500;
+            background: #FFFFFF;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .filter-tab.active {
+            background: #333333;
+            color: #FFFFFF;
+            border-color: #333333;
+        }
+
+        .tab-count {
+            font-size: 12px;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        /* Gallery Grid */
+        .gallery-section {
+            padding: 80px;
+            background: #F5F5F5;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .gallery-item {
+            background: #FFFFFF;
+            border: 2px solid #E0E0E0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Varying heights for masonry effect */
+        .gallery-item:nth-child(6n+1) {
+            grid-row: span 2;
+        }
+
+        .gallery-item:nth-child(6n+3) {
+            grid-row: span 2;
+        }
+
+        .gallery-item:nth-child(6n+5) {
+            grid-row: span 1;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #999999;
+            background: #FAFAFA;
+            position: relative;
+        }
+
+        .gallery-item:nth-child(6n+1) .gallery-image,
+        .gallery-item:nth-child(6n+3) .gallery-image {
+            height: 600px;
+        }
+
+        .diagonal-line {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: #E0E0E0;
+            transform: rotate(45deg);
+        }
+
+        .diagonal-line-2 {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: #E0E0E0;
+            transform: rotate(-45deg);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(51, 51, 51, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .overlay-caption {
+            font-size: 16px;
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-bottom: 8px;
+        }
+
+        .overlay-tag {
+            font-size: 12px;
+            color: #FFFFFF;
+            padding: 4px 12px;
+            border: 1px solid #FFFFFF;
+            margin-bottom: 8px;
+        }
+
+        .overlay-date {
+            font-size: 12px;
+            color: #FFFFFF;
+            opacity: 0.7;
+            margin-bottom: 16px;
+        }
+
+        .overlay-icons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .overlay-icon {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #FFFFFF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #FFFFFF;
+        }
+
+        /* Load More Section */
+        .load-more-section {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid #E0E0E0;
+        }
+
+        .photo-count {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 24px;
+        }
+
+        .load-more-button {
+            padding: 16px 48px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 2px solid #333333;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Instagram Feed Section */
+        .instagram-section {
+            background: #FFFFFF;
+            padding: 80px;
+            border-top: 1px solid #E0E0E0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .instagram-handle {
+            font-size: 18px;
+            color: #666666;
+        }
+
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .instagram-item {
+            aspect-ratio: 1;
+            border: 2px solid #E0E0E0;
+            background: #FAFAFA;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #999999;
+            position: relative;
+        }
+
+        .instagram-button {
+            display: block;
+            margin: 0 auto;
+            padding: 16px 48px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 2px solid #333333;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Photo Upload CTA */
+        .upload-cta-section {
+            height: 300px;
+            background: #F5F5F5;
+            border-top: 1px solid #E0E0E0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 0 80px;
+            text-align: center;
+        }
+
+        .upload-title {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .upload-description {
+            font-size: 16px;
+            color: #666666;
+            max-width: 600px;
+        }
+
+        .upload-button {
+            padding: 16px 48px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 2px solid #333333;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .upload-disclaimer {
+            font-size: 12px;
+            color: #999999;
+            margin-top: 8px;
+        }
+
+        /* Footer - Consistent with Homepage */
+        .footer {
+            background: #FFFFFF;
+            border-top: 1px solid #E0E0E0;
+            padding: 60px 80px 24px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-link {
+            font-size: 14px;
+            color: #666666;
+            text-decoration: none;
+        }
+
+        .footer-info {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.8;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-icon {
+            width: 32px;
+            height: 32px;
+            border: 2px solid #E0E0E0;
+            border-radius: 50%;
+        }
+
+        .newsletter-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #E0E0E0;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        .newsletter-button {
+            width: 100%;
+            padding: 12px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 2px solid #333333;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #E0E0E0;
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 24px;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 60px;
+            height: 60px;
+            background: #FFFFFF;
+            border: 2px solid #333333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            z-index: 1000;
+        }
+
+        /* Side Annotations */
+        .side-annotation {
+            position: fixed;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 220px;
+            padding: 16px;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            font-size: 12px;
+            color: #999999;
+            line-height: 1.8;
+        }
+
+        .side-annotation h4 {
+            font-size: 14px;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .side-annotation ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .side-annotation li {
+            margin-bottom: 4px;
+        }
+
+        .side-annotation li:before {
+            content: "• ";
+            color: #999999;
+        }
+    </style>
+</head>
+<body>
+    <div class="wireframe-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-box">BUSINESS NAME + LOGO</div>
+            <nav class="navigation">
+                <a href="#" class="nav-item">Home</a>
+                <a href="#" class="nav-item">Available Puppies</a>
+                <a href="#" class="nav-item">About Us</a>
+                <a href="#" class="nav-item active">Gallery</a>
+                <a href="#" class="nav-item">Contact</a>
+            </nav>
+            <button class="cta-button">WhatsApp Us</button>
+        </header>
+
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="breadcrumb">
+                <a href="#">Home</a> &gt; Gallery
+            </div>
+            <h1 class="page-title">Our Gallery</h1>
+            <p class="page-subtitle">Happy moments with our puppies and their new families</p>
+        </section>
+
+        <!-- Filter Tabs -->
+        <section class="filter-section">
+            <div class="filter-tabs">
+                <button class="filter-tab active">
+                    <span>All Photos</span>
+                    <span class="tab-count">156</span>
+                </button>
+                <button class="filter-tab">
+                    <span>Available Puppies</span>
+                    <span class="tab-count">12</span>
+                </button>
+                <button class="filter-tab">
+                    <span>Past Puppies</span>
+                    <span class="tab-count">68</span>
+                </button>
+                <button class="filter-tab">
+                    <span>Happy Families</span>
+                    <span class="tab-count">45</span>
+                </button>
+                <button class="filter-tab">
+                    <span>Parent Dogs</span>
+                    <span class="tab-count">18</span>
+                </button>
+                <button class="filter-tab">
+                    <span>Our Facility</span>
+                    <span class="tab-count">13</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Gallery Grid -->
+        <section class="gallery-section">
+            <div class="gallery-grid">
+                <!-- Gallery Item 1 - Tall -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <div class="diagonal-line"></div>
+                        <div class="diagonal-line-2"></div>
+                        PUPPY PORTRAIT
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="overlay-caption">Golden Retriever Puppy</div>
+                        <div class="overlay-tag">Available Puppies</div>
+                        <div class="overlay-date">January 15, 2024</div>
+                        <div class="overlay-icons">
+                            <div class="overlay-icon">🔍</div>
+                            <div class="overlay-icon">↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 - Regular -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <div class="diagonal-line"></div>
+                        <div class="diagonal-line-2"></div>
+                        FAMILY PHOTO
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="overlay-caption">Happy Family with Max</div>
+                        <div class="overlay-tag">Happy Families</div>
+                        <div class="overlay-date">January 12, 2024</div>
+                        <div class="overlay-icons">
+                            <div class="overlay-icon">🔍</div>
+                            <div class="overlay-icon">↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 - Tall -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <div class="diagonal-line"></div>
+                        <div class="diagonal-line-2"></div>
+                        TRANSPARENT PNG DOG
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="overlay-caption">German Shepherd</div>
+                        <div class="overlay-tag">Available Puppies</div>
+                        <div class="overlay-date">January 10, 2024</div>
+                        <div class="overlay-icons">
+                            <div class="overlay-icon">🔍</div>
+                            <div class="overlay-icon">↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 - Regular -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <div class="diagonal-line"></div>
+                        <div class="diagonal-line-2"></div>
+                        FACILITY PHOTO
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="overlay-caption">Our Clean Facility</div>
+                        <div class="overlay-tag">Our Facility</div>
+                        <div class="overlay-date">January 8, 2024</div>
+                        <div class="overlay-icons">
+                            <div class="overlay-icon">🔍</div>
+                            <div class="overlay-icon">↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 5 - Regular -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <div class="diagonal-line"></div>
+                        <div class="diagonal-line-2"></div>
+                        PARENT DOG
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="overlay-caption">Champion Father</div>
+                        <div class="overlay-tag">Parent Dogs</div>
+                        <div class="overlay-date">January 5, 2024</div>
+                        <div class="overlay-icons">
+                            <div class="overlay-icon">🔍</div>
+                            <div class="overlay-icon">↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 6 - Regular -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <div class="diagonal-line"></div>
+                        <div class="diagonal-line-2"></div>
+                        PUPPIES PLAYING
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="overlay-caption">Playtime Fun</div>
+                        <div class="overlay-tag">Past Puppies</div>
+                        <div class="overlay-date">January 3, 2024</div>
+                        <div class="overlay-icons">
+                            <div class="overlay-icon">🔍</div>
+                            <div class="overlay-icon">↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 7 - Tall -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <div class="diagonal-line"></div>
+                        <div class="diagonal-line-2"></div>
+                        LABRADOR PORTRAIT
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="overlay-caption">Labrador Puppy</div>
+                        <div class="overlay-tag">Available Puppies</div>
+                        <div class="overlay-date">December 28, 2023</div>
+                        <div class="overlay-icons">
+                            <div class="overlay-icon">🔍</div>
+                            <div class="overlay-icon">↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 8 - Regular -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <div class="diagonal-line"></div>
+                        <div class="diagonal-line-2"></div>
+                        CUSTOMER TESTIMONIAL
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="overlay-caption">Bella's New Home</div>
+                        <div class="overlay-tag">Happy Families</div>
+                        <div class="overlay-date">December 25, 2023</div>
+                        <div class="overlay-icons">
+                            <div class="overlay-icon">🔍</div>
+                            <div class="overlay-icon">↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 9 - Tall -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <div class="diagonal-line"></div>
+                        <div class="diagonal-line-2"></div>
+                        TRANSPARENT PNG
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="overlay-caption">Rottweiler Puppy</div>
+                        <div class="overlay-tag">Available Puppies</div>
+                        <div class="overlay-date">December 22, 2023</div>
+                        <div class="overlay-icons">
+                            <div class="overlay-icon">🔍</div>
+                            <div class="overlay-icon">↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 10 - Regular -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <div class="diagonal-line"></div>
+                        <div class="diagonal-line-2"></div>
+                        VET CHECK PHOTO
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="overlay-caption">Health Certificate</div>
+                        <div class="overlay-tag">Our Facility</div>
+                        <div class="overlay-date">December 20, 2023</div>
+                        <div class="overlay-icons">
+                            <div class="overlay-icon">🔍</div>
+                            <div class="overlay-icon">↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 11 - Regular -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <div class="diagonal-line"></div>
+                        <div class="diagonal-line-2"></div>
+                        MOTHER DOG
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="overlay-caption">Champion Mother</div>
+                        <div class="overlay-tag">Parent Dogs</div>
+                        <div class="overlay-date">December 18, 2023</div>
+                        <div class="overlay-icons">
+                            <div class="overlay-icon">🔍</div>
+                            <div class="overlay-icon">↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 12 - Regular -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <div class="diagonal-line"></div>
+                        <div class="diagonal-line-2"></div>
+                        GROUP PHOTO
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="overlay-caption">Litter of Puppies</div>
+                        <div class="overlay-tag">Past Puppies</div>
+                        <div class="overlay-date">December 15, 2023</div>
+                        <div class="overlay-icons">
+                            <div class="overlay-icon">🔍</div>
+                            <div class="overlay-icon">↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 13 - Tall -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <div class="diagonal-line"></div>
+                        <div class="diagonal-line-2"></div>
+                        BEAGLE PORTRAIT
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="overlay-caption">Beagle Puppy</div>
+                        <div class="overlay-tag">Available Puppies</div>
+                        <div class="overlay-date">December 12, 2023</div>
+                        <div class="overlay-icons">
+                            <div class="overlay-icon">🔍</div>
+                            <div class="overlay-icon">↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 14 - Regular -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <div class="diagonal-line"></div>
+                        <div class="diagonal-line-2"></div>
+                        HAPPY CUSTOMER
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="overlay-caption">Joy with Her Family</div>
+                        <div class="overlay-tag">Happy Families</div>
+                        <div class="overlay-date">December 10, 2023</div>
+                        <div class="overlay-icons">
+                            <div class="overlay-icon">🔍</div>
+                            <div class="overlay-icon">↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 15 - Tall -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <div class="diagonal-line"></div>
+                        <div class="diagonal-line-2"></div>
+                        POODLE PNG
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="overlay-caption">Toy Poodle</div>
+                        <div class="overlay-tag">Available Puppies</div>
+                        <div class="overlay-date">December 8, 2023</div>
+                        <div class="overlay-icons">
+                            <div class="overlay-icon">🔍</div>
+                            <div class="overlay-icon">↗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 16 - Regular -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <div class="diagonal-line"></div>
+                        <div class="diagonal-line-2"></div>
+                        TRAINING PHOTO
+                    </div>
+                    <div class="gallery-overlay">
+                        <div class="overlay-caption">Early Training</div>
+                        <div class="overlay-tag">Our Facility</div>
+                        <div class="overlay-date">December 5, 2023</div>
+                        <div class="overlay-icons">
+                            <div class="overlay-icon">🔍</div>
+                            <div class="overlay-icon">↗</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="annotation">Masonry grid with varying heights creates visual interest. Hover reveals photo details, category tag, date, and social sharing options</div>
+
+            <!-- Load More Section -->
+            <div class="load-more-section">
+                <div class="photo-count">Showing 40 of 156 photos</div>
+                <button class="load-more-button">Load More Photos</button>
+                <div class="annotation" style="margin-top: 16px;">Auto-loads on scroll or manual click to load next 20 photos</div>
+            </div>
+        </section>
+
+        <!-- Instagram Feed Section -->
+        <section class="instagram-section">
+            <div class="section-header">
+                <h2 class="section-title">Follow Us on Instagram</h2>
+                <p class="instagram-handle">@businessname</p>
+            </div>
+            <div class="instagram-grid">
+                <div class="instagram-item">
+                    <div class="diagonal-line"></div>
+                    <div class="diagonal-line-2"></div>
+                    INSTAGRAM POST 1
+                </div>
+                <div class="instagram-item">
+                    <div class="diagonal-line"></div>
+                    <div class="diagonal-line-2"></div>
+                    INSTAGRAM POST 2
+                </div>
+                <div class="instagram-item">
+                    <div class="diagonal-line"></div>
+                    <div class="diagonal-line-2"></div>
+                    INSTAGRAM POST 3
+                </div>
+                <div class="instagram-item">
+                    <div class="diagonal-line"></div>
+                    <div class="diagonal-line-2"></div>
+                    INSTAGRAM POST 4
+                </div>
+                <div class="instagram-item">
+                    <div class="diagonal-line"></div>
+                    <div class="diagonal-line-2"></div>
+                    INSTAGRAM POST 5
+                </div>
+                <div class="instagram-item">
+                    <div class="diagonal-line"></div>
+                    <div class="diagonal-line-2"></div>
+                    INSTAGRAM POST 6
+                </div>
+                <div class="instagram-item">
+                    <div class="diagonal-line"></div>
+                    <div class="diagonal-line-2"></div>
+                    INSTAGRAM POST 7
+                </div>
+                <div class="instagram-item">
+                    <div class="diagonal-line"></div>
+                    <div class="diagonal-line-2"></div>
+                    INSTAGRAM POST 8
+                </div>
+                <div class="instagram-item">
+                    <div class="diagonal-line"></div>
+                    <div class="diagonal-line-2"></div>
+                    INSTAGRAM POST 9
+                </div>
+                <div class="instagram-item">
+                    <div class="diagonal-line"></div>
+                    <div class="diagonal-line-2"></div>
+                    INSTAGRAM POST 10
+                </div>
+                <div class="instagram-item">
+                    <div class="diagonal-line"></div>
+                    <div class="diagonal-line-2"></div>
+                    INSTAGRAM POST 11
+                </div>
+                <div class="instagram-item">
+                    <div class="diagonal-line"></div>
+                    <div class="diagonal-line-2"></div>
+                    INSTAGRAM POST 12
+                </div>
+            </div>
+            <button class="instagram-button">Follow on Instagram</button>
+            <div class="annotation">Live Instagram feed updates automatically with recent posts</div>
+        </section>
+
+        <!-- Photo Upload CTA -->
+        <section class="upload-cta-section">
+            <h2 class="upload-title">Share Your Puppy's Story</h2>
+            <p class="upload-description">Did you adopt from us? We'd love to see how your puppy is doing! Share your photos and stories with our community.</p>
+            <button class="upload-button">Submit Your Photos</button>
+            <p class="upload-disclaimer">Photos may be featured on our website and social media</p>
+            <div class="annotation">Opens form modal for photo upload with fields for name, puppy name, breed, date adopted, and message</div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo-box" style="margin-bottom: 16px;">LOGO</div>
+                    <p class="footer-info">Premium dog breeding in Lagos, Nigeria. Healthy, happy puppies for loving families.</p>
+                    <div class="social-icons">
+                        <div class="social-icon"></div>
+                        <div class="social-icon"></div>
+                        <div class="social-icon"></div>
+                        <div class="social-icon"></div>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Home</a>
+                        <a href="#" class="footer-link">Available Puppies</a>
+                        <a href="#" class="footer-link">About Us</a>
+                        <a href="#" class="footer-link">Gallery</a>
+                        <a href="#" class="footer-link">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <div class="footer-info">
+                        <p>Phone: +234 XXX XXX XXXX</p>
+                        <p>WhatsApp: +234 XXX XXX XXXX</p>
+                        <p>Email: info@businessname.com</p>
+                        <p>Location: Lagos, Nigeria</p>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p class="footer-info" style="margin-bottom: 8px;">Get updates on available puppies</p>
+                    <input type="email" class="newsletter-input" placeholder="Your email address">
+                    <button class="newsletter-button">Subscribe</button>
+                    <p class="footer-info" style="margin-top: 16px;">Business Hours:<br>Mon-Sat: 9AM - 6PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2024 Business Name. All rights reserved.</div>
+                <div class="footer-legal">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Floating WhatsApp Button -->
+        <div class="whatsapp-float">
+            WhatsApp
+        </div>
+
+        <!-- Side Annotations -->
+        <div class="side-annotation">
+            <h4>Gallery Page Notes</h4>
+            <ul>
+                <li>Lightbox opens on click</li>
+                <li>Prev/next navigation</li>
+                <li>Filter persistence via URL</li>
+                <li>Lazy-load images</li>
+                <li>Social share in lightbox</li>
+                <li>Page length: ~2500px</li>
+                <li>Auto-scroll load more</li>
+            </ul>
+        </div>
+    </div>
+
+</body></html>

@@ -1,0 +1,1411 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Puppies - Dog Breeding Website Wireframe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFFFFF;
+            color: #333333;
+            line-height: 1.5;
+        }
+
+        .wireframe-container {
+            max-width: 1728px;
+            margin: 0 auto;
+            background: #F5F5F5;
+        }
+
+        .annotation {
+            font-size: 12px;
+            color: #999999;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        /* Header */
+        .header {
+            height: 80px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 80px;
+        }
+
+        .logo-box {
+            width: 200px;
+            height: 60px;
+            border: 2px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-item {
+            font-size: 16px;
+            color: #333333;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav-item.active {
+            color: #333333;
+            font-weight: 700;
+            border-bottom: 2px solid #333333;
+            padding-bottom: 2px;
+        }
+
+        .cta-button {
+            padding: 12px 24px;
+            border: 2px solid #333333;
+            font-size: 16px;
+            font-weight: 600;
+            background: #FFFFFF;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: #F5F5F5;
+        }
+
+        /* Page Title Section */
+        .page-title-section {
+            height: 200px;
+            background: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 80px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 16px;
+        }
+
+        .breadcrumb a {
+            color: #666666;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: #666666;
+        }
+
+        /* Filter & Sort Bar */
+        .filter-sort-bar {
+            height: 80px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 80px;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .filter-dropdown {
+            padding: 10px 16px;
+            border: 1px solid #E0E0E0;
+            background: #FFFFFF;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            color: #333333;
+            cursor: pointer;
+            min-width: 150px;
+        }
+
+        .sort-group {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .sort-label {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 8px;
+            margin-left: 16px;
+        }
+
+        .view-button {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #E0E0E0;
+            background: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .view-button.active {
+            background: #333333;
+            color: #FFFFFF;
+            border-color: #333333;
+        }
+
+        .results-count {
+            position: absolute;
+            left: 80px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: #666666;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            padding: 60px 80px;
+            background: #F5F5F5;
+            position: relative;
+        }
+
+        .results-header {
+            margin-bottom: 32px;
+            font-size: 16px;
+            color: #666666;
+            font-weight: 600;
+        }
+
+        /* Puppy Grid */
+        .puppy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-bottom: 60px;
+        }
+
+        .puppy-card {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            position: relative;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .puppy-card:hover {
+            background: #FAFAFA;
+            cursor: pointer;
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            padding: 6px 12px;
+            background: #333333;
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .status-badge.new {
+            background: #333333;
+        }
+
+        .status-badge.reserved {
+            background: #999999;
+        }
+
+        .card-image-main {
+            width: 100%;
+            height: 400px;
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #999999;
+            background: #FAFAFA;
+            position: relative;
+        }
+
+        .diagonal-line {
+            position: absolute;
+            width: 141%;
+            height: 1px;
+            background: #E0E0E0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .thumbnail-strip {
+            display: flex;
+            border-bottom: 1px solid #E0E0E0;
+            background: #FFFFFF;
+        }
+
+        .thumbnail {
+            flex: 1;
+            height: 80px;
+            border-right: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: #999999;
+            background: #FAFAFA;
+            position: relative;
+        }
+
+        .thumbnail:last-child {
+            border-right: none;
+        }
+
+        .thumbnail .diagonal-line {
+            width: 113%;
+        }
+
+        .card-content {
+            padding: 24px;
+        }
+
+        .breed-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+        }
+
+        .puppy-meta {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 16px;
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .gender-icon {
+            width: 16px;
+            height: 16px;
+            border: 1px solid #E0E0E0;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+
+        .temperament-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            padding: 6px 12px;
+            border: 1px solid #E0E0E0;
+            font-size: 12px;
+            background: #F5F5F5;
+            white-space: nowrap;
+        }
+
+        .price {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+
+        .description {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 24px;
+            line-height: 1.6;
+            min-height: 66px;
+        }
+
+        .card-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .reserve-button {
+            padding: 14px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 2px solid #333333;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .reserve-button:hover {
+            background: #555555;
+        }
+
+        .view-details-button {
+            padding: 14px;
+            background: #FFFFFF;
+            color: #333333;
+            border: 2px solid #333333;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .view-details-button:hover {
+            background: #F5F5F5;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 60px;
+        }
+
+        .page-button {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #E0E0E0;
+            background: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .page-button:hover {
+            background: #F5F5F5;
+        }
+
+        .page-button.active {
+            background: #333333;
+            color: #FFFFFF;
+            border-color: #333333;
+            font-weight: 700;
+        }
+
+        .page-arrow {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #E0E0E0;
+            background: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .page-arrow:hover {
+            background: #F5F5F5;
+        }
+
+        .page-ellipsis {
+            padding: 0 8px;
+            color: #999999;
+        }
+
+        /* Call-to-Action Section */
+        .cta-section {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            padding: 60px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .cta-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+        }
+
+        .cta-description {
+            font-size: 16px;
+            color: #666666;
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .cta-primary {
+            padding: 16px 32px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 2px solid #333333;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .cta-primary:hover {
+            background: #555555;
+        }
+
+        .cta-secondary {
+            padding: 16px 32px;
+            background: #FFFFFF;
+            color: #333333;
+            border: 2px solid #333333;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .cta-secondary:hover {
+            background: #F5F5F5;
+        }
+
+        /* Footer */
+        .footer {
+            background: #FFFFFF;
+            border-top: 1px solid #E0E0E0;
+            padding: 60px 80px 24px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-link {
+            font-size: 14px;
+            color: #666666;
+            text-decoration: none;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        .footer-info {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.8;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .social-icon {
+            width: 32px;
+            height: 32px;
+            border: 2px solid #E0E0E0;
+            border-radius: 50%;
+        }
+
+        .newsletter-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #E0E0E0;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        .newsletter-button {
+            width: 100%;
+            padding: 12px;
+            background: #333333;
+            color: #FFFFFF;
+            border: 2px solid #333333;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .newsletter-button:hover {
+            background: #555555;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #E0E0E0;
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 24px;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 60px;
+            height: 60px;
+            background: #FFFFFF;
+            border: 2px solid #333333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .whatsapp-float:hover {
+            background: #F5F5F5;
+        }
+
+        /* Side Annotations */
+        .side-annotation {
+            position: fixed;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 220px;
+            padding: 16px;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            font-size: 12px;
+            color: #999999;
+            line-height: 1.8;
+        }
+
+        .side-annotation h4 {
+            font-size: 14px;
+            color: #333333;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .side-annotation ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .side-annotation li {
+            margin-bottom: 4px;
+        }
+
+        .side-annotation li:before {
+            content: "• ";
+            color: #999999;
+        }
+    </style>
+</head>
+<body>
+    <div class="wireframe-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-box">BUSINESS NAME + LOGO</div>
+            <nav class="navigation">
+                <a href="#" class="nav-item">Home</a>
+                <a href="#" class="nav-item active">Available Puppies</a>
+                <a href="#" class="nav-item">About Us</a>
+                <a href="#" class="nav-item">Gallery</a>
+                <a href="#" class="nav-item">Contact</a>
+            </nav>
+            <button class="cta-button">WhatsApp Us</button>
+        </header>
+
+        <!-- Page Title Section -->
+        <section class="page-title-section">
+            <div class="breadcrumb">
+                <a href="#">Home</a> &gt; Available Puppies
+            </div>
+            <h1 class="page-title">Available Puppies</h1>
+            <p class="page-subtitle">Find your perfect companion from our current litters</p>
+        </section>
+
+        <!-- Filter & Sort Bar -->
+        <div class="filter-sort-bar">
+            <div class="filter-group">
+                <select class="filter-dropdown">
+                    <option>Filter by Breed</option>
+                    <option>Golden Retriever</option>
+                    <option>German Shepherd</option>
+                    <option>Labrador Retriever</option>
+                    <option>Rottweiler</option>
+                    <option>Poodle</option>
+                </select>
+                <select class="filter-dropdown">
+                    <option>Filter by Age</option>
+                    <option>Puppies (0-6 months)</option>
+                    <option>Young (6-12 months)</option>
+                    <option>Adult (1 year+)</option>
+                </select>
+                <select class="filter-dropdown">
+                    <option>Filter by Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Any</option>
+                </select>
+                <select class="filter-dropdown">
+                    <option>Price Range</option>
+                    <option>₦50,000 - ₦100,000</option>
+                    <option>₦100,000 - ₦200,000</option>
+                    <option>₦200,000 - ₦300,000</option>
+                    <option>₦300,000+</option>
+                </select>
+            </div>
+            <div class="sort-group">
+                <span class="sort-label">Sort by:</span>
+                <select class="filter-dropdown">
+                    <option>Newest</option>
+                    <option>Price: Low to High</option>
+                    <option>Price: High to Low</option>
+                    <option>Age: Youngest First</option>
+                </select>
+                <div class="view-toggle">
+                    <button class="view-button active">⊞</button>
+                    <button class="view-button">☰</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="results-header">Showing 12 puppies</div>
+
+            <!-- Puppy Grid -->
+            <div class="puppy-grid">
+                <!-- Card 1 - Transparent PNG on gradient -->
+                <div class="puppy-card">
+                    <div class="status-badge new">NEW</div>
+                    <div class="card-image-main" style="background: linear-gradient(135deg, #FFE6CC 0%, #FFF9F0 100%);">
+                        <div class="diagonal-line"></div>
+                        TRANSPARENT PNG ON GRADIENT
+                    </div>
+                    <div class="thumbnail-strip">
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            2
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            3
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            4
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            +3
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="breed-name">Golden Retriever</div>
+                        <div class="puppy-meta">
+                            <span>8 weeks old</span>
+                            <span>|</span>
+                            <span><span class="gender-icon"></span>Male</span>
+                        </div>
+                        <div class="temperament-tags">
+                            <span class="tag">Family Friendly</span>
+                            <span class="tag">Playful</span>
+                            <span class="tag">Good with Kids</span>
+                        </div>
+                        <div class="price">₦180,000</div>
+                        <div class="description">
+                            Beautiful, healthy Golden Retriever puppy. Vaccinated, dewormed, and vet-checked. Great temperament with children and other pets.
+                        </div>
+                        <div class="card-buttons">
+                            <button class="reserve-button">Reserve on WhatsApp</button>
+                            <button class="view-details-button">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 - Full background photo -->
+                <div class="puppy-card">
+                    <div class="card-image-main">
+                        <div class="diagonal-line"></div>
+                        FULL BACKGROUND PHOTO
+                    </div>
+                    <div class="thumbnail-strip">
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            2
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            3
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            4
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            +5
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="breed-name">German Shepherd</div>
+                        <div class="puppy-meta">
+                            <span>10 weeks old</span>
+                            <span>|</span>
+                            <span><span class="gender-icon"></span>Female</span>
+                        </div>
+                        <div class="temperament-tags">
+                            <span class="tag">Active</span>
+                            <span class="tag">Intelligent</span>
+                            <span class="tag">Loyal</span>
+                        </div>
+                        <div class="price">₦220,000</div>
+                        <div class="description">
+                            Intelligent and loyal German Shepherd. Perfect for families who want a protective companion. Excellent bloodline.
+                        </div>
+                        <div class="card-buttons">
+                            <button class="reserve-button">Reserve on WhatsApp</button>
+                            <button class="view-details-button">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 - Transparent PNG on blue gradient -->
+                <div class="puppy-card">
+                    <div class="status-badge new">NEW</div>
+                    <div class="card-image-main" style="background: linear-gradient(135deg, #E3F2FD 0%, #F0F9FF 100%);">
+                        <div class="diagonal-line"></div>
+                        TRANSPARENT PNG ON BLUE
+                    </div>
+                    <div class="thumbnail-strip">
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            2
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            3
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            4
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            +4
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="breed-name">Labrador Retriever</div>
+                        <div class="puppy-meta">
+                            <span>6 weeks old</span>
+                            <span>|</span>
+                            <span><span class="gender-icon"></span>Male</span>
+                        </div>
+                        <div class="temperament-tags">
+                            <span class="tag">Calm</span>
+                            <span class="tag">Friendly</span>
+                            <span class="tag">Family Friendly</span>
+                        </div>
+                        <div class="price">₦170,000</div>
+                        <div class="description">
+                            Friendly Labrador puppy with gentle temperament. Fully vaccinated and ready for a loving home. Great with children.
+                        </div>
+                        <div class="card-buttons">
+                            <button class="reserve-button">Reserve on WhatsApp</button>
+                            <button class="view-details-button">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 - Solid color background -->
+                <div class="puppy-card">
+                    <div class="card-image-main" style="background: #E8F5E9;">
+                        <div class="diagonal-line"></div>
+                        TRANSPARENT PNG ON GREEN
+                    </div>
+                    <div class="thumbnail-strip">
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            2
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            3
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            4
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            +6
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="breed-name">Rottweiler</div>
+                        <div class="puppy-meta">
+                            <span>12 weeks old</span>
+                            <span>|</span>
+                            <span><span class="gender-icon"></span>Male</span>
+                        </div>
+                        <div class="temperament-tags">
+                            <span class="tag">Protective</span>
+                            <span class="tag">Confident</span>
+                            <span class="tag">Loyal</span>
+                        </div>
+                        <div class="price">₦250,000</div>
+                        <div class="description">
+                            Strong and confident Rottweiler puppy. Well-socialized and trained. Excellent guard dog with loving personality.
+                        </div>
+                        <div class="card-buttons">
+                            <button class="reserve-button">Reserve on WhatsApp</button>
+                            <button class="view-details-button">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 - Full background -->
+                <div class="puppy-card">
+                    <div class="status-badge reserved">RESERVED</div>
+                    <div class="card-image-main">
+                        <div class="diagonal-line"></div>
+                        FULL BACKGROUND PHOTO
+                    </div>
+                    <div class="thumbnail-strip">
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            2
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            3
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            4
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            +2
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="breed-name">Poodle</div>
+                        <div class="puppy-meta">
+                            <span>9 weeks old</span>
+                            <span>|</span>
+                            <span><span class="gender-icon"></span>Female</span>
+                        </div>
+                        <div class="temperament-tags">
+                            <span class="tag">Smart</span>
+                            <span class="tag">Hypoallergenic</span>
+                            <span class="tag">Playful</span>
+                        </div>
+                        <div class="price">₦200,000</div>
+                        <div class="description">
+                            Elegant toy poodle with exceptional intelligence. Hypoallergenic coat perfect for families with allergies.
+                        </div>
+                        <div class="card-buttons">
+                            <button class="reserve-button">Reserve on WhatsApp</button>
+                            <button class="view-details-button">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 - Transparent PNG on gradient -->
+                <div class="puppy-card">
+                    <div class="status-badge new">NEW</div>
+                    <div class="card-image-main" style="background: linear-gradient(135deg, #FCE4EC 0%, #FFF0F5 100%);">
+                        <div class="diagonal-line"></div>
+                        TRANSPARENT PNG ON PINK
+                    </div>
+                    <div class="thumbnail-strip">
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            2
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            3
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            4
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            +7
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="breed-name">Beagle</div>
+                        <div class="puppy-meta">
+                            <span>7 weeks old</span>
+                            <span>|</span>
+                            <span><span class="gender-icon"></span>Female</span>
+                        </div>
+                        <div class="temperament-tags">
+                            <span class="tag">Curious</span>
+                            <span class="tag">Gentle</span>
+                            <span class="tag">Good with Kids</span>
+                        </div>
+                        <div class="price">₦160,000</div>
+                        <div class="description">
+                            Adorable Beagle puppy with wonderful temperament. Curious and friendly, excellent with children and families.
+                        </div>
+                        <div class="card-buttons">
+                            <button class="reserve-button">Reserve on WhatsApp</button>
+                            <button class="view-details-button">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7 - Full background -->
+                <div class="puppy-card">
+                    <div class="card-image-main">
+                        <div class="diagonal-line"></div>
+                        FULL BACKGROUND PHOTO
+                    </div>
+                    <div class="thumbnail-strip">
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            2
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            3
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            4
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            +3
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="breed-name">Siberian Husky</div>
+                        <div class="puppy-meta">
+                            <span>11 weeks old</span>
+                            <span>|</span>
+                            <span><span class="gender-icon"></span>Male</span>
+                        </div>
+                        <div class="temperament-tags">
+                            <span class="tag">Energetic</span>
+                            <span class="tag">Social</span>
+                            <span class="tag">Athletic</span>
+                        </div>
+                        <div class="price">₦280,000</div>
+                        <div class="description">
+                            Stunning Siberian Husky with striking blue eyes. Energetic and social, perfect for active families.
+                        </div>
+                        <div class="card-buttons">
+                            <button class="reserve-button">Reserve on WhatsApp</button>
+                            <button class="view-details-button">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8 - Solid color -->
+                <div class="puppy-card">
+                    <div class="card-image-main" style="background: #FFF9C4;">
+                        <div class="diagonal-line"></div>
+                        TRANSPARENT PNG ON YELLOW
+                    </div>
+                    <div class="thumbnail-strip">
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            2
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            3
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            4
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            +5
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="breed-name">Cocker Spaniel</div>
+                        <div class="puppy-meta">
+                            <span>8 weeks old</span>
+                            <span>|</span>
+                            <span><span class="gender-icon"></span>Female</span>
+                        </div>
+                        <div class="temperament-tags">
+                            <span class="tag">Gentle</span>
+                            <span class="tag">Affectionate</span>
+                            <span class="tag">Family Friendly</span>
+                        </div>
+                        <div class="price">₦190,000</div>
+                        <div class="description">
+                            Sweet Cocker Spaniel with silky coat. Affectionate and gentle, wonderful companion for all ages.
+                        </div>
+                        <div class="card-buttons">
+                            <button class="reserve-button">Reserve on WhatsApp</button>
+                            <button class="view-details-button">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 9 - Full background -->
+                <div class="puppy-card">
+                    <div class="card-image-main">
+                        <div class="diagonal-line"></div>
+                        FULL BACKGROUND PHOTO
+                    </div>
+                    <div class="thumbnail-strip">
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            2
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            3
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            4
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            +4
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="breed-name">Bulldog</div>
+                        <div class="puppy-meta">
+                            <span>9 weeks old</span>
+                            <span>|</span>
+                            <span><span class="gender-icon"></span>Male</span>
+                        </div>
+                        <div class="temperament-tags">
+                            <span class="tag">Calm</span>
+                            <span class="tag">Friendly</span>
+                            <span class="tag">Loyal</span>
+                        </div>
+                        <div class="price">₦240,000</div>
+                        <div class="description">
+                            Adorable English Bulldog with classic features. Calm temperament, perfect for apartment living.
+                        </div>
+                        <div class="card-buttons">
+                            <button class="reserve-button">Reserve on WhatsApp</button>
+                            <button class="view-details-button">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 10 - Gradient -->
+                <div class="puppy-card">
+                    <div class="status-badge new">NEW</div>
+                    <div class="card-image-main" style="background: linear-gradient(135deg, #F3E5F5 0%, #FFF4FF 100%);">
+                        <div class="diagonal-line"></div>
+                        TRANSPARENT PNG ON PURPLE
+                    </div>
+                    <div class="thumbnail-strip">
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            2
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            3
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            4
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            +6
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="breed-name">Shih Tzu</div>
+                        <div class="puppy-meta">
+                            <span>7 weeks old</span>
+                            <span>|</span>
+                            <span><span class="gender-icon"></span>Female</span>
+                        </div>
+                        <div class="temperament-tags">
+                            <span class="tag">Affectionate</span>
+                            <span class="tag">Playful</span>
+                            <span class="tag">Low Shedding</span>
+                        </div>
+                        <div class="price">₦185,000</div>
+                        <div class="description">
+                            Beautiful Shih Tzu with luxurious coat. Affectionate lap dog, perfect companion for indoor living.
+                        </div>
+                        <div class="card-buttons">
+                            <button class="reserve-button">Reserve on WhatsApp</button>
+                            <button class="view-details-button">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 11 - Full background -->
+                <div class="puppy-card">
+                    <div class="card-image-main">
+                        <div class="diagonal-line"></div>
+                        FULL BACKGROUND PHOTO
+                    </div>
+                    <div class="thumbnail-strip">
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            2
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            3
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            4
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            +8
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="breed-name">Maltese</div>
+                        <div class="puppy-meta">
+                            <span>6 weeks old</span>
+                            <span>|</span>
+                            <span><span class="gender-icon"></span>Male</span>
+                        </div>
+                        <div class="temperament-tags">
+                            <span class="tag">Gentle</span>
+                            <span class="tag">Playful</span>
+                            <span class="tag">Hypoallergenic</span>
+                        </div>
+                        <div class="price">₦195,000</div>
+                        <div class="description">
+                            Elegant Maltese puppy with snow-white coat. Gentle and playful, excellent for families and seniors.
+                        </div>
+                        <div class="card-buttons">
+                            <button class="reserve-button">Reserve on WhatsApp</button>
+                            <button class="view-details-button">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 12 - Gradient -->
+                <div class="puppy-card">
+                    <div class="card-image-main" style="background: linear-gradient(135deg, #E0F2F1 0%, #F0FFF4 100%);">
+                        <div class="diagonal-line"></div>
+                        TRANSPARENT PNG ON MINT
+                    </div>
+                    <div class="thumbnail-strip">
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            2
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            3
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            4
+                        </div>
+                        <div class="thumbnail">
+                            <div class="diagonal-line"></div>
+                            +3
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="breed-name">Yorkshire Terrier</div>
+                        <div class="puppy-meta">
+                            <span>8 weeks old</span>
+                            <span>|</span>
+                            <span><span class="gender-icon"></span>Female</span>
+                        </div>
+                        <div class="temperament-tags">
+                            <span class="tag">Confident</span>
+                            <span class="tag">Energetic</span>
+                            <span class="tag">Compact</span>
+                        </div>
+                        <div class="price">₦175,000</div>
+                        <div class="description">
+                            Tiny Yorkshire Terrier with big personality. Confident and energetic, perfect for apartment living.
+                        </div>
+                        <div class="card-buttons">
+                            <button class="reserve-button">Reserve on WhatsApp</button>
+                            <button class="view-details-button">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="annotation">Cards alternate between transparent PNGs on gradient backgrounds, full background photos, and solid color backgrounds for visual variety</div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="page-arrow">←</button>
+                <button class="page-button active">1</button>
+                <button class="page-button">2</button>
+                <button class="page-button">3</button>
+                <button class="page-button">4</button>
+                <span class="page-ellipsis">...</span>
+                <button class="page-button">8</button>
+                <button class="page-arrow">→</button>
+            </div>
+
+            <!-- Call-to-Action Section -->
+            <div class="cta-section">
+                <h2 class="cta-title">Can't Find What You're Looking For?</h2>
+                <p class="cta-description">We have new litters regularly. Contact us about upcoming puppies or specific breeds you're interested in.</p>
+                <div class="cta-buttons">
+                    <button class="cta-primary">Contact Us About Future Litters</button>
+                    <button class="cta-secondary">Join Our Waiting List</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo-box" style="margin-bottom: 16px;">LOGO</div>
+                    <p class="footer-info">Premium dog breeding in Lagos, Nigeria. Healthy, happy puppies for loving families.</p>
+                    <div class="social-icons">
+                        <div class="social-icon"></div>
+                        <div class="social-icon"></div>
+                        <div class="social-icon"></div>
+                        <div class="social-icon"></div>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Home</a>
+                        <a href="#" class="footer-link">Available Puppies</a>
+                        <a href="#" class="footer-link">About Us</a>
+                        <a href="#" class="footer-link">Gallery</a>
+                        <a href="#" class="footer-link">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <div class="footer-info">
+                        <p>Phone: +234 XXX XXX XXXX</p>
+                        <p>WhatsApp: +234 XXX XXX XXXX</p>
+                        <p>Email: info@businessname.com</p>
+                        <p>Location: Lagos, Nigeria</p>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p class="footer-info" style="margin-bottom: 8px;">Get updates on available puppies</p>
+                    <input type="email" class="newsletter-input" placeholder="Your email address">
+                    <button class="newsletter-button">Subscribe</button>
+                    <p class="footer-info" style="margin-top: 16px;">Business Hours:<br>Mon-Sat: 9AM - 6PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2024 Business Name. All rights reserved.</div>
+                <div class="footer-legal">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Floating WhatsApp Button -->
+        <div class="whatsapp-float">
+            WhatsApp
+        </div>
+
+        <!-- Side Annotations -->
+        <div class="side-annotation">
+            <h4>Page Notes</h4>
+            <ul>
+                <li>Filter selections persist with URL parameters</li>
+                <li>Grid/list view toggle changes layout</li>
+                <li>12-15 puppies per page</li>
+                <li>Loading state shows skeleton screens</li>
+                <li>Total page length: ~3800px</li>
+                <li>Photo gallery opens lightbox on click</li>
+            </ul>
+        </div>
+    </div>
+
+</body></html>
