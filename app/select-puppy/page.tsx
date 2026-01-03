@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { FaWhatsapp } from 'react-icons/fa';
+import { Suspense } from 'react';
 
 const allPuppies = [
   { id: 1, name: 'Max', breed: 'Golden Retriever', age: '8 weeks', gender: 'Male', tag: 'Family Friendly', price: 180000, image: '/photos/3dogs_transparent_bg.png' },
@@ -13,7 +14,7 @@ const allPuppies = [
   { id: 5, name: 'Bella', breed: 'Pitbull', age: '10 weeks', gender: 'Female', tag: 'Affectionate', price: 205000, image: '/photos/pitbull_sitting.png' },
 ];
 
-export default function SelectPuppy() {
+function SelectPuppyContent() {
   const searchParams = useSearchParams();
   const breed = searchParams.get('breed') || 'All Breeds';
   const puppies = allPuppies.filter(p => breed === 'All Breeds' ? true : p.breed === breed);
@@ -56,7 +57,7 @@ export default function SelectPuppy() {
                     <span className="px-3 py-1 bg-gold/20 text-brown border border-gold/30 text-xs rounded-full font-semibold">{puppy.gender}</span>
                     <span className="px-3 py-1 bg-gold/20 text-brown border border-gold/30 text-xs rounded-full font-semibold">{puppy.tag}</span>
                   </div>
-                  <div className="text-xl font-bold text-brown mb-4">₦{puppy.price.toLocaleString('en-NG')}</div>
+                  <div className="text-xl font-bold text-brown mb-4">₦{puppy.price.toLocaleString('en-US')}</div>
                   <div className="flex gap-2">
                     <Link href={`/reserve-puppy?id=${puppy.id}`} className="flex-1 py-3 bg-gradient-to-r from-brown to-dark text-white border-2 border-transparent text-sm font-semibold rounded-2xl text-center hover:scale-105 transition-transform">Select</Link>
                     <Link href={`/puppy-detail/${puppy.id}`} className="flex-1 py-3 bg-white text-brown border-2 border-gold text-sm font-semibold rounded-2xl text-center hover:bg-gold/10 transition">See Details</Link>
@@ -75,4 +76,10 @@ export default function SelectPuppy() {
   );
 }
 
-
+export default function SelectPuppy() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <SelectPuppyContent />
+    </Suspense>
+  );
+}

@@ -1,0 +1,20 @@
+Breeds
+Add/edit breeds, stats, images, care, temperament.
+
+Open
+Puppies
+Add/edit puppies, names, prices, status, photos.
+
+Open
+Content
+Home, About, Gallery, Contact content & assets.
+
+Open
+Reservations
+View reservations, verify payments, update status.
+
+Open
+Settings
+Banks, WhatsApp, pricing defaults, hero assets.
+
+Open

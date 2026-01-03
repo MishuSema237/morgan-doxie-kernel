@@ -1,12 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaWhatsapp, FaCheck } from 'react-icons/fa';
 
-export default function ReservePuppy() {
+function ReservePuppyContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const puppyId = searchParams.get('id') || '1';
@@ -27,7 +27,7 @@ export default function ReservePuppy() {
     age: selected.age,
     gender: selected.gender,
     tag: selected.tag,
-    price: `₦${selected.price.toLocaleString('en-NG')}`,
+    price: `₦${selected.price.toLocaleString('en-US')}`,
     image: selected.image,
   };
 
@@ -81,7 +81,7 @@ export default function ReservePuppy() {
     router.push(`/review-reservation?id=${puppyId}`);
   };
 
-  const depositAmount = formData.depositAmount === '50%' 
+  const depositAmount = formData.depositAmount === '50%'
     ? Math.round(parseInt(puppy.price.replace(/[^0-9]/g, '')) * 0.5).toLocaleString()
     : Math.round(parseInt(puppy.price.replace(/[^0-9]/g, '')) * 0.75).toLocaleString();
 
@@ -396,7 +396,7 @@ export default function ReservePuppy() {
                       onChange={handleChange}
                       className="w-5 h-5 border-2 border-gold/30 focus:ring-gold"
                     />
-                    <span className="text-sm text-gray-700">I will pick up in Lagos (no additional charge)</span>
+                    <span className="text-sm text-gray-700">I will pick up locally (no additional charge)</span>
                   </label>
                   <label className="flex items-center gap-3 cursor-pointer p-4 border-2 border-gold/30 rounded-2xl hover:bg-gold/5">
                     <input
@@ -418,7 +418,7 @@ export default function ReservePuppy() {
                       onChange={handleChange}
                       className="w-5 h-5 border-2 border-gold/30 focus:ring-gold"
                     />
-                    <span className="text-sm text-gray-700">I need delivery outside Lagos (price calculated based on location)</span>
+                    <span className="text-sm text-gray-700">I need delivery long distance delivery (price calculated based on location)</span>
                   </label>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
@@ -617,3 +617,10 @@ export default function ReservePuppy() {
   );
 }
 
+export default function ReservePuppy() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <ReservePuppyContent />
+    </Suspense>
+  );
+}

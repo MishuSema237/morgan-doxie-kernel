@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
@@ -8,7 +8,28 @@ export default function AdminLogin() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [checking, setChecking] = useState(true);
   const router = useRouter();
+
+  // Check if already authenticated
+  useEffect(() => {
+    const checkAuth = () => {
+      // Check if admin-session cookie exists
+      const cookies = document.cookie.split(';');
+      const hasSession = cookies.some(cookie =>
+        cookie.trim().startsWith('admin-session=')
+      );
+
+      if (hasSession) {
+        // Already logged in, redirect to dashboard
+        router.push('/admin');
+      } else {
+        setChecking(false);
+      }
+    };
+
+    checkAuth();
+  }, [router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,6 +61,15 @@ export default function AdminLogin() {
       setLoading(false);
     }
   };
+
+  // Show loading while checking authentication
+  if (checking) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-brown via-brown/90 to-dark flex items-center justify-center">
+        <div className="text-gold text-lg">Checking authentication...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-brown via-brown/90 to-dark flex items-center justify-center px-8">

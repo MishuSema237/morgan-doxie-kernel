@@ -9,9 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        gold: "#D4AF37",
-        brown: "#8B4513",
+        gold: "#C6A55C",
+        brown: "#2C1802", // Dark Chocolate
         dark: "#1a1a1a",
+        cream: "#FDFBF7",
+        section: "#F5F2EA", // Slightly darker cream for sections
         whatsapp: "#25D366",
       },
       fontFamily: {

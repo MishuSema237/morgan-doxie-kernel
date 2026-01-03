@@ -31,33 +31,37 @@ interface Settings {
 
 export default function Footer() {
   const [settings, setSettings] = useState<Settings | null>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('/api/settings')
       .then((res) => res.json())
       .then((data) => {
         setSettings(data);
-        setLoading(false);
       })
       .catch((err) => {
         console.error('Error fetching settings:', err);
-        setLoading(false);
       });
   }, []);
 
-  if (loading) {
-    return (
-      <footer className="bg-dark text-white pt-16 pb-8 px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center py-8 text-gray-400">Loading...</div>
-        </div>
-      </footer>
-    );
-  }
+  const socialMedia = settings?.socialMedia || {
+    instagram: 'https://instagram.com/bullifykennel',
+    facebook: '#',
+    twitter: '#',
+    tiktok: '#',
+    whatsapp: 'https://wa.me/234XXXXXXXXX'
+  };
 
-  const socialMedia = settings?.socialMedia || {};
-  const contact = settings?.contact || {};
+  const contact = settings?.contact || {
+    phone: '+234 XXX XXX XXXX',
+    whatsapp: '+234 XXX XXX XXXX',
+    email: 'info@bullifykennel.com',
+    address: 'Your Location',
+    businessHours: {
+      weekdays: '9:00 AM - 6:00 PM',
+      saturday: '10:00 AM - 4:00 PM',
+      sunday: 'Closed'
+    }
+  };
 
   // Only show social icons that have links
   const socialLinks = [
@@ -66,7 +70,7 @@ export default function Footer() {
     { key: 'twitter', url: socialMedia.twitter, icon: FaTwitter },
     { key: 'tiktok', url: socialMedia.tiktok, icon: FaTiktok },
     { key: 'whatsapp', url: socialMedia.whatsapp, icon: FaWhatsapp },
-  ].filter((link) => link.url && link.url.trim() !== '');
+  ].filter((link) => link.url && link.url.trim() !== '' && link.url !== '#');
 
   return (
     <footer className="bg-dark text-white pt-16 pb-8 px-8">
@@ -75,7 +79,7 @@ export default function Footer() {
           <div>
             <div className="text-2xl font-bold mb-4 text-gold">Bullify Kennel</div>
             <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-              Premium dog breeding in Lagos, Nigeria. Healthy, happy puppies for loving families.
+              Premium Dachshund breeding. Healthy, happy puppies for loving families.
             </p>
             {socialLinks.length > 0 && (
               <div className="flex gap-3 mt-4">
@@ -129,12 +133,7 @@ export default function Footer() {
                   <span>{contact.phone}</span>
                 </div>
               )}
-              {contact.whatsapp && (
-                <div className="flex items-center gap-2">
-                  <FaWhatsapp className="text-gold" />
-                  <span>{contact.whatsapp}</span>
-                </div>
-              )}
+              {/* WhatsApp removed */}
               {contact.email && (
                 <div className="flex items-center gap-2">
                   <FaEnvelope className="text-gold" />
@@ -158,8 +157,6 @@ export default function Footer() {
             {contact.businessHours?.weekdays && (
               <p className="text-sm text-gray-300 mt-4">
                 Business Hours: {contact.businessHours.weekdays}
-                {contact.businessHours.saturday && ` | Sat: ${contact.businessHours.saturday}`}
-                {contact.businessHours.sunday && ` | Sun: ${contact.businessHours.sunday}`}
               </p>
             )}
           </div>

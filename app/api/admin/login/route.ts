@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import bcrypt from 'bcryptjs';
+import dbConnect from '@/lib/dbConnect';
+import Admin from '@/lib/models/Admin';
 
-// Simple password-based authentication
+// Database-based authentication
 export async function POST(request: NextRequest) {
   try {
-    const { password } = await request.json();
+    const { password, username } = await request.json();
 
     if (!password) {
       return NextResponse.json(
@@ -14,29 +16,33 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get admin password hash from environment
-    const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
+    // Connect to database
+    await dbConnect();
 
-    if (!adminPasswordHash) {
-      console.error('ADMIN_PASSWORD_HASH not set in environment variables');
+    // Find admin user (default username is 'admin')
+    const adminUser = await Admin.findOne({
+      username: username || 'admin'
+    });
+
+    if (!adminUser) {
       return NextResponse.json(
-        { error: 'Server configuration error' },
-        { status: 500 }
-      );
-    }
-
-    // Verify password
-    const isValid = await bcrypt.compare(password, adminPasswordHash);
-
-    if (!isValid) {
-      return NextResponse.json(
-        { error: 'Invalid password' },
+        { error: 'Invalid credentials' },
         { status: 401 }
       );
     }
 
-    // Create session (simple token-based for now)
-    const sessionToken = Buffer.from(`${Date.now()}-admin`).toString('base64');
+    // Verify password
+    const isValid = await bcrypt.compare(password, adminUser.passwordHash);
+
+    if (!isValid) {
+      return NextResponse.json(
+        { error: 'Invalid credentials' },
+        { status: 401 }
+      );
+    }
+
+    // Create session
+    const sessionToken = Buffer.from(`${Date.now()}-${adminUser.username}`).toString('base64');
     const cookieStore = await cookies();
     cookieStore.set('admin-session', sessionToken, {
       httpOnly: true,
@@ -45,7 +51,13 @@ export async function POST(request: NextRequest) {
       maxAge: 60 * 60 * 24 * 7, // 7 days
     });
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({
+      success: true,
+      user: {
+        username: adminUser.username,
+        email: adminUser.email,
+      }
+    });
   } catch (error) {
     console.error('Login error:', error);
     return NextResponse.json(
@@ -54,6 +66,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
-
-

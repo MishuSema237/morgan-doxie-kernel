@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { FaWhatsapp, FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaStar } from 'react-icons/fa';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -15,19 +17,46 @@ export default function ContactUs() {
     agreeToTerms: false,
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    alert('Thank you for contacting us! We will get back to you soon.');
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      inquiryType: '',
-      message: '',
-      agreeToTerms: false,
-    });
+    setStatus('submitting');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          inquiryType: '',
+          message: '',
+          agreeToTerms: false,
+        });
+        alert('Thank you for contacting us! We will get back to you soon.');
+      } else {
+        setStatus('error');
+        alert(data.error || 'Failed to send message. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setStatus('error');
+      alert('An unexpected error occurred. Please try again later.');
+    } finally {
+      setStatus(prev => prev === 'submitting' ? 'idle' : prev); // Only reset if currently submitting
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -42,36 +71,7 @@ export default function ContactUs() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="h-20 bg-white border-b-2 border-gold sticky top-0 z-50 shadow-sm backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-8 flex items-center justify-between h-full">
-          <Link href="/" className="text-2xl font-bold text-brown hover:text-gold transition cursor-pointer">Bullify Kennel</Link>
-          <nav className="hidden lg:flex items-center gap-8">
-            <Link href="/" className="text-base font-medium text-dark hover:text-gold transition relative group">
-              Home
-            </Link>
-            <Link href="/available-puppies" className="text-base font-medium text-dark hover:text-gold transition relative group">
-              Available Puppies
-            </Link>
-            <Link href="/breeds" className="text-base font-medium text-dark hover:text-gold transition relative group">
-              Breeds
-            </Link>
-            <Link href="/about-us" className="text-base font-medium text-dark hover:text-gold transition relative group">
-              About Us
-            </Link>
-            <Link href="/gallery" className="text-base font-medium text-dark hover:text-gold transition relative group">
-              Gallery
-            </Link>
-            <Link href="/contact-us" className="text-base font-medium text-dark hover:text-gold transition relative group">
-              Contact
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gold"></span>
-            </Link>
-          </nav>
-          <Link href="https://wa.me/234XXXXXXXXX" className="btn-whatsapp hidden lg:flex items-center gap-2 hover:scale-105 transition-transform">
-            <FaWhatsapp className="text-lg" /> WhatsApp
-          </Link>
-        </div>
-      </header>
+      <Header />
 
       {/* Page Header */}
       <section className="h-[400px] bg-gradient-to-br from-brown via-brown/90 to-dark text-white flex items-center justify-center relative overflow-hidden">
@@ -208,9 +208,10 @@ export default function ContactUs() {
                   </div>
                   <button
                     type="submit"
-                    className="w-full py-4 bg-gradient-to-r from-brown to-dark text-white border-2 border-transparent text-base font-semibold rounded-2xl hover:scale-105 transition-transform"
+                    disabled={status === 'submitting'}
+                    className="w-full py-4 bg-gradient-to-r from-brown to-dark text-white border-2 border-transparent text-base font-semibold rounded-2xl hover:scale-105 transition-transform disabled:opacity-70 disabled:hover:scale-100"
                   >
-                    Send Message
+                    {status === 'submitting' ? 'Sending...' : 'Send Message'}
                   </button>
                   <p className="text-xs text-center text-gray-500">
                     By submitting this form, you agree to receive communications from Bullify Kennel.
@@ -321,7 +322,7 @@ export default function ContactUs() {
                 </h3>
                 <div className="space-y-3 text-gray-700">
                   <p className="leading-relaxed">
-                    Lagos, Nigeria
+                    Your Location
                   </p>
                   <div className="h-48 bg-gradient-to-br from-gold/20 via-brown/20 to-dark/20 rounded-2xl border-2 border-gold/30 flex items-center justify-center">
                     <p className="text-sm text-gray-600">Map View</p>
@@ -348,61 +349,7 @@ export default function ContactUs() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-dark text-white pt-16 pb-8 px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-12">
-            <div>
-              <div className="text-2xl font-bold mb-4 text-gold">Bullify Kennel</div>
-              <p className="text-sm text-gray-300 mb-4 leading-relaxed">Premium dog breeding in Lagos, Nigeria. Healthy, happy puppies for loving families.</p>
-            </div>
-            <div>
-              <h3 className="text-base font-bold mb-4 text-gold">Quick Links</h3>
-              <div className="flex flex-col gap-2">
-                <Link href="/" className="text-sm text-gray-300 hover:text-gold transition">Home</Link>
-                <Link href="/available-puppies" className="text-sm text-gray-300 hover:text-gold transition">Available Puppies</Link>
-                <Link href="/about-us" className="text-sm text-gray-300 hover:text-gold transition">About Us</Link>
-                <Link href="/gallery" className="text-sm text-gray-300 hover:text-gold transition">Gallery</Link>
-                <Link href="/contact-us" className="text-sm text-gray-300 hover:text-gold transition">Contact</Link>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-base font-bold mb-4 text-gold">Contact Info</h3>
-              <div className="text-sm text-gray-300 space-y-2">
-                <div className="flex items-center gap-2">
-                  <FaPhone className="text-gold" />
-                  <span>+234 XXX XXX XXXX</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaWhatsapp className="text-gold" />
-                  <span>+234 XXX XXX XXXX</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaEnvelope className="text-gold" />
-                  <span>info@bullifykennel.com</span>
-                </div>
-                <p className="mt-2">Lagos, Nigeria</p>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-base font-bold mb-4 text-gold">Newsletter</h3>
-              <p className="text-sm text-gray-300 mb-2">Get updates on available puppies</p>
-              <input type="email" placeholder="Your email address" className="w-full px-3 py-3 border border-gold/30 bg-brown/30 rounded-2xl mb-2 text-sm text-white placeholder:text-gray-400 focus:outline-none focus:border-gold" />
-              <button className="w-full px-3 py-3 bg-gradient-to-r from-gold to-brown text-dark border-2 border-transparent text-sm font-semibold rounded-2xl hover:scale-105 transition-transform">
-                Subscribe
-              </button>
-              <p className="text-sm text-gray-300 mt-4">Business Hours: Mon-Sat: 9AM - 6PM</p>
-            </div>
-          </div>
-          <div className="border-t border-gold/30 pt-6 flex flex-col lg:flex-row justify-between items-center gap-4 text-xs text-gray-400">
-            <div>© 2024 Bullify Kennel. All rights reserved.</div>
-            <div className="flex gap-6">
-              <Link href="#" className="hover:text-gold transition">Privacy Policy</Link>
-              <Link href="#" className="hover:text-gold transition">Terms of Service</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       {/* Floating WhatsApp Button */}
       <Link href="https://wa.me/234XXXXXXXXX" className="fixed bottom-8 right-8 w-16 h-16 bg-whatsapp border-2 border-white rounded-full flex items-center justify-center text-white shadow-2xl hover:scale-110 hover:rotate-12 transition-transform z-50 animate-bounce-slow">
@@ -411,4 +358,3 @@ export default function ContactUs() {
     </div>
   );
 }
-

@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 
 // GET - Fetch settings (public, no auth needed)
@@ -10,6 +10,11 @@ export async function GET() {
     // If no settings exist, return defaults
     if (!settings) {
       return NextResponse.json({
+        currency: {
+          code: 'USD',
+          symbol: '$',
+          position: 'before',
+        },
         socialMedia: {
           instagram: '',
           facebook: '',
@@ -43,5 +48,25 @@ export async function GET() {
   }
 }
 
+// PUT - Update settings (admin only)
+export async function PUT(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const db = await getDb();
 
+    // Update or insert settings
+    await db.collection('settings').updateOne(
+      {},
+      { $set: body },
+      { upsert: true }
+    );
 
+    return NextResponse.json({ success: true, data: body });
+  } catch (error) {
+    console.error('Error updating settings:', error);
+    return NextResponse.json(
+      { error: 'Failed to update settings' },
+      { status: 500 }
+    );
+  }
+}

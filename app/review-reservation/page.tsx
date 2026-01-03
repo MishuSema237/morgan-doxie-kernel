@@ -1,12 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaWhatsapp, FaCheck, FaEdit, FaLock } from 'react-icons/fa';
 
-export default function ReviewReservation() {
+function ReviewReservationContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const puppyId = searchParams.get('id') || '1';
@@ -28,14 +28,14 @@ export default function ReviewReservation() {
       age: selected.age,
       gender: selected.gender,
       tag: selected.tag,
-      price: `₦${selected.price.toLocaleString('en-NG')}`,
+      price: `₦${selected.price.toLocaleString('en-US')}`,
       image: selected.image,
     },
     customer: {
       name: 'John Doe',
       email: 'john@example.com',
       phone: '+234 123 456 7890',
-      address: '123 Main Street, Lagos, Nigeria',
+      address: '123 Main Street, Your Location',
     },
     delivery: {
       method: 'Pickup in Lagos',
@@ -206,7 +206,7 @@ export default function ReviewReservation() {
                 </div>
                 <div>
                   <span className="text-sm text-gray-600">Date:</span>
-                  <div className="text-base font-semibold text-brown">{new Date(reservation.delivery.date).toLocaleDateString('en-NG', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                  <div className="text-base font-semibold text-brown">{new Date(reservation.delivery.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
                 </div>
                 <div>
                   <span className="text-sm text-gray-600">Time:</span>
@@ -291,11 +291,10 @@ export default function ReviewReservation() {
               <button
                 onClick={handleConfirm}
                 disabled={!agreeAll}
-                className={`px-8 py-4 font-semibold rounded-2xl transition ${
-                  agreeAll
+                className={`px-8 py-4 font-semibold rounded-2xl transition ${agreeAll
                     ? 'bg-gradient-to-r from-brown to-dark text-white hover:scale-105'
                     : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                }`}
+                  }`}
               >
                 Confirm Reservation
               </button>
@@ -306,7 +305,7 @@ export default function ReviewReservation() {
           <div className="lg:sticky lg:top-24 lg:h-fit">
             <div className="bg-white border-2 border-gold rounded-3xl p-6">
               <h3 className="text-lg font-bold text-brown mb-4 text-center">Reservation Summary</h3>
-              
+
               <div className="relative w-full h-32 rounded-2xl overflow-hidden border-2 border-gold/30 mb-4">
                 <Image
                   src={reservation.puppy.image}
@@ -397,3 +396,10 @@ export default function ReviewReservation() {
   );
 }
 
+export default function ReviewReservation() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <ReviewReservationContent />
+    </Suspense>
+  );
+}

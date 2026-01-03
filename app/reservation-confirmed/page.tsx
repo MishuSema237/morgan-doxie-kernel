@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FaWhatsapp, FaCheck, FaCopy, FaDownload, FaClock, FaEnvelope, FaPhone } from 'react-icons/fa';
 import { useState } from 'react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export default function ReservationConfirmed() {
   const [toast, setToast] = useState<string>('');
@@ -28,7 +30,7 @@ export default function ReservationConfirmed() {
       deadline: '2024-02-15T15:00:00',
       account: {
         name: 'Bullify Kennel',
-        bank: 'GTBank Nigeria',
+        bank: 'Your Bank',
         number: '0123456789',
         reference: 'REF-12345',
       },
@@ -72,12 +74,7 @@ export default function ReservationConfirmed() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="h-20 bg-white border-b-2 border-gold sticky top-0 z-50 shadow-sm backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-8 flex items-center justify-between h-full">
-          <Link href="/" className="text-2xl font-bold text-brown hover:text-gold transition cursor-pointer">Bullify Kennel</Link>
-        </div>
-      </header>
+      <Header />
 
       {/* Success Animation Section */}
       <section className="bg-white border-b-2 border-gold/30 py-16">
@@ -111,7 +108,7 @@ export default function ReservationConfirmed() {
                   1
                 </div>
                 <div className="absolute left-11 top-16 bottom-0 w-0.5 bg-gold/30"></div>
-                
+
                 <div className="text-xs font-bold text-gray-500 uppercase mb-2">Step 1 - Now</div>
                 <h3 className="text-xl font-bold text-brown mb-4">Complete Your Payment</h3>
                 <p className="text-base text-gray-700 mb-4">
@@ -161,7 +158,7 @@ export default function ReservationConfirmed() {
                     <div className="flex items-center gap-2 mb-2">
                       <FaClock className="text-red-600" />
                       <span className="text-sm font-bold text-red-600">
-                        Payment Deadline: {deadlineDate.toLocaleDateString('en-NG', { year: 'numeric', month: 'long', day: 'numeric' })} at {deadlineDate.toLocaleTimeString('en-NG', { hour: '2-digit', minute: '2-digit' })} WAT
+                        Payment Deadline: {deadlineDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })} at {deadlineDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
                       </span>
                     </div>
                     <p className="text-xs text-red-600">
@@ -177,7 +174,7 @@ export default function ReservationConfirmed() {
                   2
                 </div>
                 <div className="absolute left-11 top-16 bottom-0 w-0.5 bg-gold/30"></div>
-                
+
                 <div className="text-xs font-bold text-gray-500 uppercase mb-2">Step 2 - Within 24 Hours</div>
                 <h3 className="text-xl font-bold text-brown mb-4">Payment Confirmation</h3>
                 <p className="text-base text-gray-700 mb-2">
@@ -194,7 +191,7 @@ export default function ReservationConfirmed() {
                   3
                 </div>
                 <div className="absolute left-11 top-16 bottom-0 w-0.5 bg-gold/30"></div>
-                
+
                 <div className="text-xs font-bold text-gray-500 uppercase mb-2">Step 3 - Regular Updates</div>
                 <h3 className="text-xl font-bold text-brown mb-4">Stay Connected</h3>
                 <ul className="space-y-2 text-base text-gray-700">
@@ -219,7 +216,7 @@ export default function ReservationConfirmed() {
                   4
                 </div>
                 <div className="absolute left-11 top-16 bottom-0 w-0.5 bg-gold/30"></div>
-                
+
                 <div className="text-xs font-bold text-gray-500 uppercase mb-2">Step 4 - 7 Days Before Pickup</div>
                 <h3 className="text-xl font-bold text-brown mb-4">Final Preparations</h3>
                 <ul className="space-y-2 text-base text-gray-700">
@@ -243,7 +240,7 @@ export default function ReservationConfirmed() {
                 <div className="absolute left-8 top-8 w-8 h-8 border-2 border-gold/30 rounded-full flex items-center justify-center bg-white text-gray-400 font-bold text-sm">
                   5
                 </div>
-                
+
                 <div className="text-xs font-bold text-gray-500 uppercase mb-2 pl-16">Step 5 - Pickup Day</div>
                 <h3 className="text-xl font-bold text-brown mb-4 pl-16">Welcome Your Puppy Home!</h3>
                 <ul className="space-y-2 text-base text-gray-700 pl-16">
@@ -295,7 +292,7 @@ export default function ReservationConfirmed() {
               {/* Reservation Summary */}
               <div className="bg-white border-2 border-gold rounded-3xl p-6">
                 <h3 className="text-lg font-bold text-brown mb-4 text-center">Reservation Summary</h3>
-                
+
                 <div className="relative w-full h-40 rounded-2xl overflow-hidden border-2 border-gold/30 mb-4">
                   <Image
                     src={reservation.puppy.image}
@@ -409,74 +406,19 @@ export default function ReservationConfirmed() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-dark text-white pt-16 pb-8 px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-12">
-            <div>
-              <div className="text-2xl font-bold mb-4 text-gold">Bullify Kennel</div>
-              <p className="text-sm text-gray-300 mb-4 leading-relaxed">Premium dog breeding in Lagos, Nigeria. Healthy, happy puppies for loving families.</p>
-            </div>
-            <div>
-              <h3 className="text-base font-bold mb-4 text-gold">Quick Links</h3>
-              <div className="flex flex-col gap-2">
-                <Link href="/" className="text-sm text-gray-300 hover:text-gold transition">Home</Link>
-                <Link href="/available-puppies" className="text-sm text-gray-300 hover:text-gold transition">Available Puppies</Link>
-                <Link href="/breeds" className="text-sm text-gray-300 hover:text-gold transition">Breeds</Link>
-                <Link href="/about-us" className="text-sm text-gray-300 hover:text-gold transition">About Us</Link>
-                <Link href="/gallery" className="text-sm text-gray-300 hover:text-gold transition">Gallery</Link>
-                <Link href="/contact-us" className="text-sm text-gray-300 hover:text-gold transition">Contact</Link>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-base font-bold mb-4 text-gold">Contact Info</h3>
-              <div className="text-sm text-gray-300 space-y-2">
-                <div className="flex items-center gap-2">
-                  <FaWhatsapp className="text-gold" />
-                  <span>+234 XXX XXX XXXX</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaPhone className="text-gold" />
-                  <span>+234 XXX XXX XXXX</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaEnvelope className="text-gold" />
-                  <span>info@bullifykennel.com</span>
-                </div>
-                <p className="mt-2">Lagos, Nigeria</p>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-base font-bold mb-4 text-gold">Business Hours</h3>
-              <div className="text-sm text-gray-300 space-y-1">
-                <p>Monday - Friday: 9AM - 6PM</p>
-                <p>Saturday: 9AM - 5PM</p>
-                <p>Sunday: By Appointment</p>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-gold/30 pt-6 flex flex-col lg:flex-row justify-between items-center gap-4 text-xs text-gray-400">
-            <div>© 2024 Bullify Kennel. All rights reserved.</div>
-            <div className="flex gap-6">
-              <Link href="#" className="hover:text-gold transition">Privacy Policy</Link>
-              <Link href="#" className="hover:text-gold transition">Terms of Service</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       {/* Floating WhatsApp Button */}
       <Link href="https://wa.me/234XXXXXXXXX" className="fixed bottom-8 right-8 w-16 h-16 bg-whatsapp border-2 border-white rounded-full flex items-center justify-center text-white shadow-2xl hover:scale-110 hover:rotate-12 transition-transform z-50 animate-bounce-slow">
         <FaWhatsapp className="text-2xl" />
       </Link>
-    </div>
 
-    {/* Toast */}
-    {toast && (
-      <div className="fixed bottom-6 right-6 bg-dark text-white border-2 border-gold rounded-2xl px-4 py-3 shadow-xl z-[200]">
-        {toast}
-      </div>
-    )}
+      {/* Toast */}
+      {toast && (
+        <div className="fixed bottom-6 right-6 bg-dark text-white border-2 border-gold rounded-2xl px-4 py-3 shadow-xl z-[200]">
+          {toast}
+        </div>
+      )}
+    </div>
   );
 }
-
