@@ -306,8 +306,12 @@ export default function PuppyDetailView({ puppy, similarPuppies }: { puppy: any,
                         </div>
                     </div>
                 )}
-            </div>\r\n            </section>\r\n\r\n            {/* Lightbox Modal */}\r\n            {isLightboxOpen && (
-            <div
+            </div>
+            </section>
+
+            {/* Lightbox Modal */}
+            {isLightboxOpen && (
+                <div
                 className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4"
                 onClick={() => setIsLightboxOpen(false)}
             >
