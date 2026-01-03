@@ -269,7 +269,7 @@ export default function PuppyDetailView({ puppy, similarPuppies }: { puppy: any,
                         </div>
                         {/* End of Right Column */}
                     </div>
-                </div>
+                    </div>
                 {/* End of Main Grid */}
 
                 {/* Similar Puppies Section */}
