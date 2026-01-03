@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 import PuppyBrowser from '@/components/PuppyBrowser';
 import Header from '@/components/Header';
@@ -46,7 +47,15 @@ export default async function AvailablePuppies() {
       </section>
 
       {/* Client Component for filtering/listing */}
-      <PuppyBrowser initialPuppies={puppies} breeds={breedNames} />
+      <Suspense fallback={
+        <div className="py-12 px-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center text-gray-600">Loading puppies...</div>
+          </div>
+        </div>
+      }>
+        <PuppyBrowser initialPuppies={puppies} breeds={breedNames} />
+      </Suspense>
 
       <Footer />
     </div>
