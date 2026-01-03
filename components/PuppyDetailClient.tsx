@@ -26,7 +26,8 @@ export default function PuppyDetailView({ puppy, similarPuppies }: { puppy: any,
     };
 
     return (
-        <div className="min-h-screen bg-white">
+        <>
+            <div className="min-h-screen bg-white">
             {/* Header & Breadcrumb managed in parent or standard layout, but we can keep simplified breadcrumb here if wanted, 
           or assume Layout wraps it. The previous code had the header inside. 
           For consistency with other pages refactored, I will rely on the page wrapper to render header or just render content here.
@@ -308,6 +309,7 @@ export default function PuppyDetailView({ puppy, similarPuppies }: { puppy: any,
                 )}
                 </div>
             </section>
+            </div>
             {/* Lightbox Modal */}
             {isLightboxOpen ? (
                 <div
@@ -343,7 +345,7 @@ export default function PuppyDetailView({ puppy, similarPuppies }: { puppy: any,
                     </div>
                 </div>
             ) : null}
-        </div>
+        </>
     );
 }
 
