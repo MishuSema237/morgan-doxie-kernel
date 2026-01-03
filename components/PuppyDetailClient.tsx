@@ -273,7 +273,7 @@ export default function PuppyDetailView({ puppy, similarPuppies }: { puppy: any,
                 {/* End of Main Grid */}
 
                 {/* Similar Puppies Section */}
-                {similarPuppies.length > 0 && (
+                {similarPuppies.length > 0 ? (
                     <div className="mt-16 pt-16 border-t-2 border-gold/30">
                         <h2 className="text-3xl font-bold text-brown mb-8 text-center">
                             Similar Puppies
@@ -305,8 +305,8 @@ export default function PuppyDetailView({ puppy, similarPuppies }: { puppy: any,
                             ))}
                         </div>
                     </div>
-                )}
-                </div>
+                ) : null}
+                
             </section>
             {/* Lightbox Modal */}
             {isLightboxOpen ? (
