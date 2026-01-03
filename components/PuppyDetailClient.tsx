@@ -308,43 +308,43 @@ export default function PuppyDetailView({ puppy, similarPuppies }: { puppy: any,
                     </div>
                 )}
                 </div>
+                {/* Lightbox Modal */}
+                {isLightboxOpen ? (
+                    <div
+                        className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4"
+                        onClick={() => setIsLightboxOpen(false)}
+                    >
+                        <button
+                            onClick={() => setIsLightboxOpen(false)}
+                            className="absolute top-4 right-4 text-white p-2 hover:scale-110 transition z-50"
+                        >
+                            <FaTimes size={32} />
+                        </button>
+                        <div className="relative max-w-7xl w-full h-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+                            <Image
+                                src={images[selectedImage]}
+                                alt={`${puppy.breed} - Full size`}
+                                width={1200}
+                                height={1200}
+                                className="max-w-full max-h-full object-contain"
+                            />
+                            <button
+                                onClick={() => setSelectedImage((prev) => (prev - 1 + images.length) % images.length)}
+                                className="absolute left-4 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition hover:scale-110"
+                            >
+                                <FaChevronLeft size={24} />
+                            </button>
+                            <button
+                                onClick={() => setSelectedImage((prev) => (prev + 1) % images.length)}
+                                className="absolute right-4 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition hover:scale-110"
+                            >
+                                <FaChevronRight size={24} />
+                            </button>
+                        </div>
+                    </div>
+                ) : null}
             </section>
             </div>
-            {/* Lightbox Modal */}
-            {isLightboxOpen ? (
-                <div
-                    className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4"
-                    onClick={() => setIsLightboxOpen(false)}
-                >
-                    <button
-                        onClick={() => setIsLightboxOpen(false)}
-                        className="absolute top-4 right-4 text-white p-2 hover:scale-110 transition z-50"
-                    >
-                        <FaTimes size={32} />
-                    </button>
-                    <div className="relative max-w-7xl w-full h-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
-                        <Image
-                            src={images[selectedImage]}
-                            alt={`${puppy.breed} - Full size`}
-                            width={1200}
-                            height={1200}
-                            className="max-w-full max-h-full object-contain"
-                        />
-                        <button
-                            onClick={() => setSelectedImage((prev) => (prev - 1 + images.length) % images.length)}
-                            className="absolute left-4 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition hover:scale-110"
-                        >
-                            <FaChevronLeft size={24} />
-                        </button>
-                        <button
-                            onClick={() => setSelectedImage((prev) => (prev + 1) % images.length)}
-                            className="absolute right-4 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition hover:scale-110"
-                        >
-                            <FaChevronRight size={24} />
-                        </button>
-                    </div>
-                </div>
-            ) : null}
         </>
     );
 }
