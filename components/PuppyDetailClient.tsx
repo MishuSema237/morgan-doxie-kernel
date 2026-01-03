@@ -312,9 +312,9 @@ export default function PuppyDetailView({ puppy, similarPuppies }: { puppy: any,
             {/* Lightbox Modal */}
             {isLightboxOpen && (
                 <div
-                className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4"
-                onClick={() => setIsLightboxOpen(false)}
-            >
+                    className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4"
+                    onClick={() => setIsLightboxOpen(false)}
+                >
                 <button
                     onClick={() => setIsLightboxOpen(false)}
                     className="absolute top-4 right-4 text-white p-2 hover:scale-110 transition z-50"
