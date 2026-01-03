@@ -306,7 +306,7 @@ export default function PuppyDetailView({ puppy, similarPuppies }: { puppy: any,
                         </div>
                     </div>
                 )}
-            </div>
+                </div>
             </section>
 
             {/* Lightbox Modal */}
@@ -342,7 +342,9 @@ export default function PuppyDetailView({ puppy, similarPuppies }: { puppy: any,
                         <FaChevronRight size={24} />
                     </button>
                 </div>
-            </div>\r\n            )}\r\n        </div>
+            </div>
+            )}
+        </div>
     );
 }
 
